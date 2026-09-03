@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crevia Ventures | Ecosystem Architecture & Event Production</title>
+    <meta
+      name="description"
+      content="Crevia Ventures designs and delivers premium ecosystem convenings for institutional capital and decisive founders."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              coal: '#060606',
+              ivory: '#ffffff',
+              ember: '#f0782f',
+            },
+            fontFamily: {
+              sans: ['DM Sans', 'sans-serif'],
+              display: ['Playfair Display', 'serif'],
+            },
+            boxShadow: {
+              whisper: '0 10px 30px rgba(10, 10, 10, 0.06)',
+            },
+          },
+        },
+      };
+    </script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@11/dist/framer-motion.js"></script>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background: #060606;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        animation: page-enter 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+
+      @keyframes page-enter {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+          filter: blur(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+
+      @keyframes sheen {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 200% 50%;
+        }
+      }
+
+      .premium-card {
+        transition:
+          transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1),
+          border-color 420ms cubic-bezier(0.16, 1, 0.3, 1),
+          filter 420ms cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform, box-shadow, filter;
+      }
+
+      .premium-card:hover {
+        transform: translateY(-6px) scale(1.005);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+      }
+
+      .premium-button {
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1),
+          background-color 320ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .premium-button::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.18) 50%, transparent 100%);
+        transform: translateX(-140%);
+        transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+      }
+
+      .premium-button:hover::after {
+        transform: translateX(140%);
+      }
+
+      .premium-button:hover {
+        transform: translateY(-1px);
+      }
+
+      .hero-radiance {
+        background-size: 220% 220%;
+        animation: sheen 14s linear infinite;
+      }
+
+      .africa-pattern {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.14;
+        background-image:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.35' stroke-width='1.1'%3E%3Cpath d='M20 40H120V140H20zM40 60H100V120H40zM160 20h100v100H160zM180 40h60v60h-60zM20 180h100v80H20zM40 200h60v40H40zM160 160c20 0 20 40 40 40s20-40 40-40 20 40 40 40'/%3E%3Cpath d='M150 220c15 0 15 25 30 25s15-25 30-25 15 25 30 25'/%3E%3C/g%3E%3C/svg%3E");
+        background-size: 280px 280px;
+        background-repeat: repeat;
+        mix-blend-mode: screen;
+      }
+
+      .site-footer { background: linear-gradient(135deg, #070707 0%, #111111 18%, #F0782F 46%, #9d3f17 100%); color: #f5efe7; }
+      .site-footer .text-coal { color: #f5efe7 !important; }
+      .site-footer .text-coal\/\[0\.62\], .site-footer .text-coal\/\[0\.72\], .site-footer .text-coal\/\[0\.56\], .site-footer .text-coal\/\[0\.5\] { color: rgba(245,239,231,.72) !important; }
+      .site-footer .border-black\/\[0\.12\], .site-footer .border-black\/\[0\.06\] { border-color: rgba(255,255,255,.14) !important; }
+      .site-footer .rounded-t-\[2\.5rem\] { background: linear-gradient(135deg, #070707 0%, #111111 18%, #F0782F 46%, #9d3f17 100%) !important; }
+      .traction-surface .text-white { color: #f5f1eb !important; }
+      .traction-surface .text-white\/\[0\.62\] { color: rgba(245,241,235,.78) !important; }
+
+      /* Mobile nav panel styling for React header */
+      #reactMobileNav { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
+      #reactMobileNav .backdrop{ position:absolute; inset:0; background:rgba(0,0,0,0.6); opacity:0; transition:opacity .28s ease; pointer-events:none; }
+      body.mobile-open #reactMobileNav { pointer-events: auto; }
+      #reactMobileNav .panel{ position:absolute; top:0; right:0; height:100%; width:86%; max-width:360px; background:#0b0b0b; transform:translateX(110%); transition:transform .36s cubic-bezier(.16,1,.3,1); box-shadow:-24px 0 60px rgba(0,0,0,0.6); padding:22px; border-radius:12px 0 0 12px; }
+      #reactMobileNav .panel a{ display:block; padding:14px 8px; font-size:18px; color:#fff; text-decoration:none; border-radius:8px; }
+      body.mobile-open #reactMobileNav .backdrop{ opacity:1; pointer-events:auto; }
+      body.mobile-open #reactMobileNav .panel{ transform:translateX(0); pointer-events:auto; }
+      @media (min-width:768px){ #reactMobileNav{display:none!important} }
+
+    </style>
+  </head>
+  <body class="font-sans antialiased">
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useEffect, useRef, useState } = React;
+      const { motion, useAnimationFrame, useMotionTemplate, useMotionValue, useScroll, useSpring, useTransform } = window.Motion;
+
+      const REVEAL_EASE = [0.16, 1, 0.3, 1];
+      const REVEAL_TRANSITION = { duration: 0.72, ease: REVEAL_EASE };
+      const SECTION_REVEAL = {
+        initial: { opacity: 0, y: 30 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.2 },
+        transition: REVEAL_TRANSITION,
+      };
+      const STAGGER_CONTAINER = {
+        hidden: {},
+        show: {
+          transition: {
+            staggerChildren: 0.15,
+          },
+        },
+      };
+      const STAGGER_ITEM = {
+        hidden: { opacity: 0, y: 30 },
+        show: { opacity: 1, y: 0, transition: REVEAL_TRANSITION },
+      };
+
+      function MagneticButton({ href, className, children, target, rel }) {
+        const x = useMotionValue(0);
+        const y = useMotionValue(0);
+        const springX = useSpring(x, { stiffness: 280, damping: 26, mass: 0.3 });
+        const springY = useSpring(y, { stiffness: 280, damping: 26, mass: 0.3 });
+
+        const handleMouseMove = (event) => {
+          const rect = event.currentTarget.getBoundingClientRect();
+          const dx = event.clientX - (rect.left + rect.width / 2);
+          const dy = event.clientY - (rect.top + rect.height / 2);
+          x.set(Math.max(-10, Math.min(10, dx * 0.12)));
+          y.set(Math.max(-8, Math.min(8, dy * 0.16)));
+        };
+
+        const reset = () => {
+          x.set(0);
+          y.set(0);
+        };
+
+        return (
+          <motion.a
+            href={href}
+            target={target}
+            rel={rel}
+            style={{ x: springX, y: springY, willChange: 'transform' }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 540, damping: 34, mass: 0.5 }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={reset}
+            className={`premium-button ${className}`}
+          >
+            {children}
+          </motion.a>
+        );
+      }
+
+      function AnimatedStat({ value, suffix = '', label }) {
+        const elementRef = useRef(null);
+        const [displayValue, setDisplayValue] = useState(0);
+        const [started, setStarted] = useState(false);
+
+        useEffect(() => {
+          const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) setStarted(true);
+          }, { threshold: 0.45 });
+          if (elementRef.current) observer.observe(elementRef.current);
+          return () => observer.disconnect();
+        }, []);
+
+        useEffect(() => {
+          if (!started) return;
+          const duration = 1350;
+          const startTime = performance.now();
+          let frame;
+          const tick = (now) => {
+            const progress = Math.min((now - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 4);
+            setDisplayValue(Math.round(value * eased));
+            if (progress < 1) frame = requestAnimationFrame(tick);
+          };
+          frame = requestAnimationFrame(tick);
+          return () => cancelAnimationFrame(frame);
+        }, [started, value]);
+
+        return (
+          <div ref={elementRef} className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,14,0.55),rgba(255,255,255,0.02))] p-5 shadow-[0_10px_24px_rgba(0,0,0,0.18)] backdrop-blur-sm">
+            <p className="font-display text-5xl leading-none text-white sm:text-7xl">{displayValue.toLocaleString()}{suffix}</p>
+            <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.22em] text-white/75">{label}</p>
+          </div>
+        );
+      }
+
+      function SpotlightPanel({ className, children, glowClassName = 'bg-white/[0.1]', hoverLift = false }) {
+        const [isHovering, setIsHovering] = useState(false);
+        const x = useMotionValue(-200);
+        const y = useMotionValue(-200);
+        const glowX = useSpring(x, { stiffness: 260, damping: 28, mass: 0.35 });
+        const glowY = useSpring(y, { stiffness: 260, damping: 28, mass: 0.35 });
+
+        const onMove = (event) => {
+          const rect = event.currentTarget.getBoundingClientRect();
+          x.set(event.clientX - rect.left);
+          y.set(event.clientY - rect.top);
+        };
+
+        return (
+          <motion.div
+            className={`relative overflow-hidden ${className}`}
+            onMouseMove={onMove}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+            whileHover={hoverLift ? { y: -8, scale: 1.012 } : undefined}
+            transition={hoverLift ? { type: 'spring', stiffness: 320, damping: 24, mass: 0.55 } : undefined}
+          >
+            <motion.div
+              className={`pointer-events-none absolute h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl ${glowClassName}`}
+              style={{ x: glowX, y: glowY, willChange: 'transform' }}
+              animate={{ opacity: isHovering ? 0.8 : 0 }}
+              transition={{ duration: 0.28, ease: REVEAL_EASE }}
+            />
+            <motion.div
+              className="pointer-events-none absolute inset-0 rounded-[inherit] border border-white/[0.24]"
+              animate={{ opacity: isHovering ? 1 : 0.45 }}
+              transition={{ duration: 0.28, ease: REVEAL_EASE }}
+            />
+            {children}
+          </motion.div>
+        );
+      }
+
+      function PartnerMarquee({ items }) {
+        const trackRef = useRef(null);
+        const loopWidth = useRef(0);
+        const x = useMotionValue(0);
+        const [isHovering, setIsHovering] = useState(false);
+        const speedRef = useRef(34);
+
+        useEffect(() => {
+          const measure = () => {
+            if (!trackRef.current) return;
+            loopWidth.current = trackRef.current.scrollWidth / 2;
+          };
+
+          measure();
+
+          if (trackRef.current && typeof ResizeObserver !== 'undefined') {
+            const observer = new ResizeObserver(measure);
+            observer.observe(trackRef.current);
+            return () => observer.disconnect();
+          }
+        }, []);
+
+        useAnimationFrame((_, delta) => {
+          if (!loopWidth.current) return;
+          const target = isHovering ? 0 : 34;
+          speedRef.current += (target - speedRef.current) * 0.08;
+          let next = x.get() - speedRef.current * (delta / 1000);
+
+          if (next <= -loopWidth.current) {
+            next += loopWidth.current;
+          }
+
+          x.set(next);
+        });
+
+        const looped = [...items, ...items];
+
+        return (
+          <div
+            className="overflow-hidden rounded-2xl border border-black/5 bg-transparent py-6"
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
+            <motion.div ref={trackRef} style={{ x, willChange: 'transform' }} className="flex w-max items-center gap-6 py-2">
+              {looped.map((partner, index) => {
+                const isDarkBadge = partner.name === 'iHub Nairobi' || partner.name === 'Suluhu Studio';
+                const isLarge = partner.name === 'Strathmore University';
+                const isIhub = partner.name === 'iHub Nairobi';
+                const isSuluhu = partner.name === 'Suluhu Studio';
+                const imgClasses = isLarge
+                  ? 'mx-auto block max-h-28 w-[180px] object-contain object-center'
+                  : isIhub
+                    ? 'mx-auto block max-h-[84px] w-auto object-contain object-center'
+                    : isSuluhu
+                      ? 'mx-auto block max-h-[52px] w-auto object-contain object-center'
+                      : 'mx-auto block max-h-16 w-auto object-contain object-center';
+
+                return (
+                  <div
+                    key={`${partner.name || partner}-${index}`}
+                    className={`mx-2 grid h-24 place-items-center rounded-[1.5rem] px-4 py-3 text-center shadow-[0_12px_28px_rgba(0,0,0,0.06)] ${isLarge ? 'min-w-[250px] w-[250px]' : 'min-w-[190px]'} ${isDarkBadge ? 'border border-[#1a1a1a] bg-[#0d0d0d]' : 'bg-transparent'}`}
+                    style={{
+                      background: isDarkBadge ? 'linear-gradient(135deg, #0c0c0c 0%, #191919 100%)' : 'transparent',
+                    }}
+                  >
+                    {partner.svg ? (
+                      <span className="inline-flex max-h-16 w-full items-center justify-center" dangerouslySetInnerHTML={{ __html: partner.svg }} />
+                    ) : partner.src ? (
+                      <div className="flex w-full items-center justify-center">
+                        <img
+                          src={partner.src}
+                          alt={partner.name}
+                          className={imgClasses}
+                          style={{
+                            filter: isDarkBadge ? 'drop-shadow(0 8px 18px rgba(255,255,255,0.08))' : 'drop-shadow(0 8px 18px rgba(17,17,17,0.08))',
+                            margin: '0 auto',
+                            display: 'block',
+                            objectPosition: 'center center',
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      <span className="text-lg font-semibold tracking-wide text-black/[0.7]">{partner.name || partner}</span>
+                    )}
+                  </div>
+                );
+              })}
+            </motion.div>
+          </div>
+        );
+      }
+
+      function VideoModal({ event, onClose }) {
+        if (!event) return null;
+        const [hasVideoError, setHasVideoError] = useState(false);
+        const [resolvedSrc, setResolvedSrc] = useState(null);
+        const [loadError, setLoadError] = useState(false);
+
+        useEffect(() => {
+          let isActive = true;
+          let objectUrl = null;
+
+          setResolvedSrc(event.playerType === 'file' ? null : event.embedUrl);
+          setLoadError(false);
+
+          if (event.playerType !== 'file') {
+            return () => {
+              isActive = false;
+            };
+          }
+
+          fetch(event.videoSrc)
+            .then((response) => {
+              if (!response.ok) throw new Error(`Failed to load video: ${response.status}`);
+              return response.blob();
+            })
+            .then((blob) => {
+              if (!isActive) return;
+              const mimeType = event.videoSrc.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+              objectUrl = URL.createObjectURL(new Blob([blob], { type: mimeType }));
+              setResolvedSrc(objectUrl);
+            })
+            .catch(() => {
+              if (isActive) setResolvedSrc(event.videoSrc);
+            });
+
+          return () => {
+            isActive = false;
+            if (objectUrl) URL.revokeObjectURL(objectUrl);
+          };
+        }, [event.embedUrl, event.playerType, event.videoSrc]);
+
+        return (
+          <div
+            className="fixed inset-0 z-[80] flex items-center justify-center bg-black/80 px-4 backdrop-blur-md"
+            onClick={onClose}
+          >
+            <div
+              className="relative w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/15 bg-[#0b0b0f] shadow-[0_40px_120px_rgba(0,0,0,0.7)]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between border-b border-white/10 px-5 py-4 text-white/80">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-white/60">Featured event</p>
+                  <h3 className="mt-1 text-lg font-medium text-white">{event.title}</h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-lg text-white/80 transition hover:bg-white/10 hover:text-white"
+                  aria-label="Close video"
+                >
+                  ×
+                </button>
+              </div>
+
+              <div className="aspect-video w-full bg-black">
+                {event.playerType === 'file' && resolvedSrc && !loadError ? (
+                  <video
+                    className="h-full w-full bg-black object-cover"
+                    src={resolvedSrc}
+                    poster={event.poster}
+                    controls
+                    autoPlay
+                    playsInline
+                    preload="auto"
+                    muted={false}
+                    defaultMuted={false}
+                    onLoadedMetadata={(loadedEvent) => {
+                      loadedEvent.currentTarget.muted = false;
+                      loadedEvent.currentTarget.defaultMuted = false;
+                      loadedEvent.currentTarget.volume = 1;
+                    }}
+                    onError={() => {
+                      if (resolvedSrc && resolvedSrc.startsWith('blob:')) {
+                        setResolvedSrc(event.videoSrc);
+                      } else {
+                        setLoadError(true);
+                      }
+                    }}
+                  />
+                ) : event.playerType === 'file' && !loadError ? (
+                  <div className="flex h-full items-center justify-center bg-gradient-to-br from-[#101010] via-[#1a1a1a] to-[#070707] px-8 text-center text-white">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-white/60">Loading video</p>
+                      <p className="mt-3 text-lg text-white/80">Preparing playback...</p>
+                    </div>
+                  </div>
+                ) : event.playerType === 'file' ? (
+                  <div className="flex h-full flex-col items-center justify-center gap-5 bg-gradient-to-br from-[#101010] via-[#1a1a1a] to-[#070707] px-8 text-center text-white">
+                    <div className="max-w-md">
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-white/60">Video unavailable</p>
+                      <h4 className="mt-3 text-2xl font-medium text-white">{event.title}</h4>
+                      <p className="mt-4 text-sm leading-7 text-white/72">
+                        The browser could not load this clip directly. The file is still available in the project media
+                        folder.
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <iframe
+                    className="h-full w-full"
+                    src={event.embedUrl}
+                    title={event.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      function PortfolioMarquee({ events, onSelect }) {
+        const [pageIndex, setPageIndex] = useState(0);
+        const eventsPerPage = 2;
+        const totalPages = Math.max(1, Math.ceil(events.length / eventsPerPage));
+        const currentEvents = events.slice(pageIndex * eventsPerPage, pageIndex * eventsPerPage + eventsPerPage);
+
+        const goPrevious = () => {
+          setPageIndex((current) => (current === 0 ? totalPages - 1 : current - 1));
+        };
+
+        const goNext = () => {
+          setPageIndex((current) => (current + 1) % totalPages);
+        };
+
+        return (
+          <div className="space-y-5">
+            <div className="flex items-center justify-end gap-3">
+              <button
+                type="button"
+                onClick={goPrevious}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10"
+                aria-label="Show previous portfolio items"
+              >
+                <span aria-hidden="true">←</span>
+              </button>
+              <button
+                type="button"
+                onClick={goNext}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10"
+                aria-label="Show next portfolio items"
+              >
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              {currentEvents.map((event, index) => (
+                <article
+                  key={`${event.title}-${pageIndex}-${index}`}
+                  onClick={() => onSelect(event)}
+                  className={`group cursor-pointer overflow-hidden rounded-[2rem] border border-white/[0.12] bg-[#101010] shadow-[0_22px_45px_rgba(0,0,0,0.35)] transition hover:brightness-110 ${event.tilt}`}
+                >
+                  <div className="relative h-[360px] overflow-hidden bg-[#0b0b0f]">
+                    {event.poster ? (
+                      <>
+                        <img
+                          src={event.poster}
+                          alt={event.title}
+                          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.16),rgba(0,0,0,0.72))]" />
+                      </>
+                    ) : (
+                      <>
+                        <div className={`flex h-full w-full flex-col justify-between bg-gradient-to-br ${event.tone} px-6 py-6`}>
+                          <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-white/70">
+                            <span>Portfolio preview</span>
+                            <span>{event.year}</span>
+                          </div>
+                          <div>
+                            <p className="max-w-sm text-3xl font-medium leading-tight text-white">{event.title}</p>
+                            <p className="mt-3 text-sm text-white/75">{event.location}</p>
+                          </div>
+                        </div>
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_42%)]" />
+                      </>
+                    )}
+
+                    <div className="absolute inset-x-0 top-0 flex items-center justify-between px-4 py-3">
+                      <span className="rounded-full border border-white/15 bg-black/20 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-md">
+                        Featured
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/25 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur-md transition hover:border-white/30 hover:bg-black/35">
+                        Play <span aria-hidden="true">▶</span>
+                      </span>
+                    </div>
+
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/25 bg-black/30 shadow-[0_12px_35px_rgba(0,0,0,0.52)] backdrop-blur-sm">
+                        <div className="ml-1 h-0 w-0 border-y-[10px] border-l-[18px] border-y-transparent border-l-white" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white px-5 py-5 text-coal">
+                    <div className="flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.2em] text-coal/55">
+                      <span>{event.location}</span>
+                      <span>{event.year}</span>
+                    </div>
+                    <h3 className="mt-3 text-[1.55rem] font-medium leading-tight text-coal">{event.title}</h3>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="flex items-center justify-center gap-2">
+              {Array.from({ length: totalPages }).map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => setPageIndex(index)}
+                  className={`h-2.5 rounded-full transition-all ${index === pageIndex ? 'w-8 bg-ember' : 'w-2.5 bg-white/30 hover:bg-white/50'}`}
+                  aria-label={`Show portfolio page ${index + 1}`}
+                  aria-pressed={index === pageIndex}
+                />
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      function App() {
+        const partners = [
+          {
+            name: 'Strathmore University',
+            src: 'images/partners/Strathmore/strathmore%20logo.png',
+          },
+          {
+            name: 'iHub Nairobi',
+            src: 'images/partners/iHub%20nairobi/iHUB.png',
+          },
+          {
+            name: 'Suluhu Studio',
+            src: 'images/partners/Suluhu%20studio/suluhu-logo-white.svg',
+          },
+          {
+            name: 'Nairobi Garage',
+            src: 'images/partners/Nairobi%20garage/LOGOS_NAIROBIGARAGE-03.webp',
+          },
+        ];
+        const [hoveredNav, setHoveredNav] = useState(null);
+        const [selectedEvent, setSelectedEvent] = useState(null);
+        const [mobileOpen, setMobileOpen] = useState(false);
+        const { scrollY } = useScroll();
+
+        const blurStrength = useTransform(scrollY, [0, 220], [9, 20]);
+        const headerOpacity = useTransform(scrollY, [0, 220], [0.45, 0.74]);
+        const borderOpacity = useTransform(scrollY, [0, 220], [0.12, 0.2]);
+        const headerBg = useMotionTemplate`rgba(10, 10, 10, ${headerOpacity})`;
+        const headerBorder = useMotionTemplate`rgba(255, 255, 255, ${borderOpacity})`;
+        const headerFilter = useMotionTemplate`blur(${blurStrength}px) saturate(160%)`;
+
+        const testimonials = [
+          {
+            quote:
+              'Crevia Ventures executed every layer with surgical precision. The room design, stakeholder flow, and production timing made complex decisions happen faster.',
+            name: 'A. Njoroge',
+            role: 'Founding Partner, Catalyst Capital',
+          },
+          {
+            quote:
+              'Their team builds environments where leaders show up ready to commit, not just network. It was flawless from pre-brief to final close.',
+            name: 'M. Adeyemi',
+            role: 'Director, Regional Innovation Hub',
+          },
+          {
+            quote:
+              'We trusted Crevia with a high-stakes convening and they owned it end-to-end. The outcome quality reflected institutional-grade control.',
+            name: 'L. Mensah',
+            role: 'CEO, Frontier Systems',
+          },
+        ];
+
+        const portfolioEvents = [
+          {
+            title: 'Freelancers Summit video',
+            location: 'Nairobi, Kenya',
+            year: '2024',
+            playerType: 'file',
+              videoSrc: 'media/freelancers-summit-web.mp4',
+            poster: 'images/freelancers%20summit/freelancers%20group%20photo.jpeg',
+            tone: 'from-[#0b1120] via-[#13273d] to-[#262c38]',
+            tilt: '-rotate-[2deg]',
+          },
+          {
+            title: 'AI Summit 2025',
+            location: 'Nairobi, Kenya',
+            year: '2025',
+            playerType: 'file',
+              videoSrc: 'media/ai-summit-2025-web.mp4',
+            poster: 'images/AI Summit 2025 group pic.png',
+            tone: 'from-[#141920] via-[#1d2f39] to-[#3d4758]',
+            tilt: 'rotate-[2deg]',
+          },
+          {
+            title: 'Crevia Summit 2026',
+            location: 'Nairobi, Kenya',
+            year: '2026',
+            playerType: 'file',
+              videoSrc: 'media/crevia-summit-2026-web.mp4',
+            poster: 'images/crevia%20summit/crevia%20summit%20group%20photo.PNG',
+            tone: 'from-[#1d2d1f] via-[#2d5341] to-[#0c120f]',
+            tilt: '-rotate-[1deg]',
+          },
+          {
+            title: "Lang'ata Islamic Centre creatives meet 2026",
+            location: 'Nairobi, Kenya',
+            year: '2026',
+            playerType: 'file',
+              videoSrc: 'media/langata-islamic-centre-creatives-meet-2026-web.mp4',
+            poster: 'images/Langata islamic centre/LIC image.png',
+            tone: 'from-[#1d1a1a] via-[#403a38] to-[#111212]',
+            tilt: 'rotate-[1deg]',
+          },
+        ];
+        const navLinks = [
+          { label: 'Services', href: '#service-focus' },
+          { label: 'Our Events', href: 'events.html' },
+          { label: 'About', href: 'about.html' },
+        ];
+
+        return (
+          <>
+            <header className="sticky top-0 z-50 px-4 pt-4 md:px-8">
+              <motion.div
+                className="relative rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#090909_0%,#121212_18%,#1a1a1a_34%,#F0782F_72%,#8B3913_100%)] px-4 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.32)] md:px-7"
+                style={{
+                  backdropFilter: headerFilter,
+                  WebkitBackdropFilter: headerFilter,
+                }}
+              >
+                <div className="grid items-center gap-4 md:grid-cols-[1fr_auto_1fr]">
+                  <a href="#" className="justify-self-start font-display text-2xl leading-none text-white transition duration-300 hover:tracking-[0.04em]">
+                    Crevia
+                  </a>
+                  <button onClick={()=>{ setMobileOpen(true); document.body.classList.add('mobile-open'); }} className="md:hidden absolute left-1/2 -translate-x-1/2 top-3 inline-flex items-center justify-center rounded-lg bg-white/5 p-2">
+                    <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.75 1.25H19.25" stroke="#F5F3F0" stroke-width="1.5" stroke-linecap="round"/><path d="M0.75 7H19.25" stroke="#F5F3F0" stroke-width="1.5" stroke-linecap="round"/><path d="M0.75 12.75H19.25" stroke="#F5F3F0" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  </button>
+
+                  <nav className="hidden items-center justify-center gap-7 md:flex">
+                    {navLinks.map((link) => (
+                      <motion.a
+                        key={link.label}
+                        href={link.href}
+                        className="relative px-1 text-sm font-medium text-white/90"
+                        whileHover={{ opacity: 1 }}
+                        onHoverStart={() => setHoveredNav(link.label)}
+                        onHoverEnd={() => setHoveredNav(null)}
+                        style={{ opacity: 0.9 }}
+                      >
+                        {link.label}
+                        {hoveredNav === link.label && (
+                          <motion.span
+                            layoutId="nav-hover-underline"
+                            className="absolute inset-x-1 -bottom-1 h-px bg-ember"
+                            transition={{ type: 'spring', stiffness: 500, damping: 34, mass: 0.45 }}
+                          />
+                        )}
+                      </motion.a>
+                    ))}
+                  </nav>
+
+                  <div className="justify-self-end">
+                    <MagneticButton
+                      href="contact.html"
+                      className="hidden md:inline-flex items-center justify-center rounded-full bg-ember px-5 py-2.5 text-sm font-semibold text-coal shadow-[0_0_0_rgba(0,0,0,0)]"
+                    >
+                      Book a Strategy Session
+                    </MagneticButton>
+                  </div>
+                </div>
+              </motion.div>
+            </header>
+
+            {mobileOpen && (
+              <div id="reactMobileNav" className="fixed inset-0 z-60">
+                <div className="backdrop absolute inset-0" onClick={()=>{ setMobileOpen(false); document.body.classList.remove('mobile-open'); }} />
+                <nav className="panel relative mx-4 mt-20 max-w-sm rounded-xl bg-[#0b0b0b] p-6 shadow-lg">
+                  {navLinks.map((link) => (
+                    <a key={link.label} href={link.href} className="block py-3 text-lg font-medium text-white/90" onClick={()=>{ setMobileOpen(false); document.body.classList.remove('mobile-open'); }}>{link.label}</a>
+                  ))}
+                  <a href="contact.html" className="mt-4 inline-block rounded-full bg-ember px-5 py-2.5 text-sm font-semibold text-[#111]" onClick={()=>{ setMobileOpen(false); document.body.classList.remove('mobile-open'); }}>Book a Strategy Session</a>
+                </nav>
+              </div>
+            )}
+
+            <main className="w-full pt-24 text-ivory md:pt-28">
+              <motion.section {...SECTION_REVEAL} className="relative isolate overflow-hidden bg-coal">
+                <div className="absolute inset-0" aria-hidden="true">
+                  <motion.img
+                    src="images/AI Summit 2025 group pic.png"
+                    alt="AI Summit Nairobi 2025"
+                    className="h-full w-full scale-[1.015] object-cover object-center blur-[0.6px]"
+                    animate={{ scale: [1.015, 1.03, 1.015] }}
+                    transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                  <div className="absolute inset-0 bg-coal/[0.56]" />
+                  <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,6,6,0.72)_0%,rgba(6,6,6,0.46)_55%,rgba(6,6,6,0.24)_100%)]" />
+                </div>
+                <div className="relative flex min-h-[92vh] w-full items-center px-6 py-20 md:px-10 lg:px-16 xl:px-20">
+                  <motion.div variants={STAGGER_CONTAINER} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }} className="max-w-5xl">
+                    <motion.h1 variants={STAGGER_ITEM} className="mt-6 max-w-4xl font-display text-5xl leading-[0.95] text-ivory sm:text-6xl lg:text-7xl">
+                      We engineer <span className="text-ember">market authority.</span>
+                    </motion.h1>
+                    <motion.p variants={STAGGER_ITEM} className="mt-8 max-w-2xl text-base leading-8 text-white/[0.74] sm:text-lg">
+                      Crevia is a strategic brand and ecosystem firm. We translate business strategy into undeniable
+                      market leadership through premium physical convenings, brand architecture, and operational design.
+                    </motion.p>
+                    <motion.div variants={STAGGER_ITEM} className="mt-10 flex flex-wrap gap-4">
+                      <MagneticButton
+                        href="#next-room"
+                        className="inline-flex items-center justify-center rounded-full bg-ember px-7 py-3 text-sm font-semibold text-coal shadow-[0_0_0_rgba(0,0,0,0)]"
+                      >
+                        Secure Your Next Room
+                      </MagneticButton>
+                      <motion.a
+                        href="#service-focus"
+                        whileTap={{ scale: 0.97 }}
+                        className="premium-button rounded-full border border-white/20 px-7 py-3 text-sm font-semibold text-white/[0.9]"
+                      >
+                        View Capability
+                      </motion.a>
+                    </motion.div>
+                  </motion.div>
+                </div>
+              </motion.section>
+
+              <motion.section {...SECTION_REVEAL} className="traction-surface relative overflow-hidden px-6 pb-16 md:px-10 md:pb-20 lg:px-16 xl:px-20" style={{ background: 'linear-gradient(135deg, #070707 0%, #111111 18%, #1c1c1c 36%, #f0782f 72%, #8d3d17 100%)' }}>
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,244,232,.35),transparent_68%)]" />
+                <div className="relative mx-auto max-w-6xl border-y border-white/15 py-10 sm:py-14">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/75">Traction, by the numbers</p>
+                    <div className="mt-10 grid gap-10 sm:grid-cols-3 sm:gap-8">
+                    <AnimatedStat value={3} suffix="+" label="Years in African markets" />
+                    <AnimatedStat value={3} label="Core operating frameworks" />
+                    <AnimatedStat value={300} suffix="+" label="Builders engaged" />
+                  </div>
+                </div>
+              </motion.section>
+
+              <motion.section {...SECTION_REVEAL} id="ecosystem" className="bg-ivory py-20 text-coal md:py-24">
+                <div className="w-full px-6 md:px-10 lg:px-16 xl:px-20">
+                  <div className="mb-8 text-center">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.38em] text-[#17110d]/68">
+                      Organizations we've worked with
+                    </p>
+                  </div>
+                  <PartnerMarquee items={partners} />
+                </div>
+              </motion.section>
+
+              <motion.section {...SECTION_REVEAL} id="past-convenings" className="relative isolate overflow-hidden bg-coal py-20 text-white md:py-24">
+                <div className="africa-pattern" />
+                <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
+                  <div className="mb-12 text-center">
+                    <p className="text-xs uppercase tracking-[0.42em] text-ember/[0.9]">Portfolio</p>
+                    <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] md:text-5xl">
+                      Event Portfolio
+                    </h2>
+                  </div>
+
+                  <PortfolioMarquee events={portfolioEvents} onSelect={setSelectedEvent} />
+                  {false && (
+                  <div className="portfolio-carousel overflow-hidden">
+                    <div className="portfolio-track gap-6 py-2">
+                      {loopedPortfolioEvents.map((event, index) => (
+                        <article
+                          key={`${event.title}-${index}`}
+                          className={`group min-w-[82vw] overflow-hidden rounded-[2rem] border border-white/[0.12] bg-[#101010] shadow-[0_22px_45px_rgba(0,0,0,0.35)] sm:min-w-[460px] lg:min-w-[520px] ${event.tilt}`}
+                        >
+                          <div className={`relative h-[320px] bg-gradient-to-br ${event.tone}`}>
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,255,255,0.2),transparent_42%)]" />
+                            <div className="absolute inset-0 bg-black/[0.38]" />
+                            <div className="absolute left-5 top-5 rounded-full border border-white/[0.35] px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-white/[0.88]">
+                              Hosted Event
+                            </div>
+                            <div className="absolute bottom-5 left-5 right-5 text-xs uppercase tracking-[0.22em] text-white/[0.7]">
+                              {event.location} · {event.year}
+                            </div>
+                            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/[0.75] to-transparent" />
+                          </div>
+                          <div className="bg-white px-6 py-5 text-coal">
+                            <p className="text-2xl leading-tight">
+                              {(index % portfolioEvents.length) + 1 < 10
+                                ? `0${(index % portfolioEvents.length) + 1}`
+                                : (index % portfolioEvents.length) + 1}
+                            </p>
+                            <h3 className="mt-2 text-[1.65rem] font-medium leading-tight">{event.title}</h3>
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
+                  )}
+                </div>
+              </motion.section>
+
+              <motion.section {...SECTION_REVEAL} id="service-focus" className="relative isolate overflow-hidden bg-[#f3efe9] py-24 md:py-28">
+                <div className="africa-pattern" />
+                <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
+                  <div className="mx-auto max-w-6xl">
+                    <div className="mx-auto max-w-5xl text-center">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.38em] text-[#17110d]/60">Service architecture</p>
+                      <h2 className="mt-4 font-display text-4xl leading-tight text-[#17110d] md:text-6xl">
+                        Strategic growth services, designed to convert attention into traction.
+                      </h2>
+                    </div>
+
+                    <div className="mt-12 grid gap-8 md:grid-cols-2">
+                      <div className="rounded-[2rem] border border-[#17110d]/10 bg-[#f7f3ee] p-8 shadow-[0_28px_60px_rgba(17,17,17,0.06)] md:p-10">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#17110d]/55">Flagship service</p>
+                        <h3 className="mt-4 font-display text-3xl leading-tight text-[#17110d] md:text-4xl">
+                          End-to-End Management
+                        </h3>
+                        <p className="mt-6 text-lg leading-9 text-[#17110d]/70">
+                          Crevia Ventures assumes complete ownership of high-stakes ecosystem convenings. From venue
+                          acquisition and production command to stakeholder alignment and executive guest management, we
+                          operate as your turnkey luxury partner—so institutional capital and decisive founders can focus on
+                          outcomes, not logistics.
+                        </p>
+                        <div className="mt-8 flex flex-wrap gap-4">
+                          <MagneticButton
+                            href="contact.html"
+                            className="inline-flex items-center justify-center rounded-full bg-ember px-8 py-4 text-sm font-semibold text-coal shadow-[0_0_0_rgba(0,0,0,0)]"
+                          >
+                            Request a private consultation
+                          </MagneticButton>
+                          <motion.a
+                            href="live-ecosystems.html"
+                            whileTap={{ scale: 0.97 }}
+                            className="premium-button inline-flex items-center justify-center rounded-full border border-[#17110d]/20 px-8 py-4 text-sm font-semibold text-[#17110d]"
+                          >
+                            Learn more
+                          </motion.a>
+                        </div>
+                      </div>
+
+                      <div className="rounded-[2rem] border border-[#17110d]/10 bg-white p-8 shadow-[0_28px_60px_rgba(17,17,17,0.06)] md:p-10">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#17110d]/60">Digital service</p>
+                        <h3 className="mt-4 font-display text-3xl leading-tight text-[#17110d] md:text-4xl">
+                          Website Creation
+                        </h3>
+                        <p className="mt-6 text-lg leading-9 text-[#17110d]/75">
+                          We build premium digital experiences that feel as credible and high-conviction as your live events.
+                          From strategy and positioning to design, frontend build, and launch support, we create websites that
+                          make founders, institutions, and buyers lean in with confidence.
+                        </p>
+                        <div className="mt-8 flex flex-wrap gap-4">
+                          <MagneticButton
+                            href="contact.html"
+                            className="inline-flex items-center justify-center rounded-full bg-ember px-8 py-4 text-sm font-semibold text-coal shadow-[0_0_0_rgba(0,0,0,0)]"
+                          >
+                            Request a private consultation
+                          </MagneticButton>
+                          <motion.a
+                            href="website-creation.html"
+                            whileTap={{ scale: 0.97 }}
+                            className="inline-flex items-center justify-center rounded-full border border-[#17110d]/20 px-8 py-4 text-sm font-semibold text-[#17110d]"
+                          >
+                            Learn more
+                          </motion.a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.section>
+
+              {/* Testimonial section removed */}
+
+              <motion.section {...SECTION_REVEAL} id="next-room" className="relative overflow-hidden bg-coal py-24 md:py-28">
+                <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
+                  <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
+                    <div className="lg:col-span-8">
+                      <p className="text-xs uppercase tracking-[0.42em] text-ember/[0.9]">Final Conversion</p>
+                      <h2 className="mt-5 max-w-4xl font-display text-4xl leading-tight text-white md:text-6xl">
+                        The next strategic room is being allocated now.
+                      </h2>
+                      <p className="mt-7 max-w-3xl text-lg leading-9 text-white/[0.74]">
+                        If the convening is high consequence, the standard must be uncompromising. Engage Crevia
+                        Ventures to architect and execute your next institutional room.
+                      </p>
+                    </div>
+                    <div className="lg:col-span-3 lg:col-start-10">
+                      <MagneticButton
+                        href="contact.html"
+                        className="inline-flex w-full items-center justify-center rounded-full bg-ember px-8 py-4 text-sm font-semibold text-coal shadow-[0_0_0_rgba(0,0,0,0)]"
+                      >
+                        Request Private Consultation
+                      </MagneticButton>
+                    </div>
+                  </div>
+                </div>
+              </motion.section>
+
+              <motion.footer {...SECTION_REVEAL} className="site-footer relative mt-12 pb-8 pt-16">
+                <div className="absolute inset-x-0 -top-12 h-12 rounded-t-[2.5rem] border-t border-black/[0.06] bg-ivory" aria-hidden="true" />
+                <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
+                  <div className="grid gap-12 border-t border-black/[0.12] pt-12 md:grid-cols-2 lg:grid-cols-4">
+                    <div className="lg:col-span-2">
+                      <p className="font-display text-3xl leading-none text-coal">Crevia Ventures</p>
+                      <p className="mt-5 max-w-md text-sm leading-7 text-coal/[0.62]">
+                        Architecture for ecosystem convenings, founder rooms, and high-consequence events across Africa.
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.28em] text-coal/[0.5]">Services</p>
+                      <div className="mt-5 space-y-3 text-sm text-coal/[0.72]">
+                        <a href="live-ecosystems.html" className="block hover:text-coal">
+                          Event Production
+                        </a>
+                        <a href="website-creation.html" className="block hover:text-coal">
+                          Website Creation
+                        </a>
+                        <a href="#past-convenings" className="block hover:text-coal">
+                          Portfolio Highlights
+                        </a>
+                        <a href="about.html" className="block hover:text-coal">
+                          About Us
+                        </a>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.28em] text-coal/[0.5]">Contact</p>
+                      <div className="mt-5 space-y-3 text-sm text-coal/[0.72]">
+                        <p>Nairobi, Kenya</p>
+                        <a href="mailto:hello@crevia.co" className="block hover:text-coal">
+                          hello@crevia.co
+                        </a>
+                        <a href="contact.html" className="block hover:text-coal">
+                          Book a consultation
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-10 border-t border-black/[0.12] pt-6">
+                    <div className="flex flex-col gap-3 text-sm text-coal/[0.56] md:flex-row md:items-center md:justify-between">
+                      <p>© 2026 Crevia Ventures. All rights reserved.</p>
+                      <div className="flex items-center gap-6">
+                        <a href="privacy.html" className="hover:text-coal/[0.9]">
+                          Privacy Policy
+                        </a>
+                        <a href="terms.html" className="hover:text-coal/[0.9]">
+                          Terms of Use
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.footer>
+            </main>
+            {selectedEvent && <VideoModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />}
+          </>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+  </body>
+</html>

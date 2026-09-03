@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Events | Crevia Ventures</title>
+    <meta name="description" content="Crevia Ventures architects high-stakes African B2B convenings where market friction is mapped, capital is allocated, and enterprise deal flow moves." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { coal: '#070706', paper: '#f3f0e9', ember: '#f0782f' },
+            fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['Playfair Display', 'serif'] },
+          },
+        },
+      };
+    </script>
+    <style>
+      :root { color-scheme: dark; }
+      html { scroll-behavior: smooth; }
+      body { margin: 0; background: #070706; color: #f3f0e9; }
+      .page-noise { background-image: radial-gradient(rgba(255,255,255,.04) .55px, transparent .55px); background-size: 5px 5px; opacity: .11; }
+      .banding { background: linear-gradient(108deg, #070706 0%, #070706 22%, rgba(8,55,57,.78) 48%, rgba(132,67,27,.48) 76%, #070706 100%); }
+      .banding::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.045) 49.8%, transparent 50.2%); background-size: 25% 100%; transform: translateY(var(--band-shift, 0px)); transition: transform .12s linear; }
+      .hairline { border-color: rgba(243,240,233,.15); }
+      .eyebrow { letter-spacing: .22em; }
+      .link-arrow { transition: transform 480ms cubic-bezier(.16,1,.3,1); }
+      a:hover .link-arrow { transform: translateX(4px); }
+      .archive-card { transition: background-color 650ms cubic-bezier(.16,1,.3,1), transform 650ms cubic-bezier(.16,1,.3,1); }
+      .archive-card:hover { background-color: rgba(255,255,255,.055); transform: translateY(-4px); }
+      .focus-ring:focus-visible { outline: 2px solid #f0782f; outline-offset: 4px; }
+      .surface-paper { background: #f3f0e9; color: #17110d; }
+      .surface-paper .text-paper { color: #17110d !important; }
+      .surface-paper .text-paper\/75, .surface-paper .text-paper\/70, .surface-paper .text-paper\/65, .surface-paper .text-paper\/60, .surface-paper .text-paper\/50, .surface-paper .text-paper\/45 { color: rgba(23,17,13,.68) !important; }
+      .surface-paper .hairline { border-color: rgba(23,17,13,.16) !important; }
+      .surface-ember { background: #f0782f; color: #17110d; }
+      .surface-ember .text-paper, .surface-ember .text-ember { color: #17110d !important; }
+      .surface-ember .text-paper\/70, .surface-ember .text-paper\/65, .surface-ember .text-paper\/60 { color: rgba(23,17,13,.72) !important; }
+      .surface-ember .hairline { border-color: rgba(23,17,13,.23) !important; }
+      .surface-ember .focus-ring { border-color: #17110d; color: #17110d; }
+      .hero-stage { animation: hero-stage 1.25s cubic-bezier(.16,1,.3,1) both; }
+      .hero-line-wrap { display: block; overflow: hidden; padding-bottom: .08em; }
+      .hero-line { display: block; transform: translateY(112%); opacity: 0; filter: blur(10px); animation: hero-line 1.35s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--delay); }
+      .hero-detail { opacity: 0; transform: translateY(16px); filter: blur(7px); animation: hero-detail .95s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--delay); }
+      .scroll-reveal { opacity: 0; transform: translateY(22px); filter: blur(9px); transition: opacity 1.05s cubic-bezier(.16,1,.3,1), transform 1.05s cubic-bezier(.16,1,.3,1), filter 1.05s cubic-bezier(.16,1,.3,1); transition-delay: var(--reveal-delay, 0ms); }
+      .scroll-reveal.is-visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+      .magnetic { transition: transform 520ms cubic-bezier(.16,1,.3,1), background-color 420ms ease, color 420ms ease; will-change: transform; }
+      .text-link { position: relative; }
+      .text-link::after { content: ''; position: absolute; left: 50%; bottom: -5px; width: 0; height: 1px; background: currentColor; transform: translateX(-50%); transition: width 420ms cubic-bezier(.16,1,.3,1); }
+      .text-link:hover::after { width: 100%; }
+      @keyframes hero-stage { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes hero-line { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+      @keyframes hero-detail { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
+      /* Mobile nav panel styling */
+      #mobileNav { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
+      #mobileNav .mobile-nav-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.6); opacity:0; transition:opacity .28s ease; pointer-events:none; }
+      body.mobile-open #mobileNav { pointer-events: auto; }
+      #mobileNav .mobile-nav-panel { position:absolute; top:0; right:0; height:100%; width:86%; max-width:360px; background:#0b0b0b; transform:translateX(110%); transition:transform .36s cubic-bezier(.16,1,.3,1); box-shadow:-24px 0 60px rgba(0,0,0,0.6); padding:22px; border-radius:12px 0 0 12px; }
+      #mobileNav .mobile-nav-panel a{ display:block; padding:14px 8px; font-size:18px; color:#f3f0e9; text-decoration:none; border-radius:8px; }
+      #mobileNav .mobile-cta{ margin-top:18px; display:inline-block; padding:12px 16px; background:#f0782f; color:#111; border-radius:999px; font-weight:600; }
+      body.mobile-open #mobileNav .mobile-nav-backdrop{ opacity:1; pointer-events:auto; }
+      body.mobile-open #mobileNav .mobile-nav-panel{ transform:translateX(0); }
+      @media (min-width: 768px){ #mobileNav{display:none!important} }
+    </style>
+  </head>
+  <body class="font-sans antialiased">
+    <div class="fixed inset-0 pointer-events-none page-noise"></div>
+      <header class="sticky inset-x-0 top-0 z-50 px-4 pt-4 md:px-8">
+      <div class="mx-auto grid max-w-[1440px] items-center gap-4 rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#090909_0%,#121212_18%,#1a1a1a_34%,#F0782F_72%,#8B3913_100%)] px-4 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.32)] backdrop-blur-md md:grid-cols-[1fr_auto_1fr] md:px-7 relative">
+        <div class="flex items-center gap-3">
+          <a href="web.html" class="focus-ring font-display text-2xl font-semibold tracking-tight text-paper">Crevia</a>
+          <button id="navToggle" aria-label="Open menu" class="md:hidden absolute left-1/2 -translate-x-1/2 top-3 inline-flex items-center justify-center rounded-lg bg-white/5 p-2">
+            <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.75 1.25H19.25" stroke="#F3F0E9" stroke-width="1.5" stroke-linecap="round"/><path d="M0.75 7H19.25" stroke="#F3F0E9" stroke-width="1.5" stroke-linecap="round"/><path d="M0.75 12.75H19.25" stroke="#F3F0E9" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <nav aria-label="Main navigation" class="hidden items-center justify-center gap-7 text-sm font-medium text-paper/80 md:flex"><a href="web.html#service-focus" class="focus-ring text-link hover:text-paper">Services</a><a href="events.html" class="focus-ring text-link hover:text-paper">Our Events</a><a href="about.html" class="focus-ring text-link hover:text-paper">About</a></nav>
+        <a href="contact.html" class="focus-ring magnetic justify-self-end hidden md:inline-flex rounded-full bg-ember px-5 py-2.5 text-sm font-semibold text-[#111111] transition hover:bg-ember">Book a Strategy Session</a>
+      </div>
+      </header>
+
+      <!-- Mobile off-canvas navigation -->
+      <div id="mobileNav" class="fixed inset-0 z-60">
+        <div class="mobile-nav-backdrop" onclick="toggleMobileNav()"></div>
+        <nav class="mobile-nav-panel">
+          <a href="web.html#service-focus" class="block" onclick="toggleMobileNav()">Services</a>
+          <a href="events.html" class="block" onclick="toggleMobileNav()">Our Events</a>
+          <a href="about.html" class="block" onclick="toggleMobileNav()">About</a>
+          <a href="contact.html" class="mobile-cta" onclick="toggleMobileNav()">Book a Strategy Session</a>
+        </nav>
+      </div>
+
+    <main>
+      <section class="banding hero-stage relative flex min-h-screen items-end overflow-hidden border-b hairline px-5 pb-14 pt-32 md:px-10 md:pb-20">
+        <div class="relative mx-auto w-full max-w-[1440px]">
+          <p class="hero-detail eyebrow flex items-center gap-3 text-[11px] font-bold uppercase text-ember" style="--delay: .25s"><span class="h-2 w-2 rounded-full bg-ember"></span> Convenings</p>
+          <h1 class="mt-9 max-w-[760px] text-[clamp(3.45rem,6vw,7.2rem)] font-medium leading-[.9] tracking-[-.055em] text-paper">
+            <span class="hero-line-wrap"><span class="hero-line" style="--delay: .30s">We engineer <span class="text-ember">market</span></span></span>
+            <span class="hero-line-wrap"><span class="hero-line" style="--delay: .62s"><span class="text-ember">authority.</span></span></span>
+          </h1>
+          <div class="hero-detail mt-12 grid max-w-4xl gap-6 border-t hairline pt-6 md:grid-cols-[1fr_1.25fr]" style="--delay: .78s">
+            <p class="eyebrow text-[10px] font-bold uppercase text-white/80">Crevia Ventures / Africa</p>
+            <p class="max-w-xl text-base leading-7 text-white/85 md:text-lg">Crevia is a strategic brand and ecosystem firm. We translate strategy into market leadership through flagship convenings, premium identity, and operational playbooks.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="surface-paper scroll-reveal border-b hairline px-5 py-24 md:px-10 md:py-36" data-reveal>
+        <div class="mx-auto grid max-w-[1440px] gap-12 lg:grid-cols-[.72fr_1.55fr] lg:gap-24">
+          <div><p class="eyebrow text-[11px] font-bold uppercase text-ember">01 / The operating thesis</p></div>
+          <div>
+            <p class="max-w-5xl font-display text-4xl font-semibold leading-[1.08] tracking-[-.035em] text-paper md:text-6xl">Procurement over <em class="text-ember">pitching.</em></p>
+            <div class="mt-12 grid gap-10 border-t hairline pt-7 md:grid-cols-2">
+              <p class="text-lg leading-8 text-paper/75">Most summits create an audience. We create active deal rooms: defined demand, relevant supply, accountable decision-makers, and a reason to continue the conversation after the stage clears.</p>
+              <p class="text-lg leading-8 text-paper/75">Founders, capital allocators, and enterprise procurement heads come together to sign contracts, map constraints, and establish the operational blueprint the market has been missing.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="africa-business-connect" class="scroll-reveal relative overflow-hidden border-b hairline bg-[#0c0c0a] px-5 py-24 md:px-10 md:py-36" data-reveal>
+        <div class="absolute -right-40 top-0 h-[680px] w-[680px] rounded-full bg-ember/15 blur-[150px]"></div>
+        <div class="absolute left-[27%] top-0 h-full w-px bg-white/10"></div>
+        <div class="relative mx-auto max-w-[1440px]">
+          <p class="eyebrow text-[11px] font-bold uppercase text-ember">02 / Upcoming flagship</p>
+          <div class="mt-10 grid items-end gap-12 lg:grid-cols-[1.35fr_.65fr]">
+            <div>
+              <p class="eyebrow text-xs font-bold uppercase text-paper/45">The annual B2B infrastructure forum</p>
+              <h2 class="mt-5 max-w-4xl font-display text-5xl font-semibold leading-[.95] tracking-[-.05em] text-paper md:text-8xl">Africa<br /><em class="text-ember">Business Connect.</em></h2>
+            </div>
+            <p class="max-w-md text-lg leading-8 text-paper/75">The definitive annual gathering for B2B scale on the continent. A tightly designed environment for operators building the infrastructure, not observing it.</p>
+          </div>
+          <div class="mt-20 grid border-y hairline md:grid-cols-3">
+            <div class="border-b hairline px-0 py-8 md:border-b-0 md:border-r md:px-8 md:first:pl-0">
+              <p class="eyebrow text-[10px] font-bold uppercase text-ember">I</p><h3 class="mt-5 text-xl font-semibold text-paper">The Deal Room</h3><p class="mt-3 leading-7 text-paper/60">Private, qualified introductions structured around live enterprise requirements and capital mandates.</p>
+            </div>
+            <div class="border-b hairline px-0 py-8 md:border-b-0 md:border-r md:px-8">
+              <p class="eyebrow text-[10px] font-bold uppercase text-ember">II</p><h3 class="mt-5 text-xl font-semibold text-paper">Diagnostic Labs</h3><p class="mt-3 leading-7 text-paper/60">Closed working sessions that identify the constraints behind stalled sectors and build practical responses.</p>
+            </div>
+            <div class="px-0 py-8 md:px-8 md:pr-0">
+              <p class="eyebrow text-[10px] font-bold uppercase text-ember">III</p><h3 class="mt-5 text-xl font-semibold text-paper">Operator Exchange</h3><p class="mt-3 leading-7 text-paper/60">Direct access to the people accountable for executing regional growth, procurement, and deployment.</p>
+            </div>
+          </div>
+          <a href="contact.html" class="focus-ring magnetic mt-12 inline-flex items-center gap-4 bg-ember px-6 py-4 text-xs font-bold uppercase tracking-[.13em] text-[#19110d] transition hover:bg-ember">Request an invitation <span class="link-arrow text-lg" aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
+      <section id="archive" class="surface-paper scroll-reveal border-b hairline px-5 py-24 md:px-10 md:py-36" data-reveal>
+        <div class="mx-auto max-w-[1440px]">
+          <div class="grid gap-7 md:grid-cols-2 md:items-end"><p class="eyebrow text-[11px] font-bold uppercase text-ember">03 / Archive</p><p class="max-w-lg text-lg leading-8 text-paper/65 md:justify-self-end">Foundational rooms, built with the same operating discipline: the right people, a clear mandate, and no wasted motion.</p></div>
+          <div class="mt-16 border-t hairline">
+            <article class="archive-card scroll-reveal grid gap-8 border-b hairline py-9 md:grid-cols-[130px_1fr_1.25fr] md:items-start md:gap-12" data-reveal style="--reveal-delay: 70ms">
+              <p class="eyebrow text-[11px] font-bold uppercase text-ember">2026</p><div><h3 class="font-display text-3xl font-semibold text-paper">Crevia Summit</h3><p class="mt-2 text-sm text-paper/50">iHub Nairobi</p></div><p class="max-w-xl leading-7 text-paper/70">Flagship ecosystem execution at iHub Nairobi — structured to produce decisive outcomes, clear commitments, and operational follow-through.</p>
+            </article>
+            <article class="archive-card scroll-reveal grid gap-8 border-b hairline py-9 md:grid-cols-[130px_1fr_1.25fr] md:items-start md:gap-12" data-reveal style="--reveal-delay: 150ms">
+              <p class="eyebrow text-[11px] font-bold uppercase text-ember">2025</p><div><h3 class="font-display text-3xl font-semibold text-paper">AI Summit</h3><p class="mt-2 text-sm text-paper/50">Strathmore University</p></div><p class="max-w-xl leading-7 text-paper/70">Advanced technology aligned to scalable social impact; design and moderation focused on operational outcomes rather than abstract debate.</p>
+            </article>
+            <article class="archive-card scroll-reveal grid gap-8 border-b hairline py-9 md:grid-cols-[130px_1fr_1.25fr] md:items-start md:gap-12" data-reveal style="--reveal-delay: 230ms">
+              <p class="eyebrow text-[11px] font-bold uppercase text-ember">2024</p><div><h3 class="font-display text-3xl font-semibold text-paper">Freelancers Summit</h3><p class="mt-2 text-sm text-paper/50">iHub Nairobi</p></div><p class="max-w-xl leading-7 text-paper/70">An inaugural summit that translated a regional talent gap into a functioning market network and ongoing opportunity pipeline.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="surface-ember scroll-reveal relative overflow-hidden px-5 py-28 md:px-10 md:py-40" data-reveal>
+        <div class="absolute bottom-0 left-1/2 h-80 w-1/2 -translate-x-1/2 rounded-full bg-[#f7c9a7]/35 blur-[120px]"></div>
+        <div class="relative mx-auto max-w-[1440px]">
+          <p class="eyebrow text-[11px] font-bold uppercase text-ember">04 / Commission the room</p>
+          <h2 class="mt-8 max-w-5xl font-display text-5xl font-semibold leading-[1] tracking-[-.045em] text-paper md:text-8xl">Stop sponsoring passive panels.</h2>
+          <p class="mt-8 max-w-2xl text-xl leading-8 text-paper/70">Partner with Crevia to architect your next high-stakes market activation.</p>
+          <a href="contact.html" class="focus-ring magnetic mt-12 inline-flex items-center gap-4 border border-ember px-6 py-4 text-xs font-bold uppercase tracking-[.13em] text-ember transition hover:bg-ember hover:text-[#19110d]">Commission an event <span class="link-arrow text-lg" aria-hidden="true">→</span></a>
+        </div>
+      </section>
+    </main>
+    <footer class="scroll-reveal border-t hairline px-5 py-14 md:px-10" data-reveal style="background: linear-gradient(135deg, #060606 0%, #111111 16%, #F0782F 42%, #9F4318 100%); color: #f5efe7;">
+      <div class="mx-auto max-w-[1440px]">
+        <div class="grid gap-10 border-b hairline pb-12 md:grid-cols-[1.4fr_1fr_1fr]">
+          <div><p class="font-display text-4xl font-semibold text-white">Crevia</p><p class="mt-4 max-w-sm leading-7 text-white/80">We architect the rooms where African market infrastructure is made actionable.</p></div>
+          <div><p class="eyebrow text-[10px] font-bold uppercase text-ember">Explore</p><div class="mt-5 space-y-3 text-sm text-white/80"><a class="focus-ring block hover:text-white" href="web.html">Home</a><a class="focus-ring block hover:text-white" href="about.html">About Crevia</a><a class="focus-ring block hover:text-white" href="web.html#service-focus">Services</a></div></div>
+          <div><p class="eyebrow text-[10px] font-bold uppercase text-ember">Start a conversation</p><a class="focus-ring mt-5 block text-sm text-white/80 hover:text-white" href="mailto:hello@crevia.co">hello@crevia.co</a><p class="mt-3 text-sm text-white/80">Nairobi, Kenya</p></div>
+        </div>
+        <div class="mt-6 flex flex-col justify-between gap-3 text-[10px] font-medium uppercase tracking-[.16em] text-white/70 sm:flex-row"><span>© 2026 Crevia Ventures</span><div class="flex gap-5"><a class="focus-ring hover:text-white" href="privacy.html">Privacy</a><a class="focus-ring hover:text-white" href="terms.html">Terms</a></div></div>
+      </div>
+    </footer>
+    <script>
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target); } });
+      }, { threshold: 0.14 });
+      document.querySelectorAll('[data-reveal]').forEach((element) => revealObserver.observe(element));
+
+      if (!reduceMotion) {
+        document.querySelectorAll('.magnetic').forEach((button) => {
+          button.addEventListener('mousemove', (event) => {
+            const rect = button.getBoundingClientRect();
+            const x = (event.clientX - rect.left - rect.width / 2) * .10;
+            const y = (event.clientY - rect.top - rect.height / 2) * .14;
+            button.style.transform = `translate(${x}px, ${y}px)`;
+          });
+          button.addEventListener('mouseleave', () => { button.style.transform = ''; });
+        });
+        const banding = document.querySelector('.banding');
+        window.addEventListener('scroll', () => banding.style.setProperty('--band-shift', `${Math.min(window.scrollY * .055, 42)}px`), { passive: true });
+      }
+
+      function toggleMobileNav(){ document.body.classList.toggle('mobile-open'); }
+      const _navToggle = document.getElementById('navToggle'); if(_navToggle) _navToggle.addEventListener('click', toggleMobileNav);
+    </script>
+  </body>
+</html>

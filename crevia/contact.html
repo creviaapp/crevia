@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Contact — Crevia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { ink: '#050505', paper: '#f5efe5', accent: '#f0782f', line: '#2a2a2a' },
+            fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['Playfair Display', 'serif'] }
+          }
+        }
+      }
+    </script>
+    <style>
+      html,body{height:100%;margin:0;background:#050505;color:#f5efe5;scroll-behavior:smooth}
+      body{animation:page-enter .9s cubic-bezier(0.16,1,0.3,1) both}
+      @keyframes page-enter{from{opacity:0;transform:translateY(12px);filter:blur(10px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+      .premium-card{transition:transform 420ms cubic-bezier(0.16,1,0.3,1),box-shadow 420ms cubic-bezier(0.16,1,0.3,1),border-color 420ms cubic-bezier(0.16,1,0.3,1);will-change:transform,box-shadow}
+      .premium-card:hover{transform:translateY(-4px);box-shadow:0 20px 45px rgba(0,0,0,.18)}
+      .premium-button{transition:transform 320ms cubic-bezier(0.16,1,0.3,1),box-shadow 320ms cubic-bezier(0.16,1,0.3,1)}
+      .premium-button:hover{transform:translateY(-1px)}
+      .glass{backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+      .contact-hero { background: linear-gradient(120deg, #070706 0%, #15120e 34%, #4b2c1d 69%, #0b3a3d 100%); }
+      .motion-reveal { opacity: 0; transform: translateY(24px); filter: blur(8px); transition: opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1), filter 1s cubic-bezier(.16,1,.3,1); transition-delay: var(--motion-delay,0ms); }
+      .motion-reveal.motion-visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+      @media (prefers-reduced-motion: reduce) { .motion-reveal { opacity: 1; transform: none; filter: none; transition: none; } }
+    </style>
+    <style>
+      /* Mobile nav panel styling */
+      #mobileNav { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
+      #mobileNav .mobile-nav-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.6); opacity:0; transition:opacity .28s ease; pointer-events:none; }
+      body.mobile-open #mobileNav { pointer-events: auto; }
+      #mobileNav .mobile-nav-panel { position:absolute; top:0; right:0; height:100%; width:86%; max-width:360px; background:#0b0b0b; transform:translateX(110%); transition:transform .36s cubic-bezier(.16,1,.3,1); box-shadow:-24px 0 60px rgba(0,0,0,0.6); padding:22px; border-radius:12px 0 0 12px; }
+      #mobileNav .mobile-nav-panel a{ display:block; padding:14px 8px; font-size:18px; color:#f3f0e9; text-decoration:none; border-radius:8px; }
+      #mobileNav .mobile-cta{ margin-top:18px; display:inline-block; padding:12px 16px; background:#f0782f; color:#111; border-radius:999px; font-weight:600; }
+      body.mobile-open #mobileNav .mobile-nav-backdrop{ opacity:1; pointer-events:auto; }
+      body.mobile-open #mobileNav .mobile-nav-panel{ transform:translateX(0); }
+      @media (min-width: 768px){ #mobileNav{display:none!important} }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+  </head>
+  <body class="antialiased min-h-screen bg-[#12100f] text-[#f5f1eb]">
+    <header class="sticky inset-x-0 top-0 z-50 px-4 pt-4 md:px-8">
+      <div class="premium-card relative rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#090909_0%,#121212_18%,#1a1a1a_34%,#F0782F_72%,#8B3913_100%)] px-4 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.32)] backdrop-blur-md md:px-7">
+        <div class="grid items-center gap-4 md:grid-cols-[1fr_auto_1fr]">
+          <div class="flex items-center gap-3">
+            <a href="web.html" class="justify-self-start font-display text-2xl leading-none text-white">Crevia</a>
+            <button id="navToggle" aria-label="Open menu" class="md:hidden absolute left-1/2 -translate-x-1/2 top-3 inline-flex items-center justify-center rounded-lg bg-white/5 p-2">
+              <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.75 1.25H19.25" stroke="#F5F3F0" stroke-width="1.5" stroke-linecap="round"/><path d="M0.75 7H19.25" stroke="#F5F3F0" stroke-width="1.5" stroke-linecap="round"/><path d="M0.75 12.75H19.25" stroke="#F5F3F0" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+
+          <nav class="hidden items-center justify-center gap-7 md:flex">
+            <a href="web.html#service-focus" class="relative px-1 text-sm font-medium text-white/[0.82] transition hover:text-white">Services</a>
+            <a href="events.html" class="relative px-1 text-sm font-medium text-white/[0.82] transition hover:text-white">Our Events</a>
+            <a href="about.html" class="relative px-1 text-sm font-medium text-white/[0.82] transition hover:text-white">About</a>
+          </nav>
+
+            <div class="justify-self-end">
+              <a href="contact.html" class="hidden md:inline-flex premium-button items-center justify-center rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-[#111111] transition hover:brightness-110">Book a Strategy Session</a>
+            </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile off-canvas navigation -->
+    <div id="mobileNav" class="fixed inset-0 z-60">
+      <div class="mobile-nav-backdrop" onclick="toggleMobileNav()"></div>
+      <nav class="mobile-nav-panel">
+        <a href="web.html#service-focus" onclick="toggleMobileNav()">Services</a>
+        <a href="events.html" onclick="toggleMobileNav()">Our Events</a>
+        <a href="about.html" onclick="toggleMobileNav()">About</a>
+        <a href="contact.html" class="mobile-cta" onclick="toggleMobileNav()">Book a Strategy Session</a>
+      </nav>
+    </div>
+
+    <section class="contact-hero relative overflow-hidden">
+      <div class="absolute inset-0 opacity-50" style="background-image: radial-gradient(circle, rgba(240,120,47,0.65) 1.5px, transparent 1.5px); background-size: 18px 18px; background-position: center;">
+      </div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03),transparent_60%)]"></div>
+
+      <div class="relative mx-auto max-w-6xl px-6 pb-20 pt-20 md:px-10 md:pt-24 lg:pt-28">
+        <div class="text-center">
+          <p class="inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.45em] text-accent">
+            <span class="inline-block h-2 w-2 rounded-full bg-accent"></span>
+            Contact
+          </p>
+
+          <h1 class="mt-8 font-display text-5xl leading-[0.9] text-[#f0ece7] md:text-7xl lg:text-[7rem]">
+            Let's have a <span class="text-accent">conversation.</span>
+          </h1>
+
+          <p class="mx-auto mt-8 max-w-3xl text-lg leading-8 text-[#d8d1c8]">
+            Tell us what you're working on. We'll tell you if and how we can help — honestly, and without obligation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#efeee9] text-[#1a1917]">
+      <div class="mx-auto max-w-6xl px-6 py-12 md:py-16 lg:py-20">
+        <div class="border-t border-[#1d1b1a]/30 pt-8 md:pt-10">
+          <div class="grid gap-10 md:grid-cols-[0.9fr_1.6fr]">
+            <aside class="space-y-8 pt-2 md:pt-4">
+              <div class="premium-card rounded-2xl border border-[#1d1b1a]/20 px-5 py-5 shadow-[0_14px_32px_rgba(26,25,23,0.04)]">
+                <p class="text-[11px] font-medium uppercase tracking-[0.34em] text-accent">Email</p>
+                <p class="mt-4 text-[1.05rem] text-[#1a1917]">hello@crevia.co</p>
+              </div>
+
+              <div class="premium-card rounded-2xl border border-[#1d1b1a]/20 px-5 py-5 shadow-[0_14px_32px_rgba(26,25,23,0.04)]">
+                <p class="text-[11px] font-medium uppercase tracking-[0.34em] text-accent">Location</p>
+                <p class="mt-4 text-[1.05rem] text-[#1a1917]">Nairobi, Kenya</p>
+                <p class="mt-1 text-[1.05rem] text-[#1a1917]">Pan-African practice</p>
+              </div>
+
+              <div class="premium-card rounded-2xl border border-[#1d1b1a]/20 px-5 py-5 shadow-[0_14px_32px_rgba(26,25,23,0.04)]">
+                <p class="text-[11px] font-medium uppercase tracking-[0.34em] text-accent">Response time</p>
+                <p class="mt-4 max-w-xs text-[1.05rem] leading-7 text-[#1a1917]">
+                  We respond to every message within two business days.
+                </p>
+              </div>
+
+              <!-- Daro applications card removed per request -->
+            </aside>
+
+            <div class="w-full">
+              <form id="contactForm" class="space-y-6">
+                <div class="grid gap-6 md:grid-cols-2">
+                  <label class="block">
+                    <span class="mb-3 block text-[11px] font-medium uppercase tracking-[0.26em] text-[#1a1917]">Full name</span>
+                    <input
+                      name="name"
+                      required
+                      class="premium-card w-full rounded-2xl border border-[#1d1b1a]/25 bg-transparent px-4 py-3 text-base text-[#1a1917] placeholder:text-[#1a1917]/45 outline-none transition focus:border-ember"
+                      placeholder="Your full name"
+                    />
+                  </label>
+
+                  <label class="block">
+                    <span class="mb-3 block text-[11px] font-medium uppercase tracking-[0.26em] text-[#1a1917]">Email address</span>
+                    <input
+                      name="email"
+                      type="email"
+                      required
+                      class="premium-card w-full rounded-2xl border border-[#1d1b1a]/25 bg-transparent px-4 py-3 text-base text-[#1a1917] placeholder:text-[#1a1917]/45 outline-none transition focus:border-ember"
+                      placeholder="your@organization.com"
+                    />
+                  </label>
+                </div>
+
+                <label class="block">
+                  <span class="mb-3 block text-[11px] font-medium uppercase tracking-[0.26em] text-[#1a1917]">Organization</span>
+                  <input
+                    name="company"
+                    class="premium-card w-full rounded-2xl border border-[#1d1b1a]/25 bg-transparent px-4 py-3 text-base text-[#1a1917] placeholder:text-[#1a1917]/45 outline-none transition focus:border-ember"
+                    placeholder="Your organization or company name"
+                  />
+                </label>
+
+                <label class="block">
+                  <span class="mb-3 block text-[11px] font-medium uppercase tracking-[0.26em] text-[#1a1917]">How can we help?</span>
+                  <select
+                    name="reason"
+                    class="premium-card w-full rounded-2xl border border-[#1d1b1a]/25 bg-transparent px-4 py-3 pr-10 text-base text-[#1a1917] outline-none transition focus:border-ember"
+                  >
+                    <option selected disabled>Select a reason for getting in touch</option>
+                    <option>Event production</option>
+                    <option>Partnership</option>
+                    <option>Media / PR</option>
+                    <option>General inquiry</option>
+                  </select>
+                </label>
+
+                <label class="block">
+                  <span class="mb-3 block text-[11px] font-medium uppercase tracking-[0.26em] text-[#1a1917]">Message</span>
+                  <textarea
+                    name="message"
+                    rows="7"
+                    required
+                    class="premium-card w-full resize-none rounded-2xl border border-[#1d1b1a]/25 bg-transparent px-4 py-3 text-base text-[#1a1917] placeholder:text-[#1a1917]/45 outline-none transition focus:border-ember"
+                    placeholder="Tell us what you're working on, the decision you're facing, or the problem you need help thinking through."
+                  ></textarea>
+                </label>
+
+                <div class="flex items-center justify-between gap-4 pt-2">
+                  <button
+                    id="submitBtn"
+                    type="submit"
+                    class="premium-button inline-flex items-center justify-center bg-accent px-8 py-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#f5f1eb] transition hover:bg-accent"
+                  >
+                    Send message
+                  </button>
+
+                  <p id="status" class="text-sm text-[#1a1917]/70">We review every message personally. No automated responses.</p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="border-t border-white/10 px-6 py-14 text-[#f5f1eb] md:px-10" style="background: linear-gradient(135deg, #060606 0%, #111111 16%, #F0782F 42%, #9F4318 100%); color: #f5efe7;">
+          <div class="mx-auto max-w-6xl"><div class="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-[1.4fr_1fr_1fr]"><div><p class="font-display text-4xl">Crevia</p><p class="mt-4 max-w-sm leading-7 text-white/55">Market rooms built for decisions that carry beyond the room.</p></div><div><p class="text-[10px] font-bold uppercase tracking-[.22em] text-ember">Explore</p><div class="mt-5 space-y-3 text-sm text-white/65"><a class="block hover:text-white" href="events.html">Our Events</a><a class="block hover:text-white" href="about.html">About Crevia</a><a class="block hover:text-white" href="web.html#service-focus">Services</a></div></div><div><p class="text-[10px] font-bold uppercase tracking-[.22em] text-ember">Contact</p><a class="mt-5 block text-sm text-white/65 hover:text-white" href="mailto:hello@crevia.co">hello@crevia.co</a><p class="mt-3 text-sm text-white/65">Nairobi, Kenya</p></div></div><div class="mt-6 flex flex-col gap-3 text-xs text-white/40 md:flex-row md:justify-between"><span>© 2026 Crevia Ventures.</span><div class="flex gap-5"><a href="privacy.html" class="hover:text-white">Privacy</a><a href="terms.html" class="hover:text-white">Terms</a></div></div></div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const SUPABASE_URL = 'https://bcbzixdcsigxhqdiveei.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_KRA3ToPGFBpIsWnNVtwRKw_7SOVRKbI';
+        const RATE_LIMIT_WINDOW = 60000;
+        const RATE_LIMIT_MAX = 3;
+
+        const useSupabase = SUPABASE_URL && SUPABASE_ANON_KEY && !SUPABASE_URL.includes('YOUR-');
+
+        let supabase = null;
+        if (useSupabase) {
+          supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+
+        const form = document.getElementById('contactForm');
+        const status = document.getElementById('status');
+        const btn = document.getElementById('submitBtn');
+
+        function checkRateLimit() {
+          const now = Date.now();
+          const submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
+          const recentSubmissions = submissions.filter(time => now - time < RATE_LIMIT_WINDOW);
+
+          if (recentSubmissions.length >= RATE_LIMIT_MAX) {
+            return false;
+          }
+
+          recentSubmissions.push(now);
+          localStorage.setItem('contactSubmissions', JSON.stringify(recentSubmissions));
+          return true;
+        }
+
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          status.textContent = '';
+          btn.disabled = true;
+          btn.textContent = 'Sending...';
+
+          if (!checkRateLimit()) {
+            status.textContent = 'Too many submissions. Please wait before trying again.';
+            btn.disabled = false;
+            btn.textContent = 'Send message';
+            return;
+          }
+
+          const formData = Object.fromEntries(new FormData(form).entries());
+
+          if (!useSupabase) {
+            status.textContent = 'Supabase not configured — paste keys at top of this file.';
+            btn.disabled = false;
+            btn.textContent = 'Send message';
+            return;
+          }
+
+          try {
+            const { error } = await supabase.from('contacts').insert([formData]);
+            if (error) throw error;
+            status.textContent = 'Thanks — we received your message.';
+            form.reset();
+          } catch (err) {
+            console.error(err);
+            status.textContent = 'Submission failed. Check console for details.';
+          }
+
+          btn.disabled = false;
+          btn.textContent = 'Send message';
+        });
+      });
+    </script>
+    <script>
+      const contactMotionReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const contactMotionObserver = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('motion-visible'); contactMotionObserver.unobserve(entry.target); } }), { threshold: .12 });
+      [...document.querySelectorAll('body > section, body > footer')].forEach((element, index) => { element.classList.add('motion-reveal'); element.style.setProperty('--motion-delay', `${index * 90}ms`); if (contactMotionReduced) element.classList.add('motion-visible'); else contactMotionObserver.observe(element); });
+    </script>
+    <script>
+      function toggleMobileNav(){ document.body.classList.toggle('mobile-open'); }
+      const _navToggle = document.getElementById('navToggle'); if(_navToggle) _navToggle.addEventListener('click', toggleMobileNav);
+    </script>
+  </body>
+</html>

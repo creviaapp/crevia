@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Admin — Crevia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { ink: '#050505', paper: '#f5efe5', accent: '#f0782f', line: '#2a2a2a' },
+            fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['Playfair Display', 'serif'] }
+          }
+        }
+      }
+    </script>
+    <style>
+      html,body{height:100%;margin:0;background:#050505;color:#f5efe5;scroll-behavior:smooth}
+      body{animation:page-enter .9s cubic-bezier(0.16,1,0.3,1) both}
+      @keyframes page-enter{from{opacity:0;transform:translateY(12px);filter:blur(10px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+      .premium-card{transition:transform 420ms cubic-bezier(0.16,1,0.3,1),box-shadow 420ms cubic-bezier(0.16,1,0.3,1),border-color 420ms cubic-bezier(0.16,1,0.3,1)}
+      .premium-card:hover{transform:translateY(-4px);box-shadow:0 20px 45px rgba(0,0,0,.18)}
+      .premium-button{transition:transform 320ms cubic-bezier(0.16,1,0.3,1),box-shadow 320ms cubic-bezier(0.16,1,0.3,1)}
+      .premium-button:hover{transform:translateY(-1px)}
+      .admin-enter{opacity:0;transform:translateY(20px);filter:blur(8px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1)}.admin-enter.is-ready{opacity:1;transform:none;filter:none}@media(prefers-reduced-motion:reduce){.admin-enter{opacity:1;transform:none;filter:none;transition:none}}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+  </head>
+  <body class="antialiased min-h-screen">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <header class="flex items-center justify-between mb-8">
+        <a href="/crevia/web.html" class="font-display text-lg">Crevia — Admin</a>
+        <button id="logoutBtn" class="text-sm px-4 py-2 rounded bg-accent/20 hover:bg-accent/30 text-accent hidden">Log out</button>
+      </header>
+
+      <!-- Login Screen -->
+      <div id="loginScreen" class="max-w-md mx-auto">
+        <div class="premium-card glass rounded-[1.25rem] p-8 border border-white/10 bg-white text-ink">
+          <h1 class="font-display text-3xl mb-6 text-ink">Admin Login</h1>
+          <form id="loginForm" class="space-y-4">
+            <label class="block">
+              <span class="text-sm text-ink/70">Admin Password</span>
+              <input id="passwordInput" type="password" required class="mt-2 w-full rounded border border-ink/15 bg-white px-3 py-2 outline-none text-ink" />
+            </label>
+            <button type="submit" class="premium-button w-full rounded-full bg-accent px-6 py-3 font-semibold text-ink hover:shadow-[0_10px_30px_rgba(240,120,47,0.3)]">Login</button>
+          </form>
+          <p id="loginError" class="mt-4 text-sm text-red-400 hidden"></p>
+          <p class="mt-4 text-xs text-ink/50">Password: <code class="bg-ink/5 px-1 rounded">admin123</code></p>
+        </div>
+      </div>
+
+      <!-- Dashboard Screen -->
+      <div id="dashboardScreen" class="hidden">
+        <div class="mb-8">
+          <h2 class="font-display text-3xl mb-2">Contact Submissions</h2>
+          <p class="text-paper/70">All messages from the contact form</p>
+        </div>
+
+        <div id="loadingState" class="text-center py-12">
+          <p class="text-paper/70">Loading submissions...</p>
+        </div>
+
+        <div id="errorState" class="text-center py-12 hidden">
+          <p class="text-red-400 mb-4"></p>
+          <button onclick="location.reload()" class="px-4 py-2 rounded bg-accent/20 text-accent hover:bg-accent/30">Retry</button>
+        </div>
+
+        <div id="tableContainer" class="premium-card hidden overflow-x-auto rounded-[1.25rem] border border-white/10 bg-white">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-ink/10 bg-ink/[0.03]">
+                <th class="px-6 py-4 text-left font-semibold text-ink">Name</th>
+                <th class="px-6 py-4 text-left font-semibold text-ink">Email</th>
+                <th class="px-6 py-4 text-left font-semibold text-ink">Company</th>
+                <th class="px-6 py-4 text-left font-semibold text-ink">Message</th>
+                <th class="px-6 py-4 text-left font-semibold text-ink">Date</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+          </table>
+        </div>
+
+        <div id="emptyState" class="text-center py-12 hidden">
+          <p class="text-paper/70">No submissions yet</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', async function() {
+        const SUPABASE_URL = 'https://bcbzixdcsigxhqdiveei.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_KRA3ToPGFBpIsWnNVtwRKw_7SOVRKbI';
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        const loginScreen = document.getElementById('loginScreen');
+        const dashboardScreen = document.getElementById('dashboardScreen');
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('emailInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const loginError = document.getElementById('loginError');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Check if user is already logged in
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          showDashboard();
+        }
+
+        // Listen for auth changes
+        supabase.auth.onAuthStateChange(async (event, session) => {
+          if (session) {
+            showDashboard();
+          } else {
+            loginScreen.classList.remove('hidden');
+            dashboardScreen.classList.add('hidden');
+            logoutBtn.classList.add('hidden');
+          }
+        });
+
+        loginForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          loginError.classList.add('hidden');
+          loginError.textContent = '';
+          
+          const email = emailInput.value;
+          const password = passwordInput.value;
+
+          try {
+            const { error } = await supabase.auth.signInWithPassword({ email, password });
+            
+            if (error) throw error;
+            // Success - showDashboard will be called by onAuthStateChange
+          } catch (err) {
+            loginError.textContent = err.message || 'Login failed. Check credentials.';
+            loginError.classList.remove('hidden');
+            passwordInput.value = '';
+          }
+        });
+
+        logoutBtn.addEventListener('click', async () => {
+          await supabase.auth.signOut();
+          emailInput.value = '';
+          passwordInput.value = '';
+        });
+
+        async function showDashboard() {
+          loginScreen.classList.add('hidden');
+          dashboardScreen.classList.remove('hidden');
+          logoutBtn.classList.remove('hidden');
+          await loadSubmissions();
+        }
+
+        async function loadSubmissions() {
+          try {
+            const { data, error } = await supabase
+              .from('contacts')
+              .select('*')
+              .order('created_at', { ascending: false });
+
+            if (error) throw error;
+
+            document.getElementById('loadingState').classList.add('hidden');
+
+            if (!data || data.length === 0) {
+              document.getElementById('emptyState').classList.remove('hidden');
+              return;
+            }
+
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = data.map(contact => `
+              <tr class="border-b border-ink/10 hover:bg-ink/[0.03]">
+                <td class="px-6 py-4 text-ink">${escapeHtml(contact.name || '—')}</td>
+                <td class="px-6 py-4 text-ink/80">${escapeHtml(contact.email || '—')}</td>
+                <td class="px-6 py-4 text-ink/70">${escapeHtml(contact.company || '—')}</td>
+                <td class="px-6 py-4 text-ink/70 max-w-xs truncate">${escapeHtml(contact.message || '—')}</td>
+                <td class="px-6 py-4 text-ink/60">${new Date(contact.created_at).toLocaleDateString()}</td>
+              </tr>
+            `).join('');
+
+            document.getElementById('tableContainer').classList.remove('hidden');
+          } catch (err) {
+            console.error(err);
+            document.getElementById('loadingState').classList.add('hidden');
+            const errorState = document.getElementById('errorState');
+            errorState.querySelector('p').textContent = err.message || 'Failed to load submissions. Check browser console.';
+            errorState.classList.remove('hidden');
+          }
+        }
+
+        function escapeHtml(text) {
+          const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+          };
+          return text.replace(/[&<>"']/g, m => map[m]);
+        }
+      });
+    </script>
+    <script>const adminShell=document.querySelector('body > div');if(adminShell){adminShell.classList.add('admin-enter');requestAnimationFrame(()=>adminShell.classList.add('is-ready'));}</script>
+  </body>
+</html>
