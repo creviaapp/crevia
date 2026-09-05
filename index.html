@@ -125,19 +125,6 @@
         animation: sheen 14s linear infinite;
       }
 
-      .hero-abstract-bg {
-        background:
-          repeating-radial-gradient(ellipse 100% 120% at 102% 50%, transparent 0 7%, rgba(228,92,47,.94) 7.2% 10.8%, transparent 11% 17.8%, rgba(7,54,65,.92) 18% 22%, transparent 22.2% 29.4%, rgba(231,96,50,.9) 29.6% 33.2%, transparent 33.4% 41%, rgba(5,42,52,.96) 41.2% 46%, transparent 46.2% 54%),
-          radial-gradient(ellipse 100% 120% at 102% 50%, rgba(4,23,28,.98) 0%, rgba(4,23,28,.9) 32%, rgba(4,38,47,.78) 57%, rgba(5,17,21,.96) 100%),
-          linear-gradient(105deg, #11130f 0%, #061d23 48%, #07151a 100%);
-        animation: hero-abstract-drift 18s ease-in-out infinite;
-      }
-
-      @keyframes hero-abstract-drift {
-        0%, 100% { background-position: 0% 50%, 0% 50%, 0% 50%, 0% 50%, 0% 50%, 0% 50%; }
-        50% { background-position: 2% 50%, 3% 50%, 1% 50%, -2% 50%, -3% 50%, 0% 50%; }
-      }
-
       .africa-pattern {
         position: absolute;
         inset: 0;
@@ -804,7 +791,13 @@
             <main className="w-full pt-24 text-ivory md:pt-28">
               <motion.section {...SECTION_REVEAL} className="relative isolate overflow-hidden bg-coal">
                 <div className="absolute inset-0" aria-hidden="true">
-                  <div className="hero-abstract-bg h-full w-full" aria-hidden="true" />
+                  <motion.img
+                    src="crevia/images/desert_dune_landscape_main.png"
+                    alt="Crevia Ventures — strategic brand architecture"
+                    className="h-full w-full scale-[1.015] object-cover object-center"
+                    animate={{ scale: [1.015, 1.03, 1.015] }}
+                    transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+                  />
                   <div className="absolute inset-0 bg-coal/[0.56]" />
                   <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,6,6,0.72)_0%,rgba(6,6,6,0.46)_55%,rgba(6,6,6,0.24)_100%)]" />
                 </div>
