@@ -140,10 +140,12 @@
             <header className="sticky top-0 z-50 px-4 py-4">
               <div className="mx-auto flex max-w-[1200px] items-center justify-between rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#090909_0%,#121212_18%,#1a1a1a_34%,#F0782F_72%,#8B3913_100%)] px-4 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.32)]">
                 <a href="web.html" className="font-display text-2xl text-white">Crevia</a>
-                <nav className="hidden items-center gap-8 text-sm text-white/90 md:flex">
+<nav className="hidden items-center gap-8 text-sm text-white/90 md:flex">
+                  <a href="../index.html" className="hover:text-white">Home</a>
+                  <a href="about.html" className="hover:text-white">About Us</a>
                   <a href="services.html" className="hover:text-white">Services</a>
                   <a href="events.html" className="hover:text-white">Our Events</a>
-                  <a href="about.html" className="hover:text-white">About</a>
+                  <a href="dira.html" className="hover:text-white">Dira</a>
                   <a href="contact.html" className="hover:text-white">Contact</a>
                 </nav>
                 <div className="hidden md:block">
@@ -258,30 +260,13 @@
               </div>
             </section>
 
-            <footer className="border-t border-white/10 bg-[#0a0a0a] px-6 py-12 text-white md:px-10">
-              <div className="mx-auto grid max-w-[1200px] gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
-                <div>
-                  <p className="font-display text-4xl">Crevia</p>
-                  <p className="mt-4 max-w-md text-sm leading-7 text-white/70">
-                    Strategic design and ecosystem architecture for brands that need to be remembered, trusted, and chosen.
-                  </p>
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.26em] text-ember">Explore</p>
-                  <div className="mt-5 space-y-3 text-sm text-white/75">
-                    <a href="web.html" className="block hover:text-white">Home</a>
-                    <a href="live-ecosystems.html" className="block hover:text-white">Event Management</a>
-                    <a href="about.html" className="block hover:text-white">About</a>
-                  </div>
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.26em] text-ember">Contact</p>
-                  <div className="mt-5 space-y-3 text-sm text-white/75">
-                    <a href="mailto:hello@crevia.co" className="block hover:text-white">hello@crevia.co</a>
-                    <p>Nairobi, Kenya</p>
-                  </div>
-                </div>
+<footer className="border-t border-white/10 px-6 py-12 text-white md:px-10" style={{background: 'linear-gradient(135deg, #060606 0%, #111111 30%, #3d1c0f 70%, #F0782F 100%)'}}>
+              <div className="mx-auto grid max-w-[1200px] gap-10 border-b border-white/10 pb-10 md:grid-cols-[1.4fr_1fr_1fr]">
+                <div><p className="font-display text-4xl">Crevia</p><p className="mt-4 max-w-sm leading-7 text-white/70">We engineer market authority.</p></div>
+                <div><p className="text-[10px] font-bold uppercase tracking-[.22em] text-ember">Navigate</p><div className="mt-5 space-y-3 text-sm text-white/75"><a className="block hover:text-white" href="../index.html">Home</a><a className="block hover:text-white" href="about.html">About Us</a><a className="block hover:text-white" href="services.html">Services</a><a className="block hover:text-white" href="events.html">Our Events</a><a className="block hover:text-white" href="dira.html">Dira</a><a className="block hover:text-white" href="contact.html">Contact</a></div></div>
+                <div><p className="text-[10px] font-bold uppercase tracking-[.22em] text-ember">Base</p><p className="mt-5 text-sm text-white/75">Nairobi, Kenya</p><a className="mt-3 block text-sm text-white/75 hover:text-white" href="mailto:hello@crevia.co">hello@crevia.co</a></div>
               </div>
+              <div className="mx-auto mt-6 flex max-w-[1200px] flex-col justify-between gap-3 text-xs text-white/50 sm:flex-row"><span>© 2026 Crevia Ventures. All rights reserved.</span><div className="flex gap-5"><a className="hover:text-white" href="privacy.html">Privacy</a><a className="hover:text-white" href="terms.html">Terms</a></div></div>
             </footer>
           </main>
         );
