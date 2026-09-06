@@ -514,16 +514,27 @@
 
       function PortfolioMarquee({ events, onSelect }) {
         const [pageIndex, setPageIndex] = useState(0);
+        const [playingKey, setPlayingKey] = useState(null);
         const eventsPerPage = 2;
         const totalPages = Math.max(1, Math.ceil(events.length / eventsPerPage));
         const currentEvents = events.slice(pageIndex * eventsPerPage, pageIndex * eventsPerPage + eventsPerPage);
 
         const goPrevious = () => {
+          setPlayingKey(null);
           setPageIndex((current) => (current === 0 ? totalPages - 1 : current - 1));
         };
 
         const goNext = () => {
+          setPlayingKey(null);
           setPageIndex((current) => (current + 1) % totalPages);
+        };
+
+        const handleCardClick = (event, index) => {
+          if (event.playerType === 'youtube') {
+            setPlayingKey(`${pageIndex}-${index}`);
+          } else {
+            onSelect(event);
+          }
         };
 
         return (
@@ -548,14 +559,26 @@
             </div>
 
             <div className="grid gap-6 md:grid-cols-2">
-              {currentEvents.map((event, index) => (
+              {currentEvents.map((event, index) => {
+                const cardKey = `${pageIndex}-${index}`;
+                const isPlaying = playingKey === cardKey;
+                return (
                 <article
-                  key={`${event.title}-${pageIndex}-${index}`}
-                  onClick={() => onSelect(event)}
-                  className={`group cursor-pointer overflow-hidden rounded-[2rem] border border-white/[0.12] bg-[#101010] shadow-[0_22px_45px_rgba(0,0,0,0.35)] transition hover:brightness-110 ${event.tilt}`}
+                  key={cardKey}
+                  onClick={() => !isPlaying && handleCardClick(event, index)}
+                  className={`group overflow-hidden rounded-[2rem] border border-white/[0.12] bg-[#101010] shadow-[0_22px_45px_rgba(0,0,0,0.35)] transition ${isPlaying ? '' : 'cursor-pointer hover:brightness-110'} ${event.tilt}`}
                 >
                   <div className="relative h-[360px] overflow-hidden bg-[#0b0b0f]">
-                    {event.poster ? (
+                    {isPlaying && event.playerType === 'youtube' ? (
+                      <iframe
+                        className="absolute inset-0 h-full w-full"
+                        src={event.embedUrl}
+                        title={event.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                      />
+                    ) : event.poster ? (
                       <>
                         <img
                           src={event.poster}
@@ -580,20 +603,24 @@
                       </>
                     )}
 
-                    <div className="absolute inset-x-0 top-0 flex items-center justify-between px-4 py-3">
-                      <span className="rounded-full border border-white/15 bg-black/20 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-md">
-                        Featured
-                      </span>
-                      <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/25 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur-md transition hover:border-white/30 hover:bg-black/35">
-                        Play <span aria-hidden="true">▶</span>
-                      </span>
-                    </div>
+                    {!isPlaying && (
+                      <>
+                        <div className="absolute inset-x-0 top-0 flex items-center justify-between px-4 py-3">
+                          <span className="rounded-full border border-white/15 bg-black/20 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-md">
+                            Featured
+                          </span>
+                          <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/25 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur-md transition hover:border-white/30 hover:bg-black/35">
+                            Play <span aria-hidden="true">▶</span>
+                          </span>
+                        </div>
 
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/25 bg-black/30 shadow-[0_12px_35px_rgba(0,0,0,0.52)] backdrop-blur-sm">
-                        <div className="ml-1 h-0 w-0 border-y-[10px] border-l-[18px] border-y-transparent border-l-white" />
-                      </div>
-                    </div>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/25 bg-black/30 shadow-[0_12px_35px_rgba(0,0,0,0.52)] backdrop-blur-sm transition group-hover:scale-110 group-hover:border-white/40">
+                            <div className="ml-1 h-0 w-0 border-y-[10px] border-l-[18px] border-y-transparent border-l-white" />
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   <div className="bg-white px-5 py-5 text-coal">
@@ -604,7 +631,8 @@
                     <h3 className="mt-3 text-[1.55rem] font-medium leading-tight text-coal">{event.title}</h3>
                   </div>
                 </article>
-              ))}
+                );
+              })}
             </div>
 
             <div className="flex items-center justify-center gap-2">
@@ -612,7 +640,7 @@
                 <button
                   key={index}
                   type="button"
-                  onClick={() => setPageIndex(index)}
+                  onClick={() => { setPlayingKey(null); setPageIndex(index); }}
                   className={`h-2.5 rounded-full transition-all ${index === pageIndex ? 'w-8 bg-ember' : 'w-2.5 bg-white/30 hover:bg-white/50'}`}
                   aria-label={`Show portfolio page ${index + 1}`}
                   aria-pressed={index === pageIndex}
@@ -677,11 +705,11 @@
 
         const portfolioEvents = [
           {
-            title: 'Freelancers Summit video',
+            title: 'Freelancers Summit',
             location: 'Nairobi, Kenya',
             year: '2024',
-            playerType: 'file',
-              videoSrc: 'crevia/media/freelancers-summit-web.mp4',
+            playerType: 'youtube',
+            embedUrl: 'https://www.youtube.com/embed/-20xdAqoBfo?autoplay=1&rel=0&modestbranding=1',
             poster: 'crevia/images/freelancers%20summit/freelancers%20group%20photo.jpeg',
             tone: 'from-[#0b1120] via-[#13273d] to-[#262c38]',
             tilt: '-rotate-[2deg]',
@@ -690,9 +718,9 @@
             title: 'AI Summit 2025',
             location: 'Nairobi, Kenya',
             year: '2025',
-            playerType: 'file',
-              videoSrc: 'crevia/media/ai-summit-2025-web.mp4',
-            poster: 'crevia/images/AI Summit 2025 group pic.png',
+            playerType: 'youtube',
+            embedUrl: 'https://www.youtube.com/embed/BKaxVxiLz0Y?autoplay=1&rel=0&modestbranding=1',
+            poster: 'crevia/images/AI%20Summit%202025%20group%20pic.png',
             tone: 'from-[#141920] via-[#1d2f39] to-[#3d4758]',
             tilt: 'rotate-[2deg]',
           },
@@ -700,19 +728,19 @@
             title: 'Crevia Summit 2026',
             location: 'Nairobi, Kenya',
             year: '2026',
-            playerType: 'file',
-              videoSrc: 'crevia/media/crevia-summit-2026-web.mp4',
+            playerType: 'youtube',
+            embedUrl: 'https://www.youtube.com/embed/v1ao9s77lpI?autoplay=1&rel=0&modestbranding=1',
             poster: 'crevia/images/crevia%20summit/crevia%20summit%20group%20photo.PNG',
             tone: 'from-[#1d2d1f] via-[#2d5341] to-[#0c120f]',
             tilt: '-rotate-[1deg]',
           },
           {
-            title: "Lang'ata Islamic Centre creatives meet 2026",
+            title: "Lang'ata Islamic Centre Creatives Meet 2026",
             location: 'Nairobi, Kenya',
             year: '2026',
-            playerType: 'file',
-              videoSrc: 'crevia/media/langata-islamic-centre-creatives-meet-2026-web.mp4',
-            poster: 'crevia/images/Langata islamic centre/LIC image.png',
+            playerType: 'youtube',
+            embedUrl: 'https://www.youtube.com/embed/iRAUyoGCKIY?autoplay=1&rel=0&modestbranding=1',
+            poster: 'crevia/images/Langata%20islamic%20centre/LIC%20image.png',
             tone: 'from-[#1d1a1a] via-[#403a38] to-[#111212]',
             tilt: 'rotate-[1deg]',
           },
