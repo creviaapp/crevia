@@ -56,9 +56,12 @@
     <div id="mobileNav" class="fixed inset-0 z-60">
       <div class="mobile-nav-backdrop" onclick="toggleMobileNav()"></div>
       <nav class="mobile-nav-panel">
-        <a href="web.html#service-focus" onclick="toggleMobileNav()">Services</a>
+        <a href="../index.html" onclick="toggleMobileNav()">Home</a>
+        <a href="about.html" onclick="toggleMobileNav()">About Us</a>
+        <a href="../index.html#service-focus" onclick="toggleMobileNav()">Services</a>
         <a href="events.html" onclick="toggleMobileNav()">Our Events</a>
-        <a href="about.html" onclick="toggleMobileNav()">About</a>
+        <a href="dira.html" onclick="toggleMobileNav()">Dira</a>
+        <a href="contact.html" onclick="toggleMobileNav()">Contact</a>
         <a href="contact.html" class="mobile-cta" onclick="toggleMobileNav()">Book a Strategy Session</a>
       </nav>
     </div>
@@ -95,7 +98,7 @@
         </section>
       </div>
     </main>
-    <footer class="border-t border-white/10 px-6 py-12 md:px-10" style="background: linear-gradient(135deg, #050505 0%, #0b0b0b 42%, #7c3518 76%, #F0782F 100%); color: #f5efe7;"><div class="mx-auto grid max-w-4xl gap-8 border-b border-white/10 pb-10 md:grid-cols-2"><div><p class="font-display text-3xl">Crevia</p><p class="mt-3 text-sm leading-6 text-white/55">We engineer market authority.</p></div><div class="md:text-right"><p class="text-[10px] font-bold uppercase tracking-[.2em] text-ember">Navigate</p><div class="mt-4 flex gap-5 text-sm text-white/65 md:justify-end"><a href="events.html" class="hover:text-white">Events</a><a href="contact.html" class="hover:text-white">Contact</a><a href="privacy.html" class="hover:text-white">Privacy</a></div></div></div><p class="mx-auto mt-5 max-w-4xl text-xs text-white/40">© 2026 Crevia Ventures. All rights reserved.</p></footer>
+    <footer class="border-t border-white/10 px-6 py-12 md:px-10" style="background: linear-gradient(135deg, #050505 0%, #0b0b0b 52%, #3d1c0f 78%, #F0782F 100%); color: #f5efe7;"><div class="mx-auto grid max-w-4xl gap-8 border-b border-white/10 pb-10 md:grid-cols-2"><div><p class="font-display text-3xl">Crevia</p><p class="mt-3 text-sm leading-6 text-white/55">We engineer market authority.</p></div><div class="md:text-right"><p class="text-[10px] font-bold uppercase tracking-[.2em] text-ember">Navigate</p><div class="mt-4 flex gap-5 text-sm text-white/65 md:justify-end"><a href="events.html" class="hover:text-white">Events</a><a href="contact.html" class="hover:text-white">Contact</a><a href="privacy.html" class="hover:text-white">Privacy</a></div></div></div><p class="mx-auto mt-5 max-w-4xl text-xs text-white/40">© 2026 Crevia Ventures. All rights reserved.</p></footer>
     <script>const termsReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;const termsObserver=new IntersectionObserver((entries)=>entries.forEach((entry)=>{if(entry.isIntersecting){entry.target.classList.add('motion-visible');termsObserver.unobserve(entry.target)}}),{threshold:.12});[...document.querySelectorAll('main > *, footer')].forEach((element,index)=>{element.classList.add('motion-reveal');element.style.transitionDelay=`${index*80}ms`;if(termsReduced)element.classList.add('motion-visible');else termsObserver.observe(element)});</script>
     <script>
       function toggleMobileNav(){ document.body.classList.toggle('mobile-open'); }
