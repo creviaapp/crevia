@@ -890,7 +890,7 @@
                   <div className="mb-12 text-center">
                     <p className="text-xs uppercase tracking-[0.42em] text-ember/[0.9]">Portfolio</p>
                     <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] md:text-5xl">
-                      The spaces we've built
+                      THE PHYSICAL SPACES WE&apos;VE BUILT
                     </h2>
                   </div>
 
@@ -930,6 +930,20 @@
                 </div>
               </motion.section>
 
+              <motion.section {...SECTION_REVEAL} id="digital-spaces" className="relative isolate overflow-hidden bg-[#f3efe9] py-20 text-coal md:py-24">
+                <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
+                  <div className="mb-12 text-center">
+                    <p className="text-xs uppercase tracking-[0.42em] text-ember">Portfolio</p>
+                    <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] md:text-5xl">THE DIGITAL SPACES WE&apos;VE BUILT</h2>
+                  </div>
+                  <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
+                    <article className="overflow-hidden rounded-[2rem] bg-white shadow-[0_22px_45px_rgba(0,0,0,.12)]"><div className="flex h-72 items-end bg-[linear-gradient(135deg,#0b1120,#132f59,#F0782F)] p-7"><p className="font-display text-4xl text-white">Digital homes with a point of view.</p></div><div className="p-6"><p className="text-[10px] uppercase tracking-[.22em] text-coal/50">Website Creation</p><h3 className="mt-2 text-2xl font-medium">Websites built to move markets.</h3></div></article>
+                    <article className="overflow-hidden rounded-[2rem] bg-white shadow-[0_22px_45px_rgba(0,0,0,.12)]"><div className="flex h-72 items-end bg-[linear-gradient(135deg,#17110d,#6b321a,#f6a06b)] p-7"><p className="font-display text-4xl text-white">Make your next chapter unmistakable.</p></div><div className="p-6"><p className="text-[10px] uppercase tracking-[.22em] text-coal/50">Digital Presence</p><h3 className="mt-2 text-2xl font-medium">A sharper story, online.</h3></div></article>
+                  </div>
+                  <div className="mt-8 flex justify-center gap-3"><button type="button" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-coal/15" aria-label="Previous digital spaces">←</button><button type="button" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-coal/15" aria-label="Next digital spaces">→</button></div>
+                </div>
+              </motion.section>
+
               <motion.section {...SECTION_REVEAL} id="service-focus" className="relative isolate overflow-hidden bg-[#f3efe9] py-24 md:py-28">
                 <div className="africa-pattern" />
                 <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
@@ -961,7 +975,7 @@
                             View Live Ecosystems
                           </MagneticButton>
                           <motion.a
-                            href="crevia/live-ecosystems.html"
+                            href="crevia/services.html#event-architecture"
                             whileTap={{ scale: 0.97 }}
                             className="premium-button inline-flex items-center justify-center rounded-full border border-[#17110d]/20 px-8 py-4 text-sm font-semibold text-[#17110d]"
                           >
@@ -987,7 +1001,7 @@
                             View Digital Services
                           </MagneticButton>
                           <motion.a
-                            href="crevia/website-creation.html"
+                            href="crevia/services.html#digital-presence"
                             whileTap={{ scale: 0.97 }}
                             className="inline-flex items-center justify-center rounded-full border border-[#17110d]/20 px-8 py-4 text-sm font-semibold text-[#17110d]"
                           >
@@ -1041,10 +1055,10 @@
                     <div>
                       <p className="text-xs uppercase tracking-[0.28em] text-coal/[0.5]">Services</p>
                       <div className="mt-5 space-y-3 text-sm text-coal/[0.72]">
-                        <a href="crevia/live-ecosystems.html" className="block hover:text-coal">
+                        <a href="crevia/services.html#event-architecture" className="block hover:text-coal">
                           Event Production
                         </a>
-                        <a href="crevia/website-creation.html" className="block hover:text-coal">
+                        <a href="crevia/services.html#digital-presence" className="block hover:text-coal">
                           Website Creation
                         </a>
                         <a href="#past-convenings" className="block hover:text-coal">
