@@ -340,14 +340,14 @@
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
-            <motion.div ref={trackRef} style={{ x, willChange: 'transform' }} className="flex w-max items-center gap-6 py-2">
+            <motion.div ref={trackRef} style={{ x, willChange: 'transform' }} className="flex w-max items-center gap-6 py-2 pl-6">
               {looped.map((partner, index) => {
                 const isDarkBadge = partner.name === 'iHub Nairobi' || partner.name === 'Suluhu Studio';
                 const isLarge = partner.name === 'Strathmore University';
                 const isIhub = partner.name === 'iHub Nairobi';
                 const isSuluhu = partner.name === 'Suluhu Studio';
                 const imgClasses = isLarge
-                  ? 'mx-auto block max-h-28 w-[180px] object-contain object-center'
+                  ? 'mx-auto block max-h-28 w-[180px] -translate-y-1 object-contain object-center'
                   : isIhub
                     ? 'mx-auto block max-h-[84px] w-auto object-contain object-center'
                     : isSuluhu
@@ -357,7 +357,7 @@
                 return (
                   <div
                     key={`${partner.name || partner}-${index}`}
-                    className={`mx-2 grid h-24 place-items-center text-center rounded-[1.5rem] px-4 py-3 text-center shadow-[0_12px_28px_rgba(0,0,0,0.06)] ${isLarge ? 'min-w-[250px] w-[250px]' : 'min-w-[190px]'} ${isDarkBadge ? 'border border-[#1a1a1a] bg-[#0d0d0d]' : 'bg-transparent'}`}
+                    className={`mx-2 grid h-24 place-items-center text-center rounded-[1.5rem] px-4 py-3 text-center shadow-[0_12px_28px_rgba(0,0,0,0.06)] ${isLarge ? 'min-w-[250px] w-[250px]' : 'min-w-[190px]'} ${isDarkBadge ? 'border border-[#1a1a1a] bg-[#0d0d0d]' : 'bg-white/80'}`}
                     style={{
                       background: isDarkBadge ? 'linear-gradient(135deg, #0c0c0c 0%, #191919 100%)' : 'transparent',
                     }}
@@ -884,6 +884,24 @@
                 </div>
               </motion.section>
 
+              <motion.section {...SECTION_REVEAL} id="our-ecosystem" className="relative overflow-hidden bg-ivory py-20 text-coal md:py-28">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_88%_18%,rgba(240,120,47,.12),transparent_28%)]" aria-hidden="true" />
+                <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
+                  <div className="mx-auto max-w-7xl">
+                    <div className="max-w-4xl">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.38em] text-ember">Our ecosystem</p>
+                      <h2 className="mt-5 font-display text-5xl leading-[0.98] tracking-[-0.03em] md:text-7xl">Three expressions.<br /><span className="text-coal/45">One direction.</span></h2>
+                      <p className="mt-7 max-w-2xl text-lg leading-8 text-coal/65 md:text-xl">Crevia is the home for a growing ecosystem of work that helps people build the right way for Africa — with sharper stories, more useful rooms, and direction that holds.</p>
+                    </div>
+                    <div className="mt-14 grid gap-5 md:grid-cols-3">
+                      <a href="#" className="group flex min-h-[320px] flex-col justify-between rounded-[2rem] border border-coal/10 bg-white p-7 shadow-[0_24px_60px_rgba(23,17,13,.08)] transition-transform duration-500 hover:-translate-y-2 md:p-9"><div><p className="text-[10px] font-bold uppercase tracking-[.28em] text-ember">01 / The studio</p><h3 className="mt-6 font-display text-4xl leading-tight">Crevia</h3><p className="mt-5 text-base leading-7 text-coal/65">The strategic brand and ecosystem firm helping ambitious organizations own their story through physical spaces, digital presence, and operational design.</p></div><span className="mt-8 text-sm font-semibold">Build with us <span aria-hidden="true">↗</span></span></a>
+                      <a href="crevia/events.html" className="group flex min-h-[320px] flex-col justify-between rounded-[2rem] bg-coal p-7 text-ivory shadow-[0_24px_60px_rgba(23,17,13,.16)] transition-transform duration-500 hover:-translate-y-2 md:p-9"><div><p className="text-[10px] font-bold uppercase tracking-[.28em] text-ember">02 / The convening platform</p><h3 className="mt-6 font-display text-4xl leading-tight">Africa Business Connect</h3><p className="mt-5 text-base leading-7 text-white/65">All our events live here: practical rooms where founders, investors, policy makers, and experienced builders work through the challenges shaping African markets.</p></div><span className="mt-8 text-sm font-semibold text-ember">Enter the room <span aria-hidden="true">↗</span></span></a>
+                      <a href="crevia/dira.html" className="group flex min-h-[320px] flex-col justify-between rounded-[2rem] border border-ember/35 bg-ember p-7 text-coal shadow-[0_24px_60px_rgba(240,120,47,.18)] transition-transform duration-500 hover:-translate-y-2 md:p-9"><div><p className="text-[10px] font-bold uppercase tracking-[.28em] text-coal/60">03 / The compass</p><h3 className="mt-6 font-display text-4xl leading-tight">Dira</h3><p className="mt-5 text-base leading-7 text-coal/75">Giving direction to the people who want to build the right way for Africa — with clearer thinking, grounded insight, and a stronger sense of what comes next.</p></div><span className="mt-8 text-sm font-semibold">Find direction <span aria-hidden="true">↗</span></span></a>
+                    </div>
+                  </div>
+                </div>
+              </motion.section>
+
               <motion.section {...SECTION_REVEAL} id="past-convenings" className="relative isolate overflow-hidden bg-coal py-20 text-white md:py-24">
                 <div className="africa-pattern" />
                 <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
@@ -1034,29 +1052,23 @@ href="crevia/services.html"
                 <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
                   <div className="grid gap-12 border-t border-black/[0.12] pt-12 md:grid-cols-2 lg:grid-cols-4">
                     <div className="lg:col-span-2">
-                      <p className="font-display text-3xl leading-none text-coal">Crevia Ventures</p>
+                      <p className="font-display text-3xl leading-none text-coal">Crevia</p>
                       <p className="mt-5 max-w-md text-sm leading-7 text-coal/[0.62]">
                         Strategic brand architecture for premium digital presences and high-stakes physical communities across Africa.
                       </p>
                     </div>
 
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.28em] text-coal/[0.5]">Services</p>
-                      <div className="mt-5 space-y-3 text-sm text-coal/[0.72]">
-                        <a href="crevia/services.html#event-architecture" className="block hover:text-coal">
-                          Event Production
-                        </a>
-                        <a href="crevia/services.html#digital-presence" className="block hover:text-coal">
-                          Website Creation
-                        </a>
-                        <a href="#past-convenings" className="block hover:text-coal">
-                          Portfolio Highlights
-                        </a>
-                        <a href="crevia/about.html" className="block hover:text-coal">
-                          About Us
-                        </a>
-                      </div>
-                    </div>
+<div>
+  <p className="text-xs uppercase tracking-[0.28em] text-coal/[0.5]">Navigate</p>
+  <div className="mt-5 space-y-3 text-sm text-coal/[0.72]">
+  <a href="#" className="block hover:text-coal">Home</a>
+  <a href="crevia/about.html" className="block hover:text-coal">About Us</a>
+  <a href="crevia/services.html" className="block hover:text-coal">Services</a>
+  <a href="crevia/events.html" className="block hover:text-coal">Our Events</a>
+  <a href="crevia/dira.html" className="block hover:text-coal">Dira</a>
+  <a href="crevia/contact.html" className="block hover:text-coal">Contact</a>
+  </div>
+  </div>
 
                     <div>
                       <p className="text-xs uppercase tracking-[0.28em] text-coal/[0.5]">Contact</p>
@@ -1074,7 +1086,7 @@ href="crevia/services.html"
 
                   <div className="mt-10 border-t border-black/[0.12] pt-6">
                     <div className="flex flex-col gap-3 text-sm text-coal/[0.56] md:flex-row md:items-center md:justify-between">
-                      <p>© 2026 Crevia Ventures. All rights reserved.</p>
+                      <p>© 2026 Crevia. All rights reserved.</p>
                       <div className="flex items-center gap-6">
                         <a href="crevia/privacy.html" className="hover:text-coal/[0.9]">
                           Privacy Policy
