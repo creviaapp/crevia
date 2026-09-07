@@ -37,7 +37,7 @@
       .surface-paper .text-paper { color: #17110d !important; }
       .surface-paper .text-paper\/75, .surface-paper .text-paper\/70, .surface-paper .text-paper\/65, .surface-paper .text-paper\/60, .surface-paper .text-paper\/50, .surface-paper .text-paper\/45 { color: rgba(23,17,13,.68) !important; }
       .surface-paper .hairline { border-color: rgba(23,17,13,.16) !important; }
-      .surface-ember { background: #f0782f; color: #17110d; }
+      .surface-ember { background: #f0782f !important; color: #17110d; }
       .surface-ember .text-paper, .surface-ember .text-ember { color: #17110d !important; }
       .surface-ember .text-paper\/70, .surface-ember .text-paper\/65, .surface-ember .text-paper\/60 { color: rgba(23,17,13,.72) !important; }
       .surface-ember .hairline { border-color: rgba(23,17,13,.23) !important; }
@@ -78,7 +78,7 @@
             <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.75 1.25H19.25" stroke="#F3F0E9" stroke-width="1.5" stroke-linecap="round"/><path d="M0.75 7H19.25" stroke="#F3F0E9" stroke-width="1.5" stroke-linecap="round"/><path d="M0.75 12.75H19.25" stroke="#F3F0E9" stroke-width="1.5" stroke-linecap="round"/></svg>
           </button>
         </div>
-        <nav aria-label="Main navigation" class="hidden items-center justify-center gap-7 text-sm font-medium text-paper/80 md:flex"><a href="../index.html" class="focus-ring text-link hover:text-paper">Home</a><a href="about.html" class="focus-ring text-link hover:text-paper">About Us</a><a href="../index.html#service-focus" class="focus-ring text-link hover:text-paper">Services</a><a href="events.html" class="focus-ring text-link hover:text-paper">Our Events</a><a href="dira.html" class="focus-ring text-link hover:text-paper">Dira</a><a href="contact.html" class="focus-ring text-link hover:text-paper">Contact</a></nav>
+        <nav aria-label="Main navigation" class="hidden items-center justify-center gap-7 text-sm font-medium text-paper/80 md:flex"><a href="../index.html" class="focus-ring text-link hover:text-paper">Home</a><a href="about.html" class="focus-ring text-link hover:text-paper">About Us</a><a href="services.html" class="focus-ring text-link hover:text-paper">Services</a><a href="events.html" class="focus-ring text-link hover:text-paper">Our Events</a><a href="dira.html" class="focus-ring text-link hover:text-paper">Dira</a><a href="contact.html" class="focus-ring text-link hover:text-paper">Contact</a></nav>
         <a href="contact.html" class="focus-ring magnetic justify-self-end hidden md:inline-flex rounded-full bg-ember px-5 py-2.5 text-sm font-semibold text-[#111111] transition hover:bg-ember">Book a Strategy Session</a>
       </div>
       </header>
@@ -89,7 +89,7 @@
 <nav class="mobile-nav-panel">
         <a href="../index.html" class="block" onclick="toggleMobileNav()">Home</a>
         <a href="about.html" class="block" onclick="toggleMobileNav()">About Us</a>
-        <a href="../index.html#service-focus" class="block" onclick="toggleMobileNav()">Services</a>
+        <a href="services.html" class="block" onclick="toggleMobileNav()">Services</a>
         <a href="events.html" class="block" onclick="toggleMobileNav()">Our Events</a>
         <a href="dira.html" class="block" onclick="toggleMobileNav()">Dira</a>
         <a href="contact.html" class="block" onclick="toggleMobileNav()">Contact</a>
@@ -102,12 +102,12 @@
         <div class="relative mx-auto w-full max-w-[1440px]">
           <p class="hero-detail eyebrow flex items-center gap-3 text-[11px] font-bold uppercase text-ember" style="--delay: .25s"><span class="h-2 w-2 rounded-full bg-ember"></span> Convenings</p>
           <h1 class="mt-9 max-w-[900px] text-[clamp(4rem,7.6vw,9rem)] font-medium leading-[.88] tracking-[-.06em] text-paper">
-            <span class="hero-line-wrap"><span class="hero-line" style="--delay: .30s">We engineer <span class="text-ember">market</span></span></span>
-            <span class="hero-line-wrap"><span class="hero-line" style="--delay: .62s"><span class="text-ember">authority.</span></span></span>
+            <span class="hero-line-wrap"><span class="hero-line" style="--delay: .30s">We create <span class="text-ember">rooms</span></span></span>
+            <span class="hero-line-wrap"><span class="hero-line" style="--delay: .62s"><span class="text-ember">that move Africa.</span></span></span>
           </h1>
           <div class="hero-detail mt-12 grid max-w-4xl gap-6 border-t hairline pt-6 md:grid-cols-[1fr_1.25fr]" style="--delay: .78s">
             <p class="eyebrow text-[10px] font-bold uppercase text-white/80">Crevia Ventures / Africa</p>
-            <p class="max-w-xl text-base leading-7 text-white/85 md:text-lg">Crevia is a strategic brand and ecosystem firm. We translate strategy into market leadership through flagship convenings, premium identity, and operational playbooks.</p>
+            <p class="max-w-xl text-base leading-7 text-white/85 md:text-lg">We host practical conversations about the challenges shaping Africa — bringing founders, investors, policy makers, and experienced practitioners into the same room to turn hard questions into useful next moves.</p>
           </div>
         </div>
       </section>
@@ -116,10 +116,10 @@
         <div class="mx-auto grid max-w-[1440px] gap-12 lg:grid-cols-[.72fr_1.55fr] lg:gap-24">
           <div><p class="eyebrow text-[11px] font-bold uppercase text-ember">01 / The operating thesis</p></div>
           <div>
-            <p class="max-w-5xl font-display text-4xl font-semibold leading-[1.08] tracking-[-.035em] text-paper md:text-6xl">Procurement over <em class="text-ember">pitching.</em></p>
+            <p class="max-w-5xl font-display text-4xl font-semibold leading-[1.08] tracking-[-.035em] text-paper md:text-6xl">Practical insight over <em class="text-ember">performance.</em></p>
             <div class="mt-12 grid gap-10 border-t hairline pt-7 md:grid-cols-2">
-              <p class="text-lg leading-8 text-paper/75">Most summits create an audience. We create active deal rooms: defined demand, relevant supply, accountable decision-makers, and a reason to continue the conversation after the stage clears.</p>
-              <p class="text-lg leading-8 text-paper/75">Founders, capital allocators, and enterprise procurement heads come together to sign contracts, map constraints, and establish the operational blueprint the market has been missing.</p>
+              <p class="text-lg leading-8 text-paper/75">The best events do more than fill a room. They bring the people closest to a challenge together, make the real constraints visible, and create a shared language for what should happen next.</p>
+              <p class="text-lg leading-8 text-paper/75">We design conversations around lived experience — the founder who has built through the complexity, the investor who has seen the pattern, and the policy maker who understands the system. The result is practical insight, stronger relationships, and decisions grounded in reality.</p>
             </div>
           </div>
         </div>
@@ -132,10 +132,10 @@
           <p class="eyebrow text-[11px] font-bold uppercase text-ember">02 / Upcoming flagship</p>
           <div class="mt-10 grid items-end gap-12 lg:grid-cols-[1.35fr_.65fr]">
             <div>
-              <p class="eyebrow text-xs font-bold uppercase text-paper/45">The annual B2B infrastructure forum</p>
+              <p class="eyebrow text-xs font-bold uppercase text-paper/45">2027 / Building the right way for Africa</p>
               <h2 class="mt-5 max-w-4xl font-display text-5xl font-semibold leading-[.95] tracking-[-.05em] text-paper md:text-8xl">Africa<br /><em class="text-ember">Business Connect.</em></h2>
             </div>
-            <p class="max-w-md text-lg leading-8 text-paper/75">The definitive annual gathering for B2B scale on the continent. A tightly designed environment for operators building the infrastructure, not observing it.</p>
+            <p class="max-w-md text-lg leading-8 text-paper/75">In 2027, founders, investors, policy makers, and ecosystem builders will gather around one urgent question: what does it mean to build the right way for Africa? This is a practical forum for examining the complexities that shape growth on the continent — and for learning from people who have worked through them.</p>
           </div>
           <div class="mt-20 grid border-y hairline md:grid-cols-3">
             <div class="border-b hairline px-0 py-8 md:border-b-0 md:border-r md:px-8 md:first:pl-0">
@@ -157,24 +157,23 @@
           <div class="grid gap-7 md:grid-cols-2 md:items-end"><p class="eyebrow text-[11px] font-bold uppercase text-ember">03 / Archive</p><p class="max-w-lg text-lg leading-8 text-paper/65 md:justify-self-end">Foundational rooms, built with the same operating discipline: the right people, a clear mandate, and no wasted motion.</p></div>
           <div class="mt-16 border-t hairline">
             <article class="archive-card scroll-reveal grid gap-8 border-b hairline py-9 md:grid-cols-[130px_1fr_1.25fr] md:items-start md:gap-12" data-reveal style="--reveal-delay: 70ms">
-              <p class="eyebrow text-[11px] font-bold uppercase text-ember">2026</p><div><h3 class="font-display text-3xl font-semibold text-paper">Crevia Summit</h3><p class="mt-2 text-sm text-paper/50">iHub Nairobi</p></div><p class="max-w-xl leading-7 text-paper/70">Flagship ecosystem execution at iHub Nairobi — structured to produce decisive outcomes, clear commitments, and operational follow-through.</p>
+              <p class="eyebrow text-[11px] font-bold uppercase text-ember">2026</p><div><h3 class="font-display text-3xl font-semibold text-paper">Crevia Summit</h3><p class="mt-2 text-sm text-paper/50">iHub Nairobi</p></div><p class="max-w-xl leading-7 text-paper/70">How to build a successful personal brand. Crevia Summit brought together ambitious builders to explore how a clear, credible personal story can create trust, opportunity, and long-term influence.</p>
             </article>
             <article class="archive-card scroll-reveal grid gap-8 border-b hairline py-9 md:grid-cols-[130px_1fr_1.25fr] md:items-start md:gap-12" data-reveal style="--reveal-delay: 150ms">
-              <p class="eyebrow text-[11px] font-bold uppercase text-ember">2025</p><div><h3 class="font-display text-3xl font-semibold text-paper">AI Summit</h3><p class="mt-2 text-sm text-paper/50">Strathmore University</p></div><p class="max-w-xl leading-7 text-paper/70">Advanced technology aligned to scalable social impact; design and moderation focused on operational outcomes rather than abstract debate.</p>
+              <p class="eyebrow text-[11px] font-bold uppercase text-ember">2025</p><div><h3 class="font-display text-3xl font-semibold text-paper">AI Summit</h3><p class="mt-2 text-sm text-paper/50">Strathmore University</p></div><p class="max-w-xl leading-7 text-paper/70">Building AI for Impact. AI Summit 2025 explored how builders across Africa can apply artificial intelligence to real challenges — moving beyond excitement toward useful, responsible, and measurable solutions.</p>
             </article>
             <article class="archive-card scroll-reveal grid gap-8 border-b hairline py-9 md:grid-cols-[130px_1fr_1.25fr] md:items-start md:gap-12" data-reveal style="--reveal-delay: 230ms">
-              <p class="eyebrow text-[11px] font-bold uppercase text-ember">2024</p><div><h3 class="font-display text-3xl font-semibold text-paper">Freelancers Summit</h3><p class="mt-2 text-sm text-paper/50">iHub Nairobi</p></div><p class="max-w-xl leading-7 text-paper/70">An inaugural summit that translated a regional talent gap into a functioning market network and ongoing opportunity pipeline.</p>
+              <p class="eyebrow text-[11px] font-bold uppercase text-ember">2024</p><div><h3 class="font-display text-3xl font-semibold text-paper">Freelancers Summit</h3><p class="mt-2 text-sm text-paper/50">iHub Nairobi</p></div><p class="max-w-xl leading-7 text-paper/70">Empowering digital independence. Freelancers Summit 2024 brought independent professionals together to share practical lessons, build community, and strengthen the systems that help digital talent work with greater freedom.</p>
             </article>
           </div>
         </div>
       </section>
 
       <section class="surface-ember scroll-reveal relative overflow-hidden px-5 py-28 md:px-10 md:py-40" data-reveal>
-        <div class="absolute bottom-0 left-1/2 h-80 w-1/2 -translate-x-1/2 rounded-full bg-[#f7c9a7]/35 blur-[120px]"></div>
         <div class="relative mx-auto max-w-[1440px]">
-          <p class="eyebrow text-[11px] font-bold uppercase text-ember">04 / Commission the room</p>
-          <h2 class="mt-8 max-w-5xl font-display text-5xl font-semibold leading-[1] tracking-[-.045em] text-paper md:text-8xl">Stop sponsoring passive panels.</h2>
-          <p class="mt-8 max-w-2xl text-xl leading-8 text-paper/70">Partner with Crevia to architect your next high-stakes market activation.</p>
+          <p class="eyebrow text-[11px] font-bold uppercase text-ember">04 / Build the conversation</p>
+          <h2 class="mt-8 max-w-5xl font-display text-5xl font-semibold leading-[1] tracking-[-.045em] text-paper md:text-8xl">Bring the right people into the room.</h2>
+          <p class="mt-8 max-w-2xl text-xl leading-8 text-paper/70">If you are building a conversation around a real African challenge, we can help you shape the question, curate the room, and design an experience that leaves people with more than notes — it leaves them with direction.</p>
           <a href="contact.html" class="focus-ring magnetic mt-12 inline-flex items-center gap-4 border border-ember px-6 py-4 text-xs font-bold uppercase tracking-[.13em] text-ember transition hover:bg-ember hover:text-[#19110d]">Commission an event <span class="link-arrow text-lg" aria-hidden="true">→</span></a>
         </div>
       </section>
@@ -182,8 +181,8 @@
     <footer class="scroll-reveal border-t hairline px-5 py-14 md:px-10" data-reveal style="background: linear-gradient(135deg, #050505 0%, #0b0b0b 52%, #3d1c0f 78%, #F0782F 100%); color: #f5efe7;">
       <div class="mx-auto max-w-[1440px]">
         <div class="grid gap-10 border-b hairline pb-12 md:grid-cols-[1.4fr_1fr_1fr]">
-          <div><p class="font-display text-4xl font-semibold text-white">Crevia</p><p class="mt-4 max-w-sm leading-7 text-white/80">We architect the rooms where African market infrastructure is made actionable.</p></div>
-          <div><p class="eyebrow text-[10px] font-bold uppercase text-ember">Explore</p><div class="mt-5 space-y-3 text-sm text-white/80"><a class="focus-ring block hover:text-white" href="web.html">Home</a><a class="focus-ring block hover:text-white" href="about.html">About Crevia</a><a class="focus-ring block hover:text-white" href="web.html#service-focus">Services</a></div></div>
+<div><p class="font-display text-4xl font-semibold text-white">Crevia</p><p class="mt-4 max-w-sm leading-7 text-white/75">We help ambitious brands own their story through physical spaces, digital presence, and meaningful convenings.</p></div>
+        <div><p class="eyebrow text-[10px] font-bold uppercase text-ember">Navigate</p><div class="mt-5 space-y-3 text-sm text-white/80"><a class="focus-ring block hover:text-white" href="../index.html">Home</a><a class="focus-ring block hover:text-white" href="about.html">About Us</a><a class="focus-ring block hover:text-white" href="services.html">Services</a><a class="focus-ring block hover:text-white" href="events.html">Our Events</a><a class="focus-ring block hover:text-white" href="dira.html">Dira</a><a class="focus-ring block hover:text-white" href="contact.html">Contact</a></div></div>
           <div><p class="eyebrow text-[10px] font-bold uppercase text-ember">Start a conversation</p><a class="focus-ring mt-5 block text-sm text-white/80 hover:text-white" href="mailto:hello@crevia.co">hello@crevia.co</a><p class="mt-3 text-sm text-white/80">Nairobi, Kenya</p></div>
         </div>
         <div class="mt-6 flex flex-col justify-between gap-3 text-[10px] font-medium uppercase tracking-[.16em] text-white/70 sm:flex-row"><span>© 2026 Crevia Ventures</span><div class="flex gap-5"><a class="focus-ring hover:text-white" href="privacy.html">Privacy</a><a class="focus-ring hover:text-white" href="terms.html">Terms</a></div></div>
