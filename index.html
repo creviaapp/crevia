@@ -340,14 +340,14 @@
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
-            <motion.div ref={trackRef} style={{ x, willChange: 'transform' }} className="flex w-max items-center gap-6 py-2">
+            <motion.div ref={trackRef} style={{ x, willChange: 'transform' }} className="flex w-max items-center gap-6 py-2 pl-6">
               {looped.map((partner, index) => {
                 const isDarkBadge = partner.name === 'iHub Nairobi' || partner.name === 'Suluhu Studio';
                 const isLarge = partner.name === 'Strathmore University';
                 const isIhub = partner.name === 'iHub Nairobi';
                 const isSuluhu = partner.name === 'Suluhu Studio';
                 const imgClasses = isLarge
-                  ? 'mx-auto block max-h-28 w-[180px] object-contain object-center'
+                  ? 'mx-auto block max-h-28 w-[180px] -translate-y-1 object-contain object-center'
                   : isIhub
                     ? 'mx-auto block max-h-[84px] w-auto object-contain object-center'
                     : isSuluhu
@@ -357,7 +357,7 @@
                 return (
                   <div
                     key={`${partner.name || partner}-${index}`}
-                    className={`mx-2 grid h-24 place-items-center text-center rounded-[1.5rem] px-4 py-3 text-center shadow-[0_12px_28px_rgba(0,0,0,0.06)] ${isLarge ? 'min-w-[250px] w-[250px]' : 'min-w-[190px]'} ${isDarkBadge ? 'border border-[#1a1a1a] bg-[#0d0d0d]' : 'bg-transparent'}`}
+                    className={`mx-2 grid h-24 place-items-center text-center rounded-[1.5rem] px-4 py-3 text-center shadow-[0_12px_28px_rgba(0,0,0,0.06)] ${isLarge ? 'min-w-[250px] w-[250px]' : 'min-w-[190px]'} ${isDarkBadge ? 'border border-[#1a1a1a] bg-[#0d0d0d]' : 'bg-white/80'}`}
                     style={{
                       background: isDarkBadge ? 'linear-gradient(135deg, #0c0c0c 0%, #191919 100%)' : 'transparent',
                     }}
