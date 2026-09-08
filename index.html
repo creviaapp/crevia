@@ -161,7 +161,10 @@
       :where(button):active, :where(a):active { transform: translateY(0) scale(.985); }
       :where(article, .premium-card, .surface-paper > div > div > div) { transition: transform .55s cubic-bezier(.16,1,.3,1), box-shadow .55s cubic-bezier(.16,1,.3,1), border-color .4s ease; }
       :where(article, .premium-card, .surface-paper > div > div > div):hover { transform: translateY(-5px); box-shadow: 0 22px 54px rgba(0,0,0,.14); }
-      @media (prefers-reduced-motion: reduce) { :where(a, button, article, .premium-card) { transition: none !important; transform: none !important; } }
+      .service-grid > div { animation: service-card-in .8s cubic-bezier(.16,1,.3,1) both; }
+      .service-grid > div:nth-child(2) { animation-delay: .12s; }
+      @keyframes service-card-in { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+      @media (prefers-reduced-motion: reduce) { :where(a, button, article, .premium-card), .service-grid > div { transition: none !important; animation: none !important; transform: none !important; } }
     </style>
     <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -969,24 +972,28 @@
                 </div>
               </motion.section>
 
-              <motion.section {...SECTION_REVEAL} id="service-focus" className="relative isolate overflow-hidden bg-[#f3efe9] py-24 md:py-28">
-                <div className="africa-pattern" />
-                <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
-                  <div className="mx-auto max-w-6xl">
-                    <div className="mx-auto max-w-5xl text-center">
-                      <p className="text-[11px] font-bold uppercase tracking-[0.38em] text-[#17110d]/60">Capabilities</p>
-                      <h2 className="mt-4 font-display text-4xl leading-tight text-[#17110d] md:text-6xl">
-                        Premium stages for premium brands.
-                      </h2>
-                    </div>
+  <motion.section {...SECTION_REVEAL} id="service-focus" className="relative isolate overflow-hidden bg-[#ebe5dc] py-28 md:py-36">
+  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_12%,rgba(240,120,47,.14),transparent_28%),linear-gradient(110deg,transparent_0%,rgba(255,255,255,.42)_48%,transparent_100%)]" />
+  <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
+  <div className="mx-auto max-w-7xl">
+  <div className="flex flex-col gap-8 border-b border-[#17110d]/15 pb-10 md:flex-row md:items-end md:justify-between">
+  <div className="max-w-4xl">
+  <p className="text-[11px] font-bold uppercase tracking-[0.38em] text-[#f0782f]">Capabilities / 02</p>
+  <h2 className="mt-5 font-display text-5xl leading-[.94] tracking-[-.04em] text-[#17110d] md:text-7xl">
+  Premium stages for<br className="hidden md:block" /> premium brands.
+  </h2>
+  </div>
+  <p className="max-w-xs text-sm leading-6 text-[#17110d]/60">From the room people remember to the digital home they return to, we build the conditions for brands to move with authority.</p>
+  </div>
 
-                    <div className="mt-12 grid gap-8 md:grid-cols-2">
-                      <div className="rounded-[2rem] border border-[#17110d]/10 bg-[#f7f3ee] p-8 shadow-[0_28px_60px_rgba(17,17,17,0.06)] md:p-10">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#17110d]/55">Physical Communities</p>
-                        <h3 className="mt-4 font-display text-3xl leading-tight text-[#17110d] md:text-4xl">
+  <div className="service-grid mt-12 grid gap-px overflow-hidden border border-[#17110d]/15 bg-[#17110d]/15 md:grid-cols-2">
+  <div className="group relative overflow-hidden bg-[#f7f3ee] p-8 transition duration-700 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:bg-[#17110d] md:p-12">
+  <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full border border-[#f0782f]/20 transition duration-700 group-hover:scale-[1.35] group-hover:border-[#f0782f]/50" />
+  <p className="relative text-[10px] font-bold uppercase tracking-[0.28em] text-[#17110d]/55 transition-colors duration-500 group-hover:text-[#f0782f]">Physical Communities</p>
+  <h3 className="relative mt-4 font-display text-3xl leading-tight text-[#17110d] transition-colors duration-500 group-hover:text-[#f7f3ee] md:text-4xl">
                           Event Architecture
                         </h3>
-                        <p className="mt-6 text-lg leading-9 text-[#17110d]/70">
+                        <p className="relative mt-6 text-lg leading-9 text-[#17110d]/70 transition-colors duration-500 group-hover:text-[#f7f3ee]/75">
                           Crevia assumes complete ownership of high-stakes ecosystem convenings. From venue
                           acquisition and production command to stakeholder alignment and executive guest management, we
                           operate as your turnkey luxury partner—so institutional capital and decisive founders can focus on
@@ -1003,29 +1010,29 @@ href="crevia/services.html"
                         </div>
                       </div>
 
-                      <div className="rounded-[2rem] border border-[#17110d]/10 bg-white p-8 shadow-[0_28px_60px_rgba(17,17,17,0.06)] md:p-10">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#17110d]/60">Digital Presence</p>
-                        <h3 className="mt-4 font-display text-3xl leading-tight text-[#17110d] md:text-4xl">
+  <div className="group relative overflow-hidden bg-[#17110d] p-8 transition duration-700 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:bg-[#241710] md:p-12">
+  <div className="pointer-events-none absolute -bottom-20 -right-12 h-64 w-64 rounded-full border border-[#f0782f]/25 transition duration-700 group-hover:scale-[1.25] group-hover:border-[#f0782f]/60" />
+  <p className="relative text-[10px] font-bold uppercase tracking-[0.28em] text-[#f0782f]">Digital Presence</p>
+  <h3 className="relative mt-4 font-display text-3xl leading-tight text-[#f7f3ee] md:text-4xl">
                           Website Creation
                         </h3>
-                        <p className="mt-6 text-lg leading-9 text-[#17110d]/75">
-                          We design premium, high-conversion web experiences that act as the definitive digital home for
+  <p className="relative mt-6 text-lg leading-9 text-[#17110d]/75 transition-colors duration-500 group-hover:text-[#f7f3ee]/75">
+  We design premium, high-conversion web experiences that act as the definitive digital home for
                           your brand's story.
                         </p>
                         <div className="mt-8 flex flex-wrap gap-4">
                           <motion.a
 href="crevia/services.html"
                             whileTap={{ scale: 0.97 }}
-                            className="inline-flex items-center justify-center rounded-full border border-[#17110d]/20 px-8 py-4 text-sm font-semibold text-[#17110d]"
-                          >
-                            Learn more
-                          </motion.a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.section>
+  className="premium-button relative inline-flex items-center justify-center rounded-full border border-[#f7f3ee]/30 px-8 py-4 text-sm font-semibold text-[#f7f3ee] transition hover:border-[#f0782f] hover:bg-[#f0782f]"
+  >
+  Learn more
+  </motion.a>
+  </div>
+  </div>
+  </div>
+  </div>
+  </motion.section>
 
               {/* Testimonial section removed */}
 
