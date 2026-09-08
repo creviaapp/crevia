@@ -60,7 +60,9 @@
           linear-gradient(rgba(255,255,255,0.015), rgba(255,255,255,0.015)),
           radial-gradient(circle at 20% 20%, rgba(255,255,255,0.09), transparent 24%);
       }
-      .hero-about { background-color: #050505; background-image: linear-gradient(rgba(5,5,5,.38), rgba(5,5,5,.38)), url("images/desert_dune_landscape_main.png"); background-size: cover; background-position: center; background-repeat: no-repeat; isolation: isolate; }
+      .hero-about { position: relative; background-color: #050505; isolation: isolate; }
+  .hero-about .hero-bg-img { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .hero-about .hero-bg-overlay { position: absolute; inset: 0; z-index: 0; background: rgba(5,5,5,.38); }
       .hero-about > .relative { z-index: 1; }
       .surface-paper { background: #f5f1eb; color: #17110d; }
       .surface-paper .text-white { color: #17110d !important; }
@@ -133,8 +135,10 @@
       </div>
 
       <main>
-        <section class="hero-about relative overflow-hidden border-b border-white/10">
-          <div class="relative mx-auto max-w-7xl px-6 py-28 md:px-8 lg:py-36">
+<section class="hero-about relative min-h-[80svh] overflow-hidden border-b border-white/10">
+  <img class="hero-bg-img" src="images/desert_dune_landscape_main.png" alt="" aria-hidden="true" fetchpriority="high" loading="eager" decoding="sync" />
+  <div class="hero-bg-overlay" aria-hidden="true"></div>
+  <div class="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-8 lg:py-36">
             <div class="max-w-4xl">
               <p class="text-xs uppercase tracking-[0.35em] text-ember/90">About us</p>
               <h1 class="mt-6 max-w-3xl font-display text-5xl leading-[0.95] text-white md:text-7xl">
