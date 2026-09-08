@@ -54,7 +54,7 @@
       }
 
       body {
-        animation: page-enter 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+        animation: none;
       }
 
       @keyframes page-enter {
@@ -120,10 +120,10 @@
         transform: translateY(-1px);
       }
 
-      .hero-radiance {
-        background-size: 220% 220%;
-        animation: sheen 14s linear infinite;
-      }
+  .hero-radiance {
+  background-size: 100% 100%;
+  animation: none;
+  }
 
       .africa-pattern {
         position: absolute;
@@ -819,7 +819,7 @@
             )}
 
             <main className="w-full text-ivory">
-              <motion.section className="relative isolate overflow-hidden bg-coal" style={{ backgroundImage: 'url("crevia/images/desert_dune_landscape_main.png")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+              <motion.section className="relative isolate overflow-hidden bg-coal" initial={false} animate={{ opacity: 1 }}>
                 <div className="absolute inset-0" aria-hidden="true">
                   <motion.img
                     src="crevia/images/desert_dune_landscape_main.png"
