@@ -155,6 +155,13 @@
       body.mobile-open #reactMobileNav .panel{ transform:translateX(0); pointer-events:auto; }
       @media (min-width:768px){ #reactMobileNav{display:none!important} }
 
+      /* Premium interaction language */
+      :where(a, button) { transition: transform .42s cubic-bezier(.16,1,.3,1), color .32s ease, background-color .42s ease, box-shadow .42s ease, border-color .42s ease; }
+      :where(a, button):hover { transform: translateY(-2px); }
+      :where(button):active, :where(a):active { transform: translateY(0) scale(.985); }
+      :where(article, .premium-card, .surface-paper > div > div > div) { transition: transform .55s cubic-bezier(.16,1,.3,1), box-shadow .55s cubic-bezier(.16,1,.3,1), border-color .4s ease; }
+      :where(article, .premium-card, .surface-paper > div > div > div):hover { transform: translateY(-5px); box-shadow: 0 22px 54px rgba(0,0,0,.14); }
+      @media (prefers-reduced-motion: reduce) { :where(a, button, article, .premium-card) { transition: none !important; transform: none !important; } }
     </style>
     <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">

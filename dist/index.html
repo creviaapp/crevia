@@ -155,6 +155,13 @@
       body.mobile-open #reactMobileNav .panel{ transform:translateX(0); pointer-events:auto; }
       @media (min-width:768px){ #reactMobileNav{display:none!important} }
 
+      /* Premium interaction language */
+      :where(a, button) { transition: transform .42s cubic-bezier(.16,1,.3,1), color .32s ease, background-color .42s ease, box-shadow .42s ease, border-color .42s ease; }
+      :where(a, button):hover { transform: translateY(-2px); }
+      :where(button):active, :where(a):active { transform: translateY(0) scale(.985); }
+      :where(article, .premium-card, .surface-paper > div > div > div) { transition: transform .55s cubic-bezier(.16,1,.3,1), box-shadow .55s cubic-bezier(.16,1,.3,1), border-color .4s ease; }
+      :where(article, .premium-card, .surface-paper > div > div > div):hover { transform: translateY(-5px); box-shadow: 0 22px 54px rgba(0,0,0,.14); }
+      @media (prefers-reduced-motion: reduce) { :where(a, button, article, .premium-card) { transition: none !important; transform: none !important; } }
     </style>
     <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -837,11 +844,10 @@
                 <div className="relative flex min-h-[92vh] w-full items-center px-6 py-20 md:px-10 lg:px-16 xl:px-20">
                   <motion.div variants={STAGGER_CONTAINER} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }} className="max-w-5xl">
                     <motion.h1 variants={STAGGER_ITEM} className="mt-6 max-w-4xl font-display text-5xl leading-[0.95] text-ivory sm:text-6xl lg:text-7xl">
-                      Own your story. <span className="text-ember">Command your market.</span>
+                      Own your story™. <span className="text-ember">Command your market.</span>
                     </motion.h1>
                     <motion.p variants={STAGGER_ITEM} className="mt-8 max-w-2xl text-base leading-8 text-white/[0.74] sm:text-lg">
-                      We are a strategic brand and ecosystem firm. We translate business strategy into undeniable
-                      market leadership through premium physical convenings, brand architecture, and operational design.
+                      We are a strategic brand architecture firm that builds premium digital presences and high-stakes physical communities across Africa.
                     </motion.p>
                     <motion.div variants={STAGGER_ITEM} className="mt-10 flex flex-wrap gap-4">
                       <MagneticButton
