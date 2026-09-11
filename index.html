@@ -167,9 +167,23 @@
       @keyframes service-card-in { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
       @media (prefers-reduced-motion: reduce) { :where(a, button, article, .premium-card), .service-grid > div { transition: none !important; animation: none !important; transform: none !important; } }
     </style>
-    <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Crevia" />
+    <meta property="og:title" content="Crevia | Strategic Brand and Ecosystem Design" />
+    <meta
+      property="og:description"
+      content="We are a strategic brand architecture firm. We help high-growth enterprises build undeniable market authority through premium digital presences and high-stakes physical communities."
+    />
+    <meta property="og:image" content="crevia/images/og-image.png" />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1260" />
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:title" content="Crevia | Strategic Brand and Ecosystem Design" />
+    <meta
+      name="twitter:description"
+      content="We are a strategic brand architecture firm. We help high-growth enterprises build undeniable market authority through premium digital presences and high-stakes physical communities."
+    />
+    <meta name="twitter:image" content="crevia/images/og-image.png">
 </head>
   <body class="font-sans antialiased">
     <div id="root"></div>
@@ -263,9 +277,15 @@
         }, [started, value]);
 
         return (
-          <div ref={elementRef} className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,14,0.55),rgba(255,255,255,0.02))] p-5 shadow-[0_10px_24px_rgba(0,0,0,0.18)] backdrop-blur-sm">
-            <p className="font-display text-5xl leading-none text-white sm:text-7xl">{displayValue.toLocaleString()}{suffix}</p>
-            <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.22em] text-white/75">{label}</p>
+          <div ref={elementRef}>
+            <SpotlightPanel
+              className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,14,0.55),rgba(255,255,255,0.02))] p-5 shadow-[0_10px_24px_rgba(0,0,0,0.18)] backdrop-blur-sm"
+              glowClassName="bg-[#f0782f]/[0.4]"
+              hoverLift
+            >
+              <p className="font-display text-5xl leading-none text-white sm:text-7xl">{displayValue.toLocaleString()}{suffix}</p>
+              <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.22em] text-white/75">{label}</p>
+            </SpotlightPanel>
           </div>
         );
       }
@@ -358,7 +378,7 @@
                 const isIhub = partner.name === 'iHub Nairobi';
                 const isSuluhu = partner.name === 'Suluhu Studio';
                 const imgClasses = isLarge
-                  ? 'block h-24 w-auto max-w-[320px] object-contain object-center'
+                  ? 'mx-auto block h-[132px] w-auto max-w-[280px] object-contain object-center'
                   : isIhub
                     ? 'mx-auto block max-h-[84px] w-auto object-contain object-center'
                     : isSuluhu
@@ -368,30 +388,29 @@
                 return (
                   <div
                     key={`${partner.name || partner}-${index}`}
-                    className={`mx-2 grid h-24 place-items-center text-center rounded-[1.5rem] px-4 py-3 text-center shadow-[0_12px_28px_rgba(0,0,0,0.06)] ${isLarge ? 'min-w-[250px] w-[250px]' : 'min-w-[190px]'} ${isDarkBadge ? 'border border-[#1a1a1a] bg-[#0d0d0d]' : 'bg-white/80'}`}
+                    className={`relative mx-2 h-24 overflow-hidden text-center rounded-[1.5rem] px-4 shadow-[0_12px_28px_rgba(0,0,0,0.06)] min-w-[190px] ${isDarkBadge ? 'border border-[#1a1a1a] bg-[#0d0d0d]' : 'bg-white/80'}`}
                     style={{
                       background: isDarkBadge ? 'linear-gradient(135deg, #0c0c0c 0%, #191919 100%)' : 'transparent',
                     }}
                   >
-                    {partner.svg ? (
-                      <span className="inline-flex max-h-16 w-full items-center justify-center" dangerouslySetInnerHTML={{ __html: partner.svg }} />
-                    ) : partner.src ? (
-<div className="flex w-full items-center justify-center text-center">
-                          <img
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      {partner.svg ? (
+                        <span className="inline-flex max-h-16 w-full items-center justify-center" dangerouslySetInnerHTML={{ __html: partner.svg }} />
+                      ) : partner.src ? (
+                        <img
                           src={partner.src}
                           alt={partner.name}
                           className={imgClasses}
                           style={{
                             filter: isDarkBadge ? 'drop-shadow(0 8px 18px rgba(255,255,255,0.08))' : 'drop-shadow(0 8px 18px rgba(17,17,17,0.08))',
-                            margin: '0 auto',
                             display: 'block',
                             objectPosition: 'center center',
                           }}
                         />
-                      </div>
-                    ) : (
-                      <span className="text-lg font-semibold tracking-wide text-black/[0.7]">{partner.name || partner}</span>
-                    )}
+                      ) : (
+                        <span className="text-lg font-semibold tracking-wide text-black/[0.7]">{partner.name || partner}</span>
+                      )}
+                    </div>
                   </div>
                 );
               })}
@@ -549,26 +568,7 @@
         };
 
         return (
-          <div className="space-y-5">
-            <div className="flex items-center justify-end gap-3">
-              <button
-                type="button"
-                onClick={goPrevious}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10"
-                aria-label="Show previous portfolio items"
-              >
-                <span aria-hidden="true">←</span>
-              </button>
-              <button
-                type="button"
-                onClick={goNext}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10"
-                aria-label="Show next portfolio items"
-              >
-                <span aria-hidden="true">→</span>
-              </button>
-            </div>
-
+          <div className="space-y-8">
             <div className="grid gap-6 md:grid-cols-2">
               {currentEvents.map((event, index) => {
                 const cardKey = `${pageIndex}-${index}`;
@@ -640,23 +640,106 @@
                       <span>{event.year}</span>
                     </div>
                     <h3 className="mt-3 text-[1.55rem] font-medium leading-tight text-coal">{event.title}</h3>
+                    {event.description && <p className="mt-3 text-sm leading-6 text-coal/70">{event.description}</p>}
                   </div>
                 </article>
                 );
               })}
             </div>
 
-            <div className="flex items-center justify-center gap-2">
-              {Array.from({ length: totalPages }).map((_, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  onClick={() => { setPlayingKey(null); setPageIndex(index); }}
-                  className={`h-2.5 rounded-full transition-all ${index === pageIndex ? 'w-8 bg-ember' : 'w-2.5 bg-white/30 hover:bg-white/50'}`}
-                  aria-label={`Show portfolio page ${index + 1}`}
-                  aria-pressed={index === pageIndex}
-                />
+            <div className="flex items-center justify-center gap-5">
+              <button
+                type="button"
+                onClick={goPrevious}
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10"
+                aria-label="Show previous portfolio items"
+              >
+                <span aria-hidden="true">←</span>
+              </button>
+
+              <div className="flex items-center gap-2">
+                {Array.from({ length: totalPages }).map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => { setPlayingKey(null); setPageIndex(index); }}
+                    className={`h-2.5 rounded-full transition-all ${index === pageIndex ? 'w-8 bg-ember' : 'w-2.5 bg-white/30 hover:bg-white/50'}`}
+                    aria-label={`Show portfolio page ${index + 1}`}
+                    aria-pressed={index === pageIndex}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={goNext}
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10"
+                aria-label="Show next portfolio items"
+              >
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      function DigitalSpacesGrid({ items }) {
+        const [pageIndex, setPageIndex] = useState(0);
+        const itemsPerPage = 2;
+        const totalPages = Math.max(1, Math.ceil(items.length / itemsPerPage));
+        const currentItems = items.slice(pageIndex * itemsPerPage, pageIndex * itemsPerPage + itemsPerPage);
+
+        const goPrevious = () => setPageIndex((current) => (current === 0 ? totalPages - 1 : current - 1));
+        const goNext = () => setPageIndex((current) => (current + 1) % totalPages);
+
+        return (
+          <div className="space-y-8">
+            <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2">
+              {currentItems.map((item, index) => (
+                <article key={`${pageIndex}-${index}`} className="overflow-hidden rounded-[2rem] bg-white shadow-[0_22px_45px_rgba(0,0,0,.12)]">
+                  <div className="h-80 overflow-hidden" style={{ background: item.bg }}>
+                    <img src={item.img} alt={item.alt} className={`h-full w-full object-cover ${item.type === 'site' ? 'object-top' : ''}`} />
+                  </div>
+                  <div className="p-6">
+                    <p className="text-[10px] uppercase tracking-[.22em] text-coal/50">{item.eyebrow}</p>
+                    <h3 className="mt-2 text-2xl font-medium">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-6 text-coal/70">{item.body}</p>
+                  </div>
+                </article>
               ))}
+            </div>
+
+            <div className="flex items-center justify-center gap-5">
+              <button
+                type="button"
+                onClick={goPrevious}
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-coal/15 text-coal transition hover:bg-coal/5"
+                aria-label="Show previous digital spaces"
+              >
+                <span aria-hidden="true">←</span>
+              </button>
+
+              <div className="flex items-center gap-2">
+                {Array.from({ length: totalPages }).map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => setPageIndex(index)}
+                    className={`h-2.5 rounded-full transition-all ${index === pageIndex ? 'w-8 bg-ember' : 'w-2.5 bg-coal/20 hover:bg-coal/35'}`}
+                    aria-label={`Show digital spaces page ${index + 1}`}
+                    aria-pressed={index === pageIndex}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={goNext}
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-coal/15 text-coal transition hover:bg-coal/5"
+                aria-label="Show next digital spaces"
+              >
+                <span aria-hidden="true">→</span>
+              </button>
             </div>
           </div>
         );
@@ -716,9 +799,10 @@
 
         const portfolioEvents = [
           {
-            title: 'Freelancers Summit',
+            title: 'Freelancers Summit 2024',
             location: 'Nairobi, Kenya',
             year: '2024',
+            description: 'Empowering digital independence. Freelancers Summit brought independent professionals together to share practical lessons, build community, and strengthen the systems that help digital talent work with greater freedom.',
             playerType: 'youtube',
             embedUrl: 'https://www.youtube.com/embed/-20xdAqoBfo?autoplay=1&rel=0&modestbranding=1',
             poster: 'crevia/images/freelancers%20summit/freelancers%20group%20photo.jpeg',
@@ -729,9 +813,10 @@
             title: 'AI Summit 2025',
             location: 'Nairobi, Kenya',
             year: '2025',
+            description: 'Building AI for impact. AI Summit 2025 explored how builders across Africa can apply artificial intelligence to real challenges — moving beyond the hype toward useful, responsible, and measurable solutions.',
             playerType: 'youtube',
             embedUrl: 'https://www.youtube.com/embed/BKaxVxiLz0Y?autoplay=1&rel=0&modestbranding=1',
-            poster: 'crevia/images/AI%20Summit%202025%20group%20pic.png',
+            poster: 'crevia/images/AI%20summit%20group%20photo%20strathmore.jpeg',
             tone: 'from-[#141920] via-[#1d2f39] to-[#3d4758]',
             tilt: 'rotate-[2deg]',
           },
@@ -739,6 +824,7 @@
             title: 'Crevia Summit 2026',
             location: 'Nairobi, Kenya',
             year: '2026',
+            description: 'How to build a personal brand that lasts. Crevia Summit brought together ambitious builders to explore how a clear, credible story creates trust, opportunity, and long-term influence.',
             playerType: 'youtube',
             embedUrl: 'https://www.youtube.com/embed/v1ao9s77lpI?autoplay=1&rel=0&modestbranding=1',
             poster: 'crevia/images/crevia%20summit/crevia%20summit%20group%20photo.PNG',
@@ -749,6 +835,7 @@
             title: "Lang'ata Islamic Centre Creatives Meet 2026",
             location: 'Nairobi, Kenya',
             year: '2026',
+            description: "A room built around a shared cause. Muslim content creators gathered over Arabian cuisine in Upperhill to shape how the flagship Lang'ata Islamic Centre gets built — trading the fundraising ideas that turn a shared vision into a physical home for the community.",
             playerType: 'youtube',
             embedUrl: 'https://www.youtube.com/embed/iRAUyoGCKIY?autoplay=1&rel=0&modestbranding=1',
             poster: 'crevia/images/Langata%20islamic%20centre/LIC%20image.png',
@@ -756,6 +843,55 @@
             tilt: 'rotate-[1deg]',
           },
         ];
+
+        const digitalSpaceItems = [
+          {
+            type: 'site',
+            bg: '#0a0908',
+            img: 'crevia/images/digital%20spaces/Screenshot%202026-09-11%20100145.png',
+            alt: 'Crevia homepage',
+            eyebrow: 'Digital Presence — Crevia',
+            title: "The site you're on.",
+            body: "Crevia is a strategic brand architecture firm that builds premium digital presences and high-stakes physical communities across Africa. This site is the proof.",
+          },
+          {
+            type: 'site',
+            bg: '#3d0613',
+            img: 'crevia/images/digital%20spaces/Screenshot%202026-09-11%20094909.png',
+            alt: 'Mzizi Organics homepage',
+            eyebrow: 'Digital Presence — Mzizi Organics',
+            title: 'Nourish the root. Flourish outward.',
+            body: 'Mzizi Organics is a premium wellness brand creating pure, organic-based remedies that nourish and heal the body from the root up.',
+          },
+          {
+            type: 'site',
+            bg: '#17110d',
+            img: 'crevia/images/digital%20spaces/Screenshot%202026-09-11%20101211.png',
+            alt: 'Kaizen Afrika homepage',
+            eyebrow: 'Digital Presence — Kaizen Afrika',
+            title: 'Operations, without the chaos.',
+            body: 'Kaizen Afrika is an app for businesses to run their operations — the infrastructure behind the intelligence and the execution.',
+          },
+          {
+            type: 'logo',
+            bg: '#3d0613',
+            img: 'crevia/images/digital%20spaces/mzizi%20organics%20logo.PNG',
+            alt: 'Mzizi Organics logo',
+            eyebrow: 'Brand Identity — Mzizi Organics',
+            title: 'A mark that grows from within.',
+            body: "The Mzizi mark takes its form from the brand's belief: nourish the root, and everything above it flourishes. Its radiating branches read as both root and vessel — the same structure that draws nourishment in is the one that carries growth out. The deep maroon behind it carries that meaning further: an earthen, blood-warm tone for vitality, groundedness, and the quiet strength of something growing before it ever shows on the surface.",
+          },
+          {
+            type: 'logo',
+            bg: '#060606',
+            img: 'crevia/images/digital%20spaces/crevia%20logo.PNG',
+            alt: 'Crevia logo',
+            eyebrow: 'Brand Identity — Crevia',
+            title: 'Every story, held at the center.',
+            body: "Crevia's mark is a ring of circles, large and small — the enterprises and the founders, the institutions and the independents, every business we've stood beside. At the center sits a single diamond: Crevia, holding their stories and carrying them out to the world. It's a quiet expression of what we believe — that no brand builds authority alone, and that community, not isolation, is the future of business.",
+          },
+        ];
+
         const navLinks = [
           { label: 'Home', href: '#' },
           { label: 'About Us', href: 'crevia/about.html' },
@@ -878,7 +1014,7 @@
                 <div className="relative mx-auto max-w-6xl border-y border-white/15 py-10 sm:py-14">
                   <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/75">Built for the institutions shaping Africa</p>
                     <div className="mt-10 grid gap-10 sm:grid-cols-3 sm:gap-8">
-                    <AnimatedStat value={3} suffix="+" label="Years Scaling African Brands" />
+                    <AnimatedStat value={3} suffix="+" label="Years in African Markets" />
                     <AnimatedStat value={3} label="Core Strategic Frameworks" />
                     <AnimatedStat value={300} suffix="+" label="Enterprise Builders Engaged" />
                   </div>
@@ -902,7 +1038,7 @@
                   <div className="mx-auto max-w-7xl">
                     <div className="max-w-4xl">
                       <p className="text-[11px] font-bold uppercase tracking-[0.38em] text-ember">Our ecosystem</p>
-                      <h2 className="mt-5 font-display text-5xl leading-[0.98] tracking-[-0.03em] md:text-7xl">Two expressions.<br /><span className="text-coal/45">One direction.</span></h2>
+                      <h2 className="mt-5 font-display text-5xl leading-[0.98] tracking-[-0.03em] md:text-7xl">Two expressions.<br /><span className="text-ember">One direction.</span></h2>
                       <p className="mt-7 max-w-2xl text-lg leading-8 text-coal/65 md:text-xl">We bring together the ideas, spaces, and platforms that help people build the right way for Africa — from the story a brand owns, to the rooms where hard questions are worked through, to the direction that helps founders keep moving.</p>
                     </div>
                     <div className="mt-14 grid gap-5 md:grid-cols-2">
@@ -919,7 +1055,7 @@
                   <div className="mb-12 text-center">
                     <p className="text-xs uppercase tracking-[0.42em] text-ember/[0.9]">Portfolio</p>
                     <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] md:text-5xl">
-                      THE PHYSICAL SPACES WE&apos;VE BUILT
+                      SOME OF THE <span className="text-ember">PHYSICAL</span> SPACES WE&apos;VE BUILT
                     </h2>
                   </div>
 
@@ -963,13 +1099,9 @@
                 <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
                   <div className="mb-12 text-center">
                     <p className="text-xs uppercase tracking-[0.42em] text-ember">Portfolio</p>
-                    <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] md:text-5xl">THE DIGITAL SPACES WE&apos;VE BUILT</h2>
+                    <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] md:text-5xl">SOME OF THE <span className="text-ember">DIGITAL</span> SPACES WE&apos;VE BUILT</h2>
                   </div>
-                  <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
-                    <article className="overflow-hidden rounded-[2rem] bg-white shadow-[0_22px_45px_rgba(0,0,0,.12)]"><div className="flex h-72 items-end bg-[linear-gradient(135deg,#0b1120,#132f59,#F0782F)] p-7"><p className="font-display text-4xl text-white">Digital homes with a point of view.</p></div><div className="p-6"><p className="text-[10px] uppercase tracking-[.22em] text-coal/50">Digital Experience Architecture</p><h3 className="mt-2 text-2xl font-medium">Websites built to move markets.</h3></div></article>
-                    <article className="overflow-hidden rounded-[2rem] bg-white shadow-[0_22px_45px_rgba(0,0,0,.12)]"><div className="flex h-72 items-end bg-[linear-gradient(135deg,#17110d,#6b321a,#f6a06b)] p-7"><p className="font-display text-4xl text-white">Make your next chapter unmistakable.</p></div><div className="p-6"><p className="text-[10px] uppercase tracking-[.22em] text-coal/50">Digital Presence</p><h3 className="mt-2 text-2xl font-medium">A sharper story, online.</h3></div></article>
-                  </div>
-                  <div className="mt-8 flex justify-center gap-3"><button type="button" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-coal/15" aria-label="Previous digital spaces">←</button><button type="button" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-coal/15" aria-label="Next digital spaces">→</button></div>
+                  <DigitalSpacesGrid items={digitalSpaceItems} />
                 </div>
               </motion.section>
 
@@ -981,7 +1113,7 @@
   <div className="max-w-4xl">
   <p className="text-[11px] font-bold uppercase tracking-[0.38em] text-[#f0782f]">Capabilities / 02</p>
   <h2 className="mt-5 font-display text-5xl leading-[.94] tracking-[-.04em] text-[#17110d] md:text-7xl">
-  Premium stages for<br className="hidden md:block" /> premium brands.
+  Premium stages for<br className="hidden md:block" /> <span className="text-ember">premium brands</span>.
   </h2>
   </div>
   <p className="max-w-xs text-sm leading-6 text-[#17110d]/60">From the room people remember to the digital home they return to, we build the conditions for brands to move with authority.</p>
@@ -992,19 +1124,19 @@
   <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full border border-[#f0782f]/20 transition duration-700 group-hover:scale-[1.35] group-hover:border-[#f0782f]/50" />
   <p className="relative text-[10px] font-bold uppercase tracking-[0.28em] text-[#17110d]/55 transition-colors duration-500 group-hover:text-[#f0782f]">Physical Communities</p>
   <h3 className="relative mt-4 font-display text-3xl leading-tight text-[#17110d] transition-colors duration-500 group-hover:text-[#f7f3ee] md:text-4xl">
-                          Event Architecture
+                          Event <span className="text-ember">Architecture</span>
                         </h3>
                         <p className="relative mt-6 text-lg leading-9 text-[#17110d]/70 transition-colors duration-500 group-hover:text-[#f7f3ee]/75">
-                          Crevia assumes complete ownership of high-stakes ecosystem convenings. From venue
-                          acquisition and production command to stakeholder alignment and executive guest management, we
-                          operate as your turnkey luxury partner—so institutional capital and decisive founders can focus on
-                          outcomes, not logistics.
+                          We engineer high-stakes convenings from strategic blueprint to flawless command. From the
+                          first strategic question to the final guest departure, we shape the room, rhythm, and
+                          experience so relationships deepen, decisions move, and your story is felt long after the
+                          event ends.
                         </p>
                         <div className="mt-8 flex flex-wrap gap-4">
                           <motion.a
 href="crevia/services.html"
                             whileTap={{ scale: 0.97 }}
-                            className="premium-button inline-flex items-center justify-center rounded-full border border-[#17110d]/20 px-8 py-4 text-sm font-semibold text-[#17110d]"
+                            className="premium-button inline-flex items-center justify-center rounded-full border border-[#17110d]/20 px-8 py-4 text-sm font-semibold text-[#17110d] transition-colors duration-500 group-hover:border-[#f7f3ee]/40 group-hover:text-[#f7f3ee]"
                           >
                             Learn more
                           </motion.a>
@@ -1015,7 +1147,7 @@ href="crevia/services.html"
   <div className="pointer-events-none absolute -bottom-20 -right-12 h-64 w-64 rounded-full border border-[#f0782f]/25 transition duration-700 group-hover:scale-[1.25] group-hover:border-[#f0782f]/60" />
   <p className="relative text-[10px] font-bold uppercase tracking-[0.28em] text-[#f0782f]">Digital Presence</p>
   <h3 className="relative mt-4 font-display text-3xl leading-tight text-[#f7f3ee] md:text-4xl">
-                          Digital Experience Architecture
+                          Digital Experience <span className="text-ember">Architecture</span>
                         </h3>
   <p className="relative mt-6 text-lg leading-9 text-[#f7f3ee]/75 transition-colors duration-500 group-hover:text-[#f7f3ee]">
   We design premium, high-conversion web experiences that act as the definitive digital home for
@@ -1044,7 +1176,7 @@ href="crevia/services.html"
                     <div className="lg:col-span-8">
                       <p className="text-xs uppercase tracking-[0.42em] text-ember/[0.9]">The Close</p>
                       <h2 className="mt-5 max-w-4xl font-display text-4xl leading-tight text-white md:text-6xl">
-                        The next strategic move is yours.
+                        The next strategic move is <span className="text-ember">yours</span>.
                       </h2>
                       <p className="mt-7 max-w-3xl text-lg leading-9 text-white/[0.74]">
                         If your brand requires uncompromising quality, the standard must be set now. Partner with Crevia
@@ -1063,53 +1195,39 @@ href="crevia/services.html"
                 </div>
               </motion.section>
 
-              <motion.footer {...SECTION_REVEAL} className="site-footer relative mt-12 pb-8 pt-16">
-                <div className="absolute inset-x-0 -top-12 h-12 rounded-t-[2.5rem] border-t border-black/[0.06] bg-ivory" aria-hidden="true" />
-                <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
-                  <div className="grid gap-12 border-t border-black/[0.12] pt-12 md:grid-cols-2 lg:grid-cols-4">
-                    <div className="lg:col-span-2">
-                      <p className="font-display text-3xl leading-none text-coal">Crevia</p>
-                      <p className="mt-5 max-w-md text-sm leading-7 text-coal/[0.62]">
-                        Strategic brand architecture for premium digital presences and high-stakes physical communities across Africa.
-                      </p>
+              <motion.footer {...SECTION_REVEAL} className="border-t border-white/10 px-6 py-14 md:px-10 lg:px-16 xl:px-20" style={{ background: 'linear-gradient(135deg, #050505 0%, #0b0b0b 52%, #3d1c0f 78%, #F0782F 100%)', color: '#f5efe7' }}>
+                <div className="mx-auto max-w-7xl">
+                  <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-[1.4fr_1fr_1fr]">
+                    <div>
+                      <p className="font-display text-4xl text-white">Crevia</p>
+                      <p className="mt-4 max-w-sm leading-7 text-white/70">We are a strategic brand architecture firm that builds premium digital presences and high-stakes physical communities across Africa.</p>
                     </div>
 
-<div>
-  <p className="text-xs uppercase tracking-[0.28em] text-coal/[0.5]">Navigate</p>
-  <div className="mt-5 space-y-3 text-sm text-coal/[0.72]">
-  <a href="#" className="block hover:text-coal">Home</a>
-  <a href="crevia/about.html" className="block hover:text-coal">About Us</a>
-  <a href="crevia/services.html" className="block hover:text-coal">Services</a>
-   <a href="crevia/dira.html" className="block hover:text-coal">Dira</a>
-  <a href="crevia/contact.html" className="block hover:text-coal">Contact</a>
-  </div>
-  </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-ember">Navigate</p>
+                      <div className="mt-5 space-y-3 text-sm text-white/70">
+                        <a href="/" className="block hover:text-white">Home</a>
+                        <a href="crevia/about.html" className="block hover:text-white">About Us</a>
+                        <a href="crevia/services.html" className="block hover:text-white">Services</a>
+                        <a href="crevia/dira.html" className="block hover:text-white">Dira</a>
+                        <a href="crevia/contact.html" className="block hover:text-white">Contact</a>
+                      </div>
+                    </div>
 
                     <div>
-                      <p className="text-xs uppercase tracking-[0.28em] text-coal/[0.5]">Contact</p>
-                      <div className="mt-5 space-y-3 text-sm text-coal/[0.72]">
-                        <p>Nairobi, Kenya</p>
-                        <a href="mailto:crevia.app@gmail.com" className="block hover:text-coal">
-                          crevia.app@gmail.com
-                        </a>
-                        <a href="crevia/contact.html" className="block hover:text-coal">
-                          Book a consultation
-                        </a>
-                      </div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-ember">Base</p>
+                      <p className="mt-5 text-sm text-white/70">Nairobi, Kenya</p>
+                      <a href="mailto:crevia.app@gmail.com" className="mt-3 block text-sm text-white/70 hover:text-white">
+                        crevia.app@gmail.com
+                      </a>
                     </div>
                   </div>
 
-                  <div className="mt-10 border-t border-black/[0.12] pt-6">
-                    <div className="flex flex-col gap-3 text-sm text-coal/[0.56] md:flex-row md:items-center md:justify-between">
-                      <p>© 2026 Crevia. All rights reserved.</p>
-                      <div className="flex items-center gap-6">
-                        <a href="crevia/privacy.html" className="hover:text-coal/[0.9]">
-                          Privacy Policy
-                        </a>
-                        <a href="crevia/terms.html" className="hover:text-coal/[0.9]">
-                          Terms of Use
-                        </a>
-                      </div>
+                  <div className="mt-6 flex flex-col gap-3 text-xs text-white/45 md:flex-row md:justify-between">
+                    <span>© 2026 Crevia. All rights reserved.</span>
+                    <div className="flex gap-5">
+                      <a href="crevia/privacy.html" className="hover:text-white">Privacy</a>
+                      <a href="crevia/terms.html" className="hover:text-white">Terms</a>
                     </div>
                   </div>
                 </div>

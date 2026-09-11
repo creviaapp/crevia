@@ -50,7 +50,6 @@
             <button type="submit" class="premium-button w-full rounded-full bg-accent px-6 py-3 font-semibold text-ink hover:shadow-[0_10px_30px_rgba(240,120,47,0.3)]">Login</button>
           </form>
           <p id="loginError" class="mt-4 text-sm text-red-400 hidden"></p>
-          <p class="mt-4 text-xs text-ink/50">Password: <code class="bg-ink/5 px-1 rounded">admin123</code></p>
         </div>
       </div>
 
@@ -79,6 +78,7 @@
                 <th class="px-6 py-4 text-left font-semibold text-ink">Company</th>
                 <th class="px-6 py-4 text-left font-semibold text-ink">Message</th>
                 <th class="px-6 py-4 text-left font-semibold text-ink">Date</th>
+                <th class="px-6 py-4 text-left font-semibold text-ink">Reply</th>
               </tr>
             </thead>
             <tbody id="tableBody">
@@ -92,6 +92,40 @@
       </div>
     </div>
 
+    <!-- Reply Modal -->
+    <div id="replyModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+      <div id="replyModalBackdrop" class="absolute inset-0 bg-black/60"></div>
+      <div class="premium-card relative w-full max-w-lg rounded-[1.25rem] border border-white/10 bg-white p-6 text-ink">
+        <div class="mb-4 flex items-center justify-between">
+          <h3 class="font-display text-2xl text-ink">Reply</h3>
+          <button id="replyModalClose" class="text-ink/50 hover:text-ink" aria-label="Close">✕</button>
+        </div>
+
+        <div class="space-y-3 text-sm">
+          <div>
+            <span class="block text-[11px] font-semibold uppercase tracking-[0.18em] text-ink/50">To</span>
+            <p id="replyTo" class="mt-1 text-ink"></p>
+          </div>
+          <div>
+            <span class="block text-[11px] font-semibold uppercase tracking-[0.18em] text-ink/50">Subject</span>
+            <p id="replySubject" class="mt-1 text-ink"></p>
+          </div>
+          <div>
+            <span class="block text-[11px] font-semibold uppercase tracking-[0.18em] text-ink/50">Message</span>
+            <pre id="replyBody" class="mt-1 max-h-60 overflow-y-auto whitespace-pre-wrap rounded-lg bg-ink/[0.04] p-3 font-sans text-ink"></pre>
+          </div>
+        </div>
+
+        <p id="replyCopiedNote" class="mt-3 hidden text-xs font-medium text-green-600">Copied to clipboard.</p>
+
+        <div class="mt-5 flex flex-wrap gap-3">
+          <a id="replyGmailLink" href="#" target="_blank" rel="noopener" class="premium-button inline-flex items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold text-ink hover:shadow-[0_10px_30px_rgba(240,120,47,0.3)]">Open in Gmail</a>
+          <a id="replyMailtoLink" href="#" class="premium-button inline-flex items-center justify-center rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold text-ink hover:bg-ink/[0.03]">Open in default mail app</a>
+          <button id="replyCopyBtn" type="button" class="premium-button inline-flex items-center justify-center rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold text-ink hover:bg-ink/[0.03]">Copy reply text</button>
+        </div>
+      </div>
+    </div>
+
     <script>
       document.addEventListener('DOMContentLoaded', async function() {
         const SUPABASE_URL = 'https://bcbzixdcsigxhqdiveei.supabase.co';
@@ -99,55 +133,45 @@
 
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+        const ADMIN_PASSWORD = 'clova@%';
+        let submissionsData = [];
+
         const loginScreen = document.getElementById('loginScreen');
         const dashboardScreen = document.getElementById('dashboardScreen');
         const loginForm = document.getElementById('loginForm');
-        const emailInput = document.getElementById('emailInput');
         const passwordInput = document.getElementById('passwordInput');
         const loginError = document.getElementById('loginError');
         const logoutBtn = document.getElementById('logoutBtn');
 
-        // Check if user is already logged in
-        const { data: { session } } = await supabase.auth.getSession();
-        if (session) {
+        // Check if already unlocked this session
+        if (sessionStorage.getItem('crevia_admin_unlocked') === '1') {
           showDashboard();
         }
 
-        // Listen for auth changes
-        supabase.auth.onAuthStateChange(async (event, session) => {
-          if (session) {
-            showDashboard();
-          } else {
-            loginScreen.classList.remove('hidden');
-            dashboardScreen.classList.add('hidden');
-            logoutBtn.classList.add('hidden');
-          }
-        });
-
-        loginForm.addEventListener('submit', async (e) => {
+        loginForm.addEventListener('submit', (e) => {
           e.preventDefault();
           loginError.classList.add('hidden');
           loginError.textContent = '';
-          
-          const email = emailInput.value;
+
           const password = passwordInput.value;
 
-          try {
-            const { error } = await supabase.auth.signInWithPassword({ email, password });
-            
-            if (error) throw error;
-            // Success - showDashboard will be called by onAuthStateChange
-          } catch (err) {
-            loginError.textContent = err.message || 'Login failed. Check credentials.';
+          if (password === ADMIN_PASSWORD) {
+            sessionStorage.setItem('crevia_admin_unlocked', '1');
+            passwordInput.value = '';
+            showDashboard();
+          } else {
+            loginError.textContent = 'Incorrect password.';
             loginError.classList.remove('hidden');
             passwordInput.value = '';
           }
         });
 
-        logoutBtn.addEventListener('click', async () => {
-          await supabase.auth.signOut();
-          emailInput.value = '';
+        logoutBtn.addEventListener('click', () => {
+          sessionStorage.removeItem('crevia_admin_unlocked');
           passwordInput.value = '';
+          loginScreen.classList.remove('hidden');
+          dashboardScreen.classList.add('hidden');
+          logoutBtn.classList.add('hidden');
         });
 
         async function showDashboard() {
@@ -173,16 +197,25 @@
               return;
             }
 
+            submissionsData = data;
+
             const tableBody = document.getElementById('tableBody');
-            tableBody.innerHTML = data.map(contact => `
+            tableBody.innerHTML = data.map((contact, index) => `
               <tr class="border-b border-ink/10 hover:bg-ink/[0.03]">
                 <td class="px-6 py-4 text-ink">${escapeHtml(contact.name || '—')}</td>
                 <td class="px-6 py-4 text-ink/80">${escapeHtml(contact.email || '—')}</td>
                 <td class="px-6 py-4 text-ink/70">${escapeHtml(contact.company || '—')}</td>
                 <td class="px-6 py-4 text-ink/70 max-w-xs truncate">${escapeHtml(contact.message || '—')}</td>
                 <td class="px-6 py-4 text-ink/60">${new Date(contact.created_at).toLocaleDateString()}</td>
+                <td class="px-6 py-4">
+                  <button type="button" data-reply-index="${index}" class="reply-btn inline-flex items-center gap-1 rounded-full bg-accent/15 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent/25">Reply ↗</button>
+                </td>
               </tr>
             `).join('');
+
+            tableBody.querySelectorAll('.reply-btn').forEach((btn) => {
+              btn.addEventListener('click', () => openReplyModal(submissionsData[Number(btn.dataset.replyIndex)]));
+            });
 
             document.getElementById('tableContainer').classList.remove('hidden');
           } catch (err) {
@@ -204,6 +237,81 @@
           };
           return text.replace(/[&<>"']/g, m => map[m]);
         }
+
+        function buildReplyContent(contact) {
+          const dateStr = contact.created_at ? new Date(contact.created_at).toLocaleDateString() : '';
+          const to = contact.email || '';
+          const subject = `Re: Your message to Crevia`;
+          const body =
+            `Hi ${contact.name || 'there'},\n\n` +
+            `Thanks for reaching out to Crevia.\n\n` +
+            `\n---\nOn ${dateStr}, you wrote:\n${contact.message || ''}`;
+          return { to, subject, body };
+        }
+
+        function buildMailtoHref({ to, subject, body }) {
+          const query = `subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          return `mailto:${to}?${query}`;
+        }
+
+        function buildGmailHref({ to, subject, body }) {
+          const query = `view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          return `https://mail.google.com/mail/?${query}`;
+        }
+
+        // Reply modal
+        const replyModal = document.getElementById('replyModal');
+        const replyModalBackdrop = document.getElementById('replyModalBackdrop');
+        const replyModalClose = document.getElementById('replyModalClose');
+        const replyTo = document.getElementById('replyTo');
+        const replySubject = document.getElementById('replySubject');
+        const replyBody = document.getElementById('replyBody');
+        const replyGmailLink = document.getElementById('replyGmailLink');
+        const replyMailtoLink = document.getElementById('replyMailtoLink');
+        const replyCopyBtn = document.getElementById('replyCopyBtn');
+        const replyCopiedNote = document.getElementById('replyCopiedNote');
+
+        function openReplyModal(contact) {
+          const content = buildReplyContent(contact);
+          replyTo.textContent = content.to;
+          replySubject.textContent = content.subject;
+          replyBody.textContent = content.body;
+          replyGmailLink.href = buildGmailHref(content);
+          replyMailtoLink.href = buildMailtoHref(content);
+          replyCopyBtn.dataset.copyText = `To: ${content.to}\nSubject: ${content.subject}\n\n${content.body}`;
+          replyCopiedNote.classList.add('hidden');
+          replyModal.classList.remove('hidden');
+          replyModal.classList.add('flex');
+        }
+
+        function closeReplyModal() {
+          replyModal.classList.add('hidden');
+          replyModal.classList.remove('flex');
+        }
+
+        replyModalBackdrop.addEventListener('click', closeReplyModal);
+        replyModalClose.addEventListener('click', closeReplyModal);
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeReplyModal();
+        });
+
+        replyCopyBtn.addEventListener('click', async () => {
+          const text = replyCopyBtn.dataset.copyText || '';
+          try {
+            await navigator.clipboard.writeText(text);
+          } catch (err) {
+            // Fallback for browsers/contexts without clipboard API access
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+          }
+          replyCopiedNote.classList.remove('hidden');
+        });
       });
     </script>
     <script>const adminShell=document.querySelector('body > div');if(adminShell){adminShell.classList.add('admin-enter');requestAnimationFrame(()=>adminShell.classList.add('is-ready'));}</script>

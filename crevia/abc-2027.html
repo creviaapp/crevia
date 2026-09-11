@@ -6,7 +6,7 @@
     <title>Africa Business Connect 2027 | Crevia</title>
     <meta name="description" content="ABC2027 is the flagship continental gathering for founders, investors, institutions, and ecosystem builders. Theme: Building the right way for Africa." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preload" as="image" href="images/AI%20Summit%202025%20group%20pic.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="images/AI%20summit%20group%20photo%20strathmore.jpeg" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -52,17 +52,31 @@
       .surface-paper .text-paper\/75, .surface-paper .text-paper\/65, .surface-paper .text-paper\/70, .surface-paper .text-paper\/60, .surface-paper .text-paper\/55, .surface-paper .text-paper\/50, .surface-paper .text-paper\/45 { color: rgba(23,17,13,.68) !important; }
       .surface-paper .hairline { border-color: rgba(23,17,13,.16) !important; }
       .surface-paper .text-ember { color: #f0782f !important; }
+      .surface-emerald { background: linear-gradient(118deg, #07110f 0%, #0b3028 48%, #06100e 100%) !important; color: #f3f0e9; }
+      .surface-emerald .text-paper { color: #f3f0e9 !important; }
+      .surface-emerald .text-paper\/75, .surface-emerald .text-paper\/70, .surface-emerald .text-paper\/65, .surface-emerald .text-paper\/60 { color: rgba(243,240,233,.76) !important; }
+      .surface-emerald .text-ember { color: #F0782F !important; }
+      .surface-emerald .hairline { border-color: rgba(243,240,233,.2) !important; }
       @keyframes hero-line { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
       @keyframes hero-detail { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
       @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
       #mobileNav { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
-      #mobileNav .mobile-nav-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.6); opacity:0; transition:opacity .28s ease; pointer-events:none; }
+      #mobileNav .mobile-nav-backdrop { position:absolute; inset:0; background:rgba(5,4,3,.74); opacity:0; transition:opacity .32s ease; pointer-events:none; }
       body.mobile-open #mobileNav { pointer-events: auto; }
-      #mobileNav .mobile-nav-panel { position:absolute; top:0; right:0; height:100%; width:86%; max-width:360px; background:#0b0b0b; transform:translateX(110%); transition:transform .36s cubic-bezier(.16,1,.3,1); box-shadow:-24px 0 60px rgba(0,0,0,0.6); padding:22px; border-radius:12px 0 0 12px; }
-      #mobileNav .mobile-nav-panel a{ display:block; padding:14px 8px; font-size:18px; color:#f3f0e9; text-decoration:none; border-radius:8px; }
-      #mobileNav .mobile-cta{ margin-top:18px; display:inline-block; padding:12px 16px; background:#f0782f; color:#111; border-radius:999px; font-weight:600; }
+      #mobileNav .mobile-nav-panel { position:absolute; top:0; right:0; height:100%; width:86%; max-width:380px; background:linear-gradient(165deg,#0c0b0a 0%,#161311 45%,#301a10 100%); transform:translateX(110%); transition:transform .42s cubic-bezier(.16,1,.3,1); box-shadow:-32px 0 70px rgba(0,0,0,.55); padding:26px 24px; display:flex; flex-direction:column; }
+      #mobileNav .mobile-nav-head { display:flex; align-items:center; justify-content:space-between; padding-bottom:20px; margin-bottom:8px; border-bottom:1px solid rgba(243,240,233,.12); }
+      #mobileNav .mobile-nav-brand { font-family:'Playfair Display', serif; font-size:22px; color:#f3f0e9; }
+      #mobileNav .mobile-nav-close { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; background:rgba(243,240,233,.06); border:1px solid rgba(243,240,233,.14); color:#f3f0e9; font-size:16px; line-height:1; cursor:pointer; transition:background .25s ease, transform .25s ease; }
+      #mobileNav .mobile-nav-close:active { transform:scale(.9); }
+      #mobileNav .mobile-nav-link { display:flex; align-items:center; justify-content:space-between; padding:15px 2px; font-size:17px; font-weight:500; color:rgba(243,240,233,.8); text-decoration:none; border-bottom:1px solid rgba(243,240,233,.08); opacity:0; transform:translateX(16px); transition:opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1), color .25s ease, padding-left .25s ease; transition-delay:calc(var(--i,0) * 55ms); }
+      #mobileNav .mobile-nav-link .mobile-nav-arrow { opacity:0; transform:translateX(-4px); transition:opacity .25s ease, transform .25s ease; color:#f0782f; font-size:15px; }
+      #mobileNav .mobile-nav-link:hover, #mobileNav .mobile-nav-link:active { color:#f3f0e9; padding-left:8px; }
+      #mobileNav .mobile-nav-link:hover .mobile-nav-arrow, #mobileNav .mobile-nav-link:active .mobile-nav-arrow { opacity:1; transform:translateX(0); }
+      #mobileNav .mobile-cta { margin-top:22px; display:flex; align-items:center; justify-content:center; gap:8px; padding:15px 20px; background:#f0782f; color:#17110d; border-radius:999px; font-weight:600; text-decoration:none; text-align:center; opacity:0; transform:translateY(12px); transition:opacity .5s cubic-bezier(.16,1,.3,1) .35s, transform .5s cubic-bezier(.16,1,.3,1) .35s, filter .25s ease; }
+      #mobileNav .mobile-cta:active { filter:brightness(.94); }
       body.mobile-open #mobileNav .mobile-nav-backdrop{ opacity:1; pointer-events:auto; }
       body.mobile-open #mobileNav .mobile-nav-panel{ transform:translateX(0); }
+      body.mobile-open #mobileNav .mobile-nav-link, body.mobile-open #mobileNav .mobile-cta{ opacity:1; transform:translateX(0) translateY(0); }
       @media (min-width: 768px){ #mobileNav{display:none!important} }
       :where(a, button) { transition: transform .42s cubic-bezier(.16,1,.3,1), color .32s ease, background-color .42s ease, box-shadow .42s ease, border-color .42s ease; }
       :where(a, button):hover { transform: translateY(-2px); }
@@ -75,7 +89,7 @@
     <div class="fixed inset-0 pointer-events-none page-noise"></div>
 
     <header class="sticky inset-x-0 top-0 z-50 px-4 pt-4 md:px-8">
-      <div class="mx-auto grid max-w-[1440px] items-center gap-4 rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#090909_0%,#121212_18%,#1a1a1a_34%,#5D0A1C_72%,#3d0613_100%)] px-4 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.32)] backdrop-blur-md md:grid-cols-[1fr_auto_1fr] md:px-7 relative">
+      <div class="mx-auto grid max-w-[1440px] items-center gap-4 rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#090909_0%,#121212_18%,#1a1a1a_34%,#F0782F_72%,#8B3913_100%)] px-4 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.32)] backdrop-blur-md md:grid-cols-[1fr_auto_1fr] md:px-7 relative">
         <div class="flex items-center gap-3">
           <a href="../index.html" class="focus-ring font-display text-2xl font-semibold tracking-tight text-paper">Crevia</a>
           <button id="navToggle" aria-label="Open menu" class="md:hidden absolute left-1/2 -translate-x-1/2 top-3 inline-flex items-center justify-center rounded-lg bg-white/5 p-2">
@@ -90,10 +104,16 @@
     <div id="mobileNav" class="fixed inset-0 z-60">
       <div class="mobile-nav-backdrop" onclick="toggleMobileNav()"></div>
       <nav class="mobile-nav-panel">
-        <a href="services.html" class="block" onclick="toggleMobileNav()">Services</a>
-        
-        <a href="about.html" class="block" onclick="toggleMobileNav()">About</a>
-        <a href="contact.html" class="mobile-cta" onclick="toggleMobileNav()">Book a Strategy Session</a>
+        <div class="mobile-nav-head">
+          <span class="mobile-nav-brand">Crevia</span>
+          <button type="button" class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">✕</button>
+        </div>
+        <a href="../index.html" class="mobile-nav-link" style="--i:0" onclick="toggleMobileNav()"><span>Home</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
+        <a href="about.html" class="mobile-nav-link" style="--i:1" onclick="toggleMobileNav()"><span>About Us</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
+        <a href="services.html" class="mobile-nav-link" style="--i:2" onclick="toggleMobileNav()"><span>Services</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
+        <a href="dira.html" class="mobile-nav-link" style="--i:3" onclick="toggleMobileNav()"><span>Dira</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
+        <a href="contact.html" class="mobile-nav-link" style="--i:4" onclick="toggleMobileNav()"><span>Contact</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
+        <a href="contact.html" class="mobile-cta" style="--i:5" onclick="toggleMobileNav()">Book a Strategy Session</a>
       </nav>
     </div>
 
@@ -101,21 +121,22 @@
       <!-- SECTION 1: THE HERO -->
       <section class="relative flex min-h-[100svh] items-center overflow-hidden border-b hairline bg-[#070706] px-5 pt-32 pb-20 md:px-10 md:pb-28" style="contain:paint;">
         <div class="absolute inset-0" aria-hidden="true">
-          <img src="images/AI%20Summit%202025%20group%20pic.png" alt="Africa Business Connect convening" loading="eager" fetchpriority="high" decoding="sync" class="hero-bg-img absolute inset-0 h-full w-full scale-[1.015] object-cover object-center blur-[0.6px]" />
-          <div class="absolute inset-0 bg-[#070706]/[0.56]"></div>
-          <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,7,6,0.72)_0%,rgba(7,7,6,0.46)_55%,rgba(7,7,6,0.24)_100%)]"></div>
+          <img src="images/AI%20summit%20group%20photo%20strathmore.jpeg" alt="Africa Business Connect convening" loading="eager" fetchpriority="high" decoding="sync" class="hero-bg-img absolute inset-0 h-full w-full scale-[1.015] object-cover object-center" />
+          <div class="absolute inset-0 bg-[#070706]/[0.75]"></div>
         </div>
         <div class="relative mx-auto w-full max-w-[1440px]">
-          <p class="hero-detail eyebrow text-center text-[11px] font-bold uppercase text-paper/60" style="--delay: .25s">2027 / Building the right way for Africa</p>
-          <h1 class="mt-8 text-center font-display text-[clamp(2.8rem,7vw,8rem)] font-semibold italic leading-[.92] tracking-[-.04em] text-paper">
-            <span class="hero-line-wrap"><span class="hero-line" style="--delay: .30s">Africa Business</span></span>
-            <span class="hero-line-wrap"><span class="hero-line" style="--delay: .55s">Connect 2027</span></span>
-          </h1>
-          <p class="hero-detail mt-8 text-center text-sm font-semibold uppercase tracking-[.18em] text-ember" style="--delay: .85s">Theme: Building the right way for Africa.</p>
-          <p class="hero-detail mx-auto mt-8 max-w-xl text-center text-lg leading-8 text-paper/80 md:text-xl md:leading-9" style="--delay: 1s">We are moving past the era of fast hype. ABC2027 is the definitive gathering for the founders, investors, and institutions laying the true groundwork for the continent's economic future. Own your story<span class="align-super text-[0.42em] leading-none">™</span> by building it right.</p>
-          <div class="hero-detail mt-14 flex flex-col items-center justify-center gap-4 sm:flex-row" style="--delay: 1.15s">
-            <a href="contact.html" class="focus-ring magnetic inline-flex items-center gap-4 rounded-full bg-ember px-8 py-4 text-xs font-bold uppercase tracking-[.13em] text-[#19110d] transition hover:bg-ember">Request an Invitation <span class="link-arrow text-lg" aria-hidden="true">→</span></a>
-            <a href="#partners" class="focus-ring magnetic inline-flex items-center gap-4 rounded-full border border-white/25 px-8 py-4 text-xs font-bold uppercase tracking-[.13em] text-paper transition hover:border-ember hover:text-ember">Become a Partner <span class="link-arrow text-lg" aria-hidden="true">→</span></a>
+          <div class="max-w-4xl lg:pl-6">
+            <p class="hero-detail eyebrow text-[11px] font-bold uppercase text-paper/60" style="--delay: .25s">2027 / Building the right way for Africa</p>
+            <h1 class="mt-8 font-display text-[clamp(2.8rem,7vw,8rem)] font-semibold italic leading-[.92] tracking-[-.04em] text-paper">
+              <span class="hero-line-wrap"><span class="hero-line" style="--delay: .30s">Africa Business</span></span>
+              <span class="hero-line-wrap"><span class="hero-line" style="--delay: .55s">Connect <span class="text-ember">2027</span></span></span>
+            </h1>
+            <p class="hero-detail mt-8 text-sm font-semibold uppercase tracking-[.18em] text-ember" style="--delay: .85s">Theme: Building the right way for Africa.</p>
+            <p class="hero-detail mt-8 max-w-2xl text-lg leading-8 text-paper/80 md:text-xl md:leading-9" style="--delay: 1s">We are moving past the era of fast hype. ABC2027 is the definitive gathering for the founders, investors, and institutions laying the true groundwork for the continent's economic future. Own your story<span class="align-super text-[0.42em] leading-none">™</span> by building it right.</p>
+            <div class="hero-detail mt-14 flex flex-col items-start justify-start gap-4 sm:flex-row" style="--delay: 1.15s">
+              <a href="contact.html" class="focus-ring magnetic inline-flex items-center gap-4 rounded-full bg-ember px-8 py-4 text-xs font-bold uppercase tracking-[.13em] text-[#19110d] transition hover:bg-ember">Request an Invitation <span class="link-arrow text-lg" aria-hidden="true">→</span></a>
+              <a href="#partners" class="focus-ring magnetic inline-flex items-center gap-4 rounded-full border border-white/25 px-8 py-4 text-xs font-bold uppercase tracking-[.13em] text-paper transition hover:border-ember hover:text-ember">Become a Partner <span class="link-arrow text-lg" aria-hidden="true">→</span></a>
+            </div>
           </div>
         </div>
       </section>
@@ -136,7 +157,7 @@
         <div class="absolute -right-40 top-1/4 h-[600px] w-[600px] rounded-full bg-maroon/20 blur-[160px]"></div>
         <div class="relative mx-auto max-w-[1440px]">
           <p class="eyebrow text-[11px] font-bold uppercase text-ember">How the room works</p>
-          <h2 class="mt-8 max-w-3xl font-display text-4xl font-semibold leading-[.98] tracking-[-.04em] text-paper md:text-6xl">Three ways to move the work forward.</h2>
+          <h2 class="mt-8 max-w-3xl font-display text-4xl font-semibold leading-[.98] tracking-[-.04em] text-paper md:text-6xl">Three ways to move the work <span class="text-ember">forward</span>.</h2>
           <div class="mt-20 grid gap-px overflow-hidden rounded-2xl border hairline md:grid-cols-3">
             <div class="card-hover border-b hairline p-10 md:border-b-0 md:border-r md:p-12">
               <div class="flex h-10 w-10 items-center justify-center rounded-full border border-ember/40 text-xs font-bold text-ember">01</div>
@@ -162,52 +183,38 @@
         <div class="relative mx-auto max-w-[1440px]">
           <div class="mx-auto max-w-3xl text-center">
             <p class="eyebrow text-[11px] font-bold uppercase text-ember">The Curation Phase</p>
-            <h2 class="mt-10 font-display text-4xl font-semibold italic leading-[1.08] tracking-[-.035em] text-paper md:text-5xl md:text-6xl">The 2027 program is currently in curation.</h2>
+            <h2 class="mt-10 font-display text-4xl font-semibold italic leading-[1.08] tracking-[-.035em] text-paper md:text-5xl md:text-6xl">The <span class="text-ember">2027</span> program is currently in curation.</h2>
             <p class="mt-12 text-lg leading-9 text-paper/65 md:text-xl md:leading-10">We are actively selecting the voices, speakers, and enterprise partners who truly represent the future of African business. To maintain an uncompromising standard of quality, the exact dates in March and the finalized venue will be shared exclusively with approved attendees and partners.</p>
           </div>
         </div>
       </section>
 
       <!-- SECTION 5: CALL FOR PARTNERS & SPONSORS -->
-      <section id="partners" class="scroll-reveal relative overflow-hidden border-b hairline px-5 py-28 md:px-10 md:py-44" data-reveal style="background: linear-gradient(135deg, #5D0A1C 0%, #3d0613 50%, #1a0309 100%);">
-        <div class="absolute -bottom-40 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-ember/8 blur-[160px]"></div>
+      <section id="partners" class="surface-emerald scroll-reveal relative overflow-hidden px-5 py-28 md:px-10 md:py-44" data-reveal>
+        <div class="pointer-events-none absolute -right-40 -top-40 h-[620px] w-[620px] rounded-full border border-white/10 opacity-60"></div>
+        <div class="pointer-events-none absolute bottom-0 left-[18%] h-px w-1/2 bg-white/10"></div>
         <div class="relative mx-auto max-w-[1440px]">
-          <div class="grid gap-12 lg:grid-cols-[1.2fr_.8fr] lg:items-end lg:gap-20">
+          <p class="eyebrow text-[11px] font-bold uppercase text-ember">Call for Partners &amp; Sponsors</p>
+          <div class="mt-8 grid gap-12 lg:grid-cols-[1.2fr_.8fr] lg:items-end lg:gap-20">
+            <h2 class="max-w-2xl font-display text-4xl font-semibold leading-[1] tracking-[-.04em] text-paper md:text-6xl">Shape the <span class="text-ember">room</span>. Become a <span class="text-ember">partner</span>.</h2>
             <div>
-              <p class="eyebrow text-[11px] font-bold uppercase text-ember">Call for Partners & Sponsors</p>
-              <h2 class="mt-8 max-w-2xl font-display text-4xl font-semibold italic leading-[1] tracking-[-.04em] text-paper md:text-6xl">Shape the room. Become a partner.</h2>
-              <p class="mt-10 max-w-xl text-lg leading-9 text-paper/70">We are currently allocating sponsorship slots and institutional partnerships for organizations that align with our mission of building the right way. Put your brand at the center of the continent's most important business conversation.</p>
-            </div>
-            <div class="lg:justify-self-end">
-              <a href="https://forms.gle/bg2z9x5xqWK2YMF86" target="_blank" rel="noopener noreferrer" class="focus-ring magnetic inline-flex items-center gap-4 rounded-full bg-ember px-8 py-4 text-xs font-bold uppercase tracking-[.13em] text-[#19110d] transition hover:bg-ember">Apply to Partner <span class="link-arrow text-lg" aria-hidden="true">→</span></a>
+              <p class="max-w-xl text-lg leading-9 text-paper/75">We are currently allocating sponsorship slots and institutional partnerships for organizations that align with our mission of building the right way. Put your brand at the center of the continent's most important business conversation.</p>
+              <a href="https://forms.gle/bg2z9x5xqWK2YMF86" target="_blank" rel="noopener noreferrer" class="focus-ring magnetic mt-8 inline-flex items-center gap-4 rounded-full bg-ember px-8 py-4 text-xs font-bold uppercase tracking-[.13em] text-[#19110d] transition hover:bg-ember">Partner with us <span class="link-arrow text-lg" aria-hidden="true">→</span></a>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 6: THE CLOSE -->
-      <section class="scroll-reveal relative overflow-hidden px-5 py-28 md:px-10 md:py-40" data-reveal>
-        <div class="relative mx-auto max-w-[1440px]">
-          <div class="mx-auto max-w-3xl text-center">
-            <p class="eyebrow text-[11px] font-bold uppercase text-ember">The Close</p>
-            <h2 class="mt-10 font-display text-4xl font-semibold italic leading-[1.05] tracking-[-.04em] text-paper md:text-6xl">The foundation is being laid.</h2>
-            <p class="mt-10 text-lg leading-9 text-paper/70 md:text-xl md:leading-10">Applications for the 2027 room are now open for early review. Secure your seat at the table.</p>
-            <div class="mt-14">
-              <a href="contact.html" class="focus-ring magnetic inline-flex items-center gap-4 rounded-full bg-ember px-8 py-4 text-xs font-bold uppercase tracking-[.13em] text-[#19110d] transition hover:bg-ember">Apply for an Invitation <span class="link-arrow text-lg" aria-hidden="true">→</span></a>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
 
-    <footer class="scroll-reveal border-t hairline px-5 py-14 md:px-10" data-reveal style="background: linear-gradient(135deg, #050505 0%, #0b0b0b 42%, #7c3518 76%, #F0782F 100%); color: #f5efe7;">
-      <div class="mx-auto max-w-[1440px]">
-        <div class="grid gap-10 border-b hairline pb-12 md:grid-cols-[1.4fr_1fr_1fr]">
-          <div><p class="font-display text-4xl font-semibold text-white">Crevia</p><p class="mt-4 max-w-sm leading-7 text-white/80">Africa Business Connect brings the people building the continent's future into the same room.</p></div>
-          <div><p class="eyebrow text-[10px] font-bold uppercase text-ember">Explore</p><div class="mt-5 space-y-3 text-sm text-white/80"><a class="focus-ring block hover:text-white" href="../index.html">Home</a><a class="focus-ring block hover:text-white" href="about.html">About Crevia</a><a class="focus-ring block hover:text-white" href="services.html">Services</a></div></div>
-          <div><p class="eyebrow text-[10px] font-bold uppercase text-ember">Start a conversation</p><a class="focus-ring mt-5 block text-sm text-white/80 hover:text-white" href="mailto:crevia.app@gmail.com">crevia.app@gmail.com</a><p class="mt-3 text-sm text-white/80">Nairobi, Kenya</p><a class="focus-ring mt-3 block text-sm text-white/80 hover:text-white" href="contact.html">Book a consultation</a></div>
+    <footer class="border-t border-white/10" style="background: linear-gradient(135deg, #050505 0%, #0b0b0b 52%, #3d1c0f 78%, #F0782F 100%); color: #f5efe7;">
+      <div class="mx-auto max-w-7xl px-6 py-14 md:px-8">
+        <div class="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-[1.4fr_1fr_1fr]">
+          <div><p class="font-display text-4xl text-white">Crevia</p><p class="mt-4 max-w-sm leading-7 text-white/55">We are a strategic brand architecture firm that builds premium digital presences and high-stakes physical communities across Africa.</p></div>
+          <div><p class="text-[10px] font-bold uppercase tracking-[.22em] text-ember">Navigate</p><div class="mt-5 space-y-3 text-sm text-white/65"><a class="block hover:text-white" href="../index.html">Home</a><a class="block hover:text-white" href="about.html">About Us</a><a class="block hover:text-white" href="services.html">Services</a><a class="block hover:text-white" href="dira.html">Dira</a><a class="block hover:text-white" href="contact.html">Contact</a></div></div>
+          <div><p class="text-[10px] font-bold uppercase tracking-[.22em] text-ember">Base</p><p class="mt-5 text-sm text-white/65">Nairobi, Kenya</p><a class="mt-3 block text-sm text-white/65 hover:text-white" href="mailto:crevia.app@gmail.com">crevia.app@gmail.com</a></div>
         </div>
-        <div class="mt-6 flex flex-col justify-between gap-3 text-[10px] font-medium uppercase tracking-[.16em] text-white/70 sm:flex-row"><span>© 2026 Crevia</span><div class="flex gap-5"><a class="focus-ring hover:text-white" href="privacy.html">Privacy</a><a class="focus-ring hover:text-white" href="terms.html">Terms</a></div></div>
+        <div class="mt-6 flex flex-col gap-3 text-xs text-white/40 md:flex-row md:justify-between"><span>© 2026 Crevia. All rights reserved.</span><div class="flex gap-5"><a href="privacy.html" class="hover:text-white">Privacy</a><a href="terms.html" class="hover:text-white">Terms</a></div></div>
       </div>
     </footer>
 

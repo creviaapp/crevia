@@ -62,7 +62,7 @@
       }
       .hero-about { position: relative; background-color: #050505; isolation: isolate; }
   .hero-about .hero-bg-img { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-  .hero-about .hero-bg-overlay { position: absolute; inset: 0; z-index: 0; background: rgba(5,5,5,.38); }
+  .hero-about .hero-bg-overlay { position: absolute; inset: 0; z-index: 0; background: rgba(5,5,5,.7); }
       .hero-about > .relative { z-index: 1; }
       .surface-paper { background: #f5f1eb; color: #17110d; }
       .surface-paper .text-white { color: #17110d !important; }
@@ -79,13 +79,22 @@
       <style>
         /* Mobile nav panel styling (shared) */
         #mobileNav { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
-        #mobileNav .mobile-nav-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.6); opacity:0; transition:opacity .28s ease; pointer-events:none; }
+        #mobileNav .mobile-nav-backdrop { position:absolute; inset:0; background:rgba(5,4,3,.74); opacity:0; transition:opacity .32s ease; pointer-events:none; }
         body.mobile-open #mobileNav { pointer-events: auto; }
-        #mobileNav .mobile-nav-panel { position:absolute; top:0; right:0; height:100%; width:86%; max-width:360px; background:#0b0b0b; transform:translateX(110%); transition:transform .36s cubic-bezier(.16,1,.3,1); box-shadow:-24px 0 60px rgba(0,0,0,0.6); padding:22px; border-radius:12px 0 0 12px; }
-        #mobileNav .mobile-nav-panel a{ display:block; padding:14px 8px; font-size:18px; color:#f5f3f0; text-decoration:none; border-radius:8px; }
-        #mobileNav .mobile-cta{ margin-top:18px; display:inline-block; padding:12px 16px; background:#f0782f; color:#111; border-radius:999px; font-weight:600; }
+        #mobileNav .mobile-nav-panel { position:absolute; top:0; right:0; height:100%; width:86%; max-width:380px; background:linear-gradient(165deg,#0c0b0a 0%,#161311 45%,#301a10 100%); transform:translateX(110%); transition:transform .42s cubic-bezier(.16,1,.3,1); box-shadow:-32px 0 70px rgba(0,0,0,.55); padding:26px 24px; display:flex; flex-direction:column; }
+        #mobileNav .mobile-nav-head { display:flex; align-items:center; justify-content:space-between; padding-bottom:20px; margin-bottom:8px; border-bottom:1px solid rgba(245,243,240,.12); }
+        #mobileNav .mobile-nav-brand { font-family:'Playfair Display', serif; font-size:22px; color:#f5f3f0; }
+        #mobileNav .mobile-nav-close { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; background:rgba(245,243,240,.06); border:1px solid rgba(245,243,240,.14); color:#f5f3f0; font-size:16px; line-height:1; cursor:pointer; transition:background .25s ease, transform .25s ease; }
+        #mobileNav .mobile-nav-close:active { transform:scale(.9); }
+        #mobileNav .mobile-nav-link { display:flex; align-items:center; justify-content:space-between; padding:15px 2px; font-size:17px; font-weight:500; color:rgba(245,243,240,.8); text-decoration:none; border-bottom:1px solid rgba(245,243,240,.08); opacity:0; transform:translateX(16px); transition:opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1), color .25s ease, padding-left .25s ease; transition-delay:calc(var(--i,0) * 55ms); }
+        #mobileNav .mobile-nav-link .mobile-nav-arrow { opacity:0; transform:translateX(-4px); transition:opacity .25s ease, transform .25s ease; color:#f0782f; font-size:15px; }
+        #mobileNav .mobile-nav-link:hover, #mobileNav .mobile-nav-link:active { color:#f5f3f0; padding-left:8px; }
+        #mobileNav .mobile-nav-link:hover .mobile-nav-arrow, #mobileNav .mobile-nav-link:active .mobile-nav-arrow { opacity:1; transform:translateX(0); }
+        #mobileNav .mobile-cta { margin-top:22px; display:flex; align-items:center; justify-content:center; gap:8px; padding:15px 20px; background:#f0782f; color:#17110d; border-radius:999px; font-weight:600; text-decoration:none; text-align:center; opacity:0; transform:translateY(12px); transition:opacity .5s cubic-bezier(.16,1,.3,1) .35s, transform .5s cubic-bezier(.16,1,.3,1) .35s, filter .25s ease; }
+        #mobileNav .mobile-cta:active { filter:brightness(.94); }
         body.mobile-open #mobileNav .mobile-nav-backdrop{ opacity:1; pointer-events:auto; }
         body.mobile-open #mobileNav .mobile-nav-panel{ transform:translateX(0); }
+        body.mobile-open #mobileNav .mobile-nav-link, body.mobile-open #mobileNav .mobile-cta{ opacity:1; transform:translateX(0) translateY(0); }
         @media (min-width: 768px){ #mobileNav{display:none!important} }
       :where(a, button) { transition: transform .42s cubic-bezier(.16,1,.3,1), color .32s ease, background-color .42s ease, box-shadow .42s ease, border-color .42s ease; }
       :where(a, button):hover { transform: translateY(-2px); }
@@ -125,12 +134,16 @@
       <div id="mobileNav" class="fixed inset-0 z-60">
         <div class="mobile-nav-backdrop" onclick="toggleMobileNav()"></div>
         <nav class="mobile-nav-panel">
-          <a href="../index.html" onclick="toggleMobileNav()">Home</a>
-          <a href="about.html" onclick="toggleMobileNav()">About Us</a>
-          <a href="services.html" onclick="toggleMobileNav()">Services</a>
-          <a href="dira.html" onclick="toggleMobileNav()">Dira</a>
-          <a href="contact.html" onclick="toggleMobileNav()">Contact</a>
-          <a href="contact.html" class="mobile-cta" onclick="toggleMobileNav()">Book a Strategy Session</a>
+          <div class="mobile-nav-head">
+            <span class="mobile-nav-brand">Crevia</span>
+            <button type="button" class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">✕</button>
+          </div>
+          <a href="../index.html" class="mobile-nav-link" style="--i:0" onclick="toggleMobileNav()"><span>Home</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
+          <a href="about.html" class="mobile-nav-link" style="--i:1" onclick="toggleMobileNav()"><span>About Us</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
+          <a href="services.html" class="mobile-nav-link" style="--i:2" onclick="toggleMobileNav()"><span>Services</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
+          <a href="dira.html" class="mobile-nav-link" style="--i:3" onclick="toggleMobileNav()"><span>Dira</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
+          <a href="contact.html" class="mobile-nav-link" style="--i:4" onclick="toggleMobileNav()"><span>Contact</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
+          <a href="contact.html" class="mobile-cta" style="--i:5" onclick="toggleMobileNav()">Book a Strategy Session</a>
         </nav>
       </div>
 
@@ -142,7 +155,7 @@
             <div class="max-w-4xl">
               <p class="text-xs uppercase tracking-[0.35em] text-ember/90">About us</p>
               <h1 class="mt-6 max-w-3xl font-display text-5xl leading-[0.95] text-white md:text-7xl">
-We make ambition<br />easier to believe in.
+We make <span class="text-ember">ambition</span><br />easier to believe in.
               </h1>
               <p class="mt-8 max-w-2xl text-lg leading-8 text-white/70">
                 We are a strategic brand and ecosystem firm for people building what matters next in Africa. We turn ambition into something people can see, feel, understand, and trust — through sharper stories, considered spaces, digital presence, and the clarity to move with purpose.
@@ -172,7 +185,7 @@ We make ambition<br />easier to believe in.
             <div>
               <p class="text-xs uppercase tracking-[0.35em] text-ember/90">Who we are</p>
               <h2 class="mt-5 max-w-xl font-display text-4xl leading-tight text-white md:text-5xl">
-                A partner for the moments that shape what comes next.
+                A partner for the moments that <span class="text-ember">shape what comes next</span>.
               </h2>
             </div>
             <p class="max-w-xl text-lg leading-8 text-white/70">
@@ -187,7 +200,7 @@ We make ambition<br />easier to believe in.
             <div class="mb-14 flex flex-col gap-5 border-b border-black/10 pb-8 md:flex-row md:items-end md:justify-between">
               <div>
                 <p class="text-xs uppercase tracking-[0.35em] text-ember/90">How we work</p>
-                <h2 class="mt-4 max-w-2xl font-display text-4xl leading-[1.05] tracking-[-0.03em] text-ink md:text-6xl">Clarity before spectacle.</h2>
+                <h2 class="mt-4 max-w-2xl font-display text-4xl leading-[1.05] tracking-[-0.03em] text-ink md:text-6xl">Clarity before <span class="text-ember">spectacle</span>.</h2>
               </div>
               <p class="max-w-sm text-sm leading-6 text-ink/60">A considered process for turning ambition into work people can understand, trust, and move with.</p>
             </div>
@@ -224,7 +237,7 @@ We make ambition<br />easier to believe in.
           <div class="grid gap-8 md:grid-cols-2">
             <div class="premium-card rounded-[2rem] border border-white/10 bg-white/[0.02] p-8 md:p-10">
               <p class="text-xs uppercase tracking-[0.35em] text-ember/90">Mission</p>
-              <h3 class="mt-5 font-display text-4xl leading-tight text-white">To make better building more possible.</h3>
+              <h3 class="mt-5 font-display text-4xl leading-tight text-white">To make better building more <span class="text-ember">possible</span>.</h3>
               <p class="mt-6 text-lg leading-8 text-white/70">
                 We help founders, institutions, and leaders turn ambition into brands, spaces, digital experiences, and convenings that move business, capital, participation, and trust forward.
               </p>
@@ -232,7 +245,7 @@ We make ambition<br />easier to believe in.
 
             <div class="premium-card rounded-[2rem] border border-white/10 bg-white/[0.02] p-8 md:p-10">
               <p class="text-xs uppercase tracking-[0.35em] text-ember/90">Vision</p>
-              <h3 class="mt-5 font-display text-4xl leading-tight text-white">To help shape the way Africa builds.</h3>
+              <h3 class="mt-5 font-display text-4xl leading-tight text-white">To help shape the way <span class="text-ember">Africa builds</span>.</h3>
               <p class="mt-6 text-lg leading-8 text-white/70">
                 We see an Africa where the people building what matters have the clarity, confidence, and rooms they need to create durable value on their own terms.
               </p>
@@ -245,7 +258,7 @@ We make ambition<br />easier to believe in.
           <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div class="premium-card rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 md:p-8">
               <p class="text-xs uppercase tracking-[0.35em] text-ember/90">Our approach</p>
-              <h3 class="mt-5 font-display text-4xl leading-tight text-white">Clarity before spectacle.</h3>
+              <h3 class="mt-5 font-display text-4xl leading-tight text-white">Clarity before <span class="text-ember">spectacle</span>.</h3>
             </div>
             <div class="space-y-6 text-lg leading-8 text-white/70">
               <p>
@@ -265,7 +278,7 @@ That is why every project we take on is designed with intent — from the first 
                 <div class="max-w-2xl">
                   <p class="text-xs uppercase tracking-[0.35em] text-ember/90">Mission</p>
                   <h2 class="mt-5 font-display text-4xl leading-tight text-white md:text-5xl">
-                    To help the people building Africa move with more clarity, confidence, and consequence.
+                    To help the people building Africa move with more clarity, confidence, and <span class="text-ember">consequence</span>.
                   </h2>
                 </div>
                 <a
@@ -283,7 +296,7 @@ That is why every project we take on is designed with intent — from the first 
       <footer class="border-t border-white/10" style="background: linear-gradient(135deg, #050505 0%, #0b0b0b 52%, #3d1c0f 78%, #F0782F 100%); color: #f5efe7;">
         <div class="mx-auto max-w-7xl px-6 py-14 md:px-8">
           <div class="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-[1.4fr_1fr_1fr]">
-            <div><p class="font-display text-4xl text-white">Crevia</p><p class="mt-4 max-w-sm leading-7 text-white/55">We make what matters clearer, more credible, and easier to move forward.</p></div>
+            <div><p class="font-display text-4xl text-white">Crevia</p><p class="mt-4 max-w-sm leading-7 text-white/55">We are a strategic brand architecture firm that builds premium digital presences and high-stakes physical communities across Africa.</p></div>
             <div><p class="text-[10px] font-bold uppercase tracking-[.22em] text-ember">Navigate</p><div class="mt-5 space-y-3 text-sm text-white/65"><a class="block hover:text-white" href="../index.html">Home</a><a class="block hover:text-white" href="about.html">About Us</a><a class="block hover:text-white" href="services.html">Services</a><a class="block hover:text-white" href="dira.html">Dira</a><a class="block hover:text-white" href="contact.html">Contact</a></div></div>
             <div><p class="text-[10px] font-bold uppercase tracking-[.22em] text-ember">Base</p><p class="mt-5 text-sm text-white/65">Nairobi, Kenya</p><a class="mt-3 block text-sm text-white/65 hover:text-white" href="mailto:crevia.app@gmail.com">crevia.app@gmail.com</a></div>
           </div>
