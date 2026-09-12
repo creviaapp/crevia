@@ -658,17 +658,10 @@
                 <span aria-hidden="true">←</span>
               </button>
 
-              <div className="flex items-center gap-2">
-                {Array.from({ length: totalPages }).map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => { setPlayingKey(null); setPageIndex(index); }}
-                    className={`h-2.5 rounded-full transition-all ${index === pageIndex ? 'w-8 bg-ember' : 'w-2.5 bg-white/30 hover:bg-white/50'}`}
-                    aria-label={`Show portfolio page ${index + 1}`}
-                    aria-pressed={index === pageIndex}
-                  />
-                ))}
+              <div className="flex items-center gap-3 text-sm font-medium tabular-nums tracking-[0.08em]">
+                <span className="text-white">{String(pageIndex + 1).padStart(2, '0')}</span>
+                <span className="h-px w-4 bg-white/20" aria-hidden="true" />
+                <span className="text-white/40">{String(totalPages).padStart(2, '0')}</span>
               </div>
 
               <button
@@ -699,7 +692,15 @@
               {currentItems.map((item, index) => (
                 <article key={`${pageIndex}-${index}`} className="overflow-hidden rounded-[2rem] bg-white shadow-[0_22px_45px_rgba(0,0,0,.12)]">
                   <div className="h-80 overflow-hidden" style={{ background: item.bg }}>
-                    <img src={item.img} alt={item.alt} className={`h-full w-full object-cover ${item.type === 'site' ? 'object-top' : ''}`} />
+                    <img
+                      src={item.img}
+                      alt={item.alt}
+                      className={
+                        item.fit === 'contain'
+                          ? 'h-full w-full object-contain p-12'
+                          : `h-full w-full object-cover ${item.type === 'site' ? 'object-top' : ''}`
+                      }
+                    />
                   </div>
                   <div className="p-6">
                     <p className="text-[10px] uppercase tracking-[.22em] text-coal/50">{item.eyebrow}</p>
@@ -720,17 +721,10 @@
                 <span aria-hidden="true">←</span>
               </button>
 
-              <div className="flex items-center gap-2">
-                {Array.from({ length: totalPages }).map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => setPageIndex(index)}
-                    className={`h-2.5 rounded-full transition-all ${index === pageIndex ? 'w-8 bg-ember' : 'w-2.5 bg-coal/20 hover:bg-coal/35'}`}
-                    aria-label={`Show digital spaces page ${index + 1}`}
-                    aria-pressed={index === pageIndex}
-                  />
-                ))}
+              <div className="flex items-center gap-3 text-sm font-medium tabular-nums tracking-[0.08em]">
+                <span className="text-coal">{String(pageIndex + 1).padStart(2, '0')}</span>
+                <span className="h-px w-4 bg-coal/20" aria-hidden="true" />
+                <span className="text-coal/40">{String(totalPages).padStart(2, '0')}</span>
               </div>
 
               <button
@@ -884,6 +878,7 @@
           },
           {
             type: 'logo',
+            fit: 'contain',
             bg: '#060606',
             img: 'crevia/images/digital%20spaces/crevia%20logo.PNG',
             alt: 'Crevia logo',
