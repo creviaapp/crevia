@@ -914,7 +914,7 @@
                   WebkitBackdropFilter: headerFilter,
                 }}
               >
-                <div className="grid items-center gap-4 md:grid-cols-[1fr_auto_1fr]">
+                <div className="relative grid items-center gap-4 md:grid-cols-[1fr_auto_1fr]">
                   <a href="#" className="justify-self-start font-display text-2xl leading-none text-white transition duration-300 hover:tracking-[0.04em]">
                     Crevia
                   </a>
@@ -945,10 +945,10 @@
                     ))}
                   </nav>
 
-                  <div className="justify-self-end">
+                  <div className="hidden md:block justify-self-end">
                     <MagneticButton
                       href="crevia/contact.html"
-                      className="hidden md:inline-flex items-center justify-center rounded-full bg-ember px-5 py-2.5 text-sm font-semibold text-coal shadow-[0_0_0_rgba(0,0,0,0)]"
+                      className="inline-flex items-center justify-center rounded-full bg-ember px-5 py-2.5 text-sm font-semibold text-coal shadow-[0_0_0_rgba(0,0,0,0)]"
                     >
                       Book a Strategy Session
                     </MagneticButton>
