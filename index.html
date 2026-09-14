@@ -551,6 +551,43 @@
         );
       }
 
+      function CreviaMarkSVG({ withWordmark = false }) {
+        const vbH = withWordmark ? 172 : 120;
+        return (
+          <svg
+            viewBox={`0 0 320 ${vbH}`}
+            style={{ display: 'block', width: '100%', height: '100%', overflow: 'visible' }}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g transform="translate(110,8) scale(0.5)">
+              <circle cx="170" cy="100" r="14" fill="#ffffff" />
+              <circle cx="149.5" cy="149.5" r="7" fill="#ffffff" />
+              <circle cx="100" cy="170" r="14" fill="#ffffff" />
+              <circle cx="50.5" cy="149.5" r="7" fill="#ffffff" />
+              <circle cx="30" cy="100" r="14" fill="#ffffff" />
+              <circle cx="50.5" cy="50.5" r="7" fill="#ffffff" />
+              <circle cx="100" cy="30" r="14" fill="#ffffff" />
+              <circle cx="149.5" cy="50.5" r="7" fill="#ffffff" />
+              <rect x="88" y="88" width="24" height="24" rx="3" transform="rotate(45 100 100)" fill="#f0782f" />
+            </g>
+            {withWordmark && (
+              <text
+                x="160"
+                y="152"
+                textAnchor="middle"
+                fontFamily="'Poppins', sans-serif"
+                fontWeight="700"
+                fontSize="32"
+                letterSpacing="7"
+                fill="#ffffff"
+              >
+                CREVIA
+              </text>
+            )}
+          </svg>
+        );
+      }
+
       function CreviaBottleWithLogo() {
         return (
           <div style={{ position: 'relative', width: '100%', height: '100%' }}>
@@ -559,32 +596,32 @@
               alt="Crevia branded bottle"
               style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
             />
-            <img
-              src="crevia/images/digital%20spaces/crevia%20logo.PNG"
-              alt="Crevia logo printed on the bottle"
+            <div
               style={{
                 position: 'absolute',
                 left: '64%',
                 top: '47%',
-                width: '30%',
+                width: '34%',
                 transform: 'translate(-50%, -50%)',
-                mixBlendMode: 'screen',
+                filter: 'drop-shadow(0 1px 2px rgba(0,0,0,.55))',
                 pointerEvents: 'none',
               }}
-            />
-            <img
-              src="crevia/images/digital%20spaces/crevia%20logo.PNG"
-              alt="Crevia logo printed on the mug"
+            >
+              <CreviaMarkSVG withWordmark />
+            </div>
+            <div
               style={{
                 position: 'absolute',
-                left: '89%',
-                top: '64%',
-                width: '7%',
+                left: '92%',
+                top: '63%',
+                width: '11%',
                 transform: 'translate(-50%, -50%)',
-                mixBlendMode: 'screen',
+                filter: 'drop-shadow(0 1px 1px rgba(0,0,0,.5))',
                 pointerEvents: 'none',
               }}
-            />
+            >
+              <CreviaMarkSVG />
+            </div>
           </div>
         );
       }
