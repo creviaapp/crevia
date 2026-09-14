@@ -127,6 +127,26 @@
   animation: none;
   }
 
+      .hero-line-wrap { display: block; overflow: hidden; padding-bottom: 0.08em; }
+      .hero-line {
+        display: block;
+        transform: translateY(112%);
+        opacity: 0;
+        filter: blur(10px);
+        animation: hero-line 1.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation-delay: var(--delay, 0s);
+      }
+      @keyframes hero-line {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hero-line { animation-duration: 0.01ms !important; }
+      }
+
       .africa-pattern {
         position: absolute;
         inset: 0;
@@ -1159,9 +1179,10 @@
                 </div>
                 <div className="relative flex min-h-[92vh] w-full items-center px-6 py-20 md:px-10 lg:px-16 xl:px-20">
                   <motion.div variants={STAGGER_CONTAINER} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }} className="max-w-5xl">
-                    <motion.h1 variants={STAGGER_ITEM} className="mt-6 max-w-4xl font-display text-5xl leading-[0.95] text-ivory sm:text-6xl lg:text-7xl">
-                      Own your story<span className="align-super text-[0.42em] leading-none">™</span>. <span className="text-ember">Command your market.</span>
-                    </motion.h1>
+                    <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[0.95] text-ivory sm:text-6xl lg:text-7xl">
+                      <span className="hero-line-wrap"><span className="hero-line" style={{ '--delay': '0.3s' }}>Own your story<span className="align-super text-[0.42em] leading-none">™</span>.</span></span>
+                      <span className="hero-line-wrap"><span className="hero-line text-ember" style={{ '--delay': '0.62s' }}>Command your market.</span></span>
+                    </h1>
                     <motion.p variants={STAGGER_ITEM} className="mt-8 max-w-2xl text-base leading-8 text-white/[0.74] sm:text-lg">
                       We are a strategic brand architecture firm that builds premium digital presences and high-stakes physical communities across Africa.
                     </motion.p>

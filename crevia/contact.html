@@ -36,6 +36,12 @@
       :where(button):active, :where(a):active { transform: translateY(0) scale(.985); }
       :where(article, .premium-card):hover { transform: translateY(-5px); box-shadow: 0 22px 54px rgba(0,0,0,.18); }
       @media (prefers-reduced-motion: reduce) { .motion-reveal, :where(a, button, article, .premium-card) { opacity: 1; transition: none !important; transform: none !important; filter: none; } }
+      .hero-line-wrap { display: block; overflow: hidden; padding-bottom: 0.08em; }
+      .hero-line { display: block; transform: translateY(112%); opacity: 0; filter: blur(10px); animation: hero-line 1.35s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--delay, 0s); }
+      .hero-detail { opacity: 0; transform: translateY(16px); filter: blur(7px); animation: hero-detail .95s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--delay, 0s); }
+      @keyframes hero-line { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+      @keyframes hero-detail { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+      @media (prefers-reduced-motion: reduce) { .hero-line, .hero-detail { animation-duration: 0.01ms !important; } }
     </style>
     <style>
       /* Mobile nav panel styling */
@@ -110,16 +116,17 @@
 
       <div class="relative mx-auto max-w-6xl px-6 pb-20 pt-20 md:px-10 md:pt-24 lg:pt-28">
         <div class="text-center">
-          <p class="inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.45em] text-accent">
+          <p class="hero-detail inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.45em] text-accent" style="--delay: .25s">
             <span class="inline-block h-2 w-2 rounded-full bg-accent"></span>
             Contact
           </p>
 
           <h1 class="mt-8 font-display text-5xl leading-[0.9] text-[#f0ece7] md:text-7xl lg:text-[7rem]">
-            Let's have a <span class="text-accent">conversation.</span>
+            <span class="hero-line-wrap"><span class="hero-line" style="--delay: .3s">Let's have a</span></span>
+            <span class="hero-line-wrap"><span class="hero-line text-accent" style="--delay: .55s">conversation.</span></span>
           </h1>
 
-          <p class="mx-auto mt-8 max-w-3xl text-lg leading-8 text-[#d8d1c8]">
+          <p class="hero-detail mx-auto mt-8 max-w-3xl text-lg leading-8 text-[#d8d1c8]" style="--delay: .85s">
             Tell us what you're working on. We'll tell you if and how we can help — honestly, and without obligation.
           </p>
         </div>

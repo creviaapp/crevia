@@ -76,6 +76,12 @@
       .motion-reveal { opacity: 0; transform: translate3d(0, 24px, 0); transition: opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); transition-delay: var(--motion-delay, 0ms); }
       .motion-reveal.motion-visible { opacity: 1; transform: translate3d(0, 0, 0); }
       @media (prefers-reduced-motion: reduce) { .motion-reveal { opacity: 1; transform: none; filter: none; transition: none; } }
+      .hero-line-wrap { display: block; overflow: hidden; padding-bottom: 0.08em; }
+      .hero-line { display: block; transform: translateY(112%); opacity: 0; filter: blur(10px); animation: hero-line 1.35s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--delay, 0s); }
+      .hero-detail { opacity: 0; transform: translateY(16px); filter: blur(7px); animation: hero-detail .95s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--delay, 0s); }
+      @keyframes hero-line { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+      @keyframes hero-detail { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+      @media (prefers-reduced-motion: reduce) { .hero-line, .hero-detail { animation-duration: 0.01ms !important; } }
     </style>
       <style>
         /* Mobile nav panel styling (shared) */
@@ -154,11 +160,12 @@
   <div class="hero-bg-overlay" aria-hidden="true"></div>
   <div class="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-8 lg:py-36">
             <div class="max-w-4xl">
-              <p class="text-xs uppercase tracking-[0.35em] text-ember/90">About us</p>
+              <p class="hero-detail text-xs uppercase tracking-[0.35em] text-ember/90" style="--delay: .25s">About us</p>
               <h1 class="mt-6 max-w-3xl font-display text-5xl leading-[0.95] text-white md:text-7xl">
-We make <span class="text-ember">ambition</span><br />easier to believe in.
+                <span class="hero-line-wrap"><span class="hero-line" style="--delay: .3s">We make <span class="text-ember">ambition</span></span></span>
+                <span class="hero-line-wrap"><span class="hero-line" style="--delay: .55s">easier to believe in.</span></span>
               </h1>
-              <p class="mt-8 max-w-2xl text-lg leading-8 text-white/70">
+              <p class="hero-detail mt-8 max-w-2xl text-lg leading-8 text-white/70" style="--delay: .85s">
                 We are a strategic brand and ecosystem firm for people building what matters next in Africa. We turn ambition into something people can see, feel, understand, and trust — through sharper stories, considered spaces, digital presence, and the clarity to move with purpose.
               </p>
             </div>
