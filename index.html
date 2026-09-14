@@ -677,6 +677,18 @@
         const eventsPerPage = 2;
         const totalPages = Math.max(1, Math.ceil(events.length / eventsPerPage));
         const currentEvents = events.slice(pageIndex * eventsPerPage, pageIndex * eventsPerPage + eventsPerPage);
+        const gridRef = useRef(null);
+        const isFirstRender = useRef(true);
+
+        useEffect(() => {
+          if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+          }
+          if (typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches) {
+            gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, [pageIndex]);
 
         const goPrevious = () => {
           setPlayingKey(null);
@@ -698,7 +710,7 @@
 
         return (
           <div className="space-y-8">
-            <div className="grid gap-6 md:grid-cols-2">
+            <div ref={gridRef} className="grid gap-6 md:grid-cols-2" style={{ scrollMarginTop: '96px', overflowAnchor: 'none' }}>
               {currentEvents.map((event, index) => {
                 const cardKey = `${pageIndex}-${index}`;
                 const isPlaying = playingKey === cardKey;
@@ -810,13 +822,25 @@
         const itemsPerPage = 2;
         const totalPages = Math.max(1, Math.ceil(items.length / itemsPerPage));
         const currentItems = items.slice(pageIndex * itemsPerPage, pageIndex * itemsPerPage + itemsPerPage);
+        const gridRef = useRef(null);
+        const isFirstRender = useRef(true);
+
+        useEffect(() => {
+          if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+          }
+          if (typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches) {
+            gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, [pageIndex]);
 
         const goPrevious = () => setPageIndex((current) => (current === 0 ? totalPages - 1 : current - 1));
         const goNext = () => setPageIndex((current) => (current + 1) % totalPages);
 
         return (
           <div className="space-y-8">
-            <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2">
+            <div ref={gridRef} className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2" style={{ scrollMarginTop: '96px', overflowAnchor: 'none' }}>
               {currentItems.map((item, index) => (
                 <article key={`${pageIndex}-${index}`} className="overflow-hidden rounded-[2rem] bg-white shadow-[0_22px_45px_rgba(0,0,0,.12)]">
                   <div className="h-80 overflow-hidden" style={{ background: item.bg }}>
