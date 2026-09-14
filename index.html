@@ -553,17 +553,24 @@
 
       function CreviaBottleWithLogo() {
         return (
-          <div className="relative h-full w-full">
+          <div style={{ position: 'relative', width: '100%', height: '100%' }}>
             <img
               src="crevia/images/digital%20spaces/crevia%20packaging.jpg"
               alt="Crevia branded bottle"
-              className="h-full w-full object-cover"
+              style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
             />
             <img
               src="crevia/images/digital%20spaces/crevia%20logo.PNG"
               alt="Crevia logo printed on the bottle"
-              className="pointer-events-none absolute object-contain"
-              style={{ left: '64%', top: '47%', width: '30%', transform: 'translate(-50%, -50%)', mixBlendMode: 'screen' }}
+              style={{
+                position: 'absolute',
+                left: '64%',
+                top: '47%',
+                width: '30%',
+                transform: 'translate(-50%, -50%)',
+                mixBlendMode: 'screen',
+                pointerEvents: 'none',
+              }}
             />
           </div>
         );
@@ -583,7 +590,7 @@
           ],
           colors: ['#000000', '#FFFFFF', '#F0782F'],
           mockups: [
-            { key: 'bottle', label: 'Packaging', aspectClass: 'aspect-square', render: () => <CreviaBottleWithLogo /> },
+            { key: 'bottle', label: 'Packaging', aspectStyle: { aspectRatio: '1 / 1' }, render: () => <CreviaBottleWithLogo /> },
           ],
         },
         mzizi: {
@@ -675,7 +682,7 @@
                   <div className={`mt-5 grid gap-5 ${brand.mockups.length > 1 ? 'sm:grid-cols-2' : 'mx-auto max-w-sm'}`}>
                     {brand.mockups.map((m) => (
                       <div key={m.key} className="overflow-hidden rounded-2xl border border-black/[0.06] bg-white">
-                        <div className={m.aspectClass || 'h-72'}>{m.render()}</div>
+                        <div className={m.aspectStyle ? '' : 'h-72'} style={m.aspectStyle}>{m.render()}</div>
                         <div className="px-4 py-3 text-center">
                           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#17110d]/40">{m.label}</p>
                         </div>
