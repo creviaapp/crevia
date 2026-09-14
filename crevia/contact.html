@@ -36,12 +36,11 @@
       :where(button):active, :where(a):active { transform: translateY(0) scale(.985); }
       :where(article, .premium-card):hover { transform: translateY(-5px); box-shadow: 0 22px 54px rgba(0,0,0,.18); }
       @media (prefers-reduced-motion: reduce) { .motion-reveal, :where(a, button, article, .premium-card) { opacity: 1; transition: none !important; transform: none !important; filter: none; } }
-      .hero-line-wrap { display: block; overflow: hidden; padding-bottom: 0.08em; }
-      .hero-line { display: block; transform: translateY(112%); opacity: 0; filter: blur(10px); animation: hero-line 1.35s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--delay, 0s); }
+      .hero-focus { display: block; transform: scale(1.07); opacity: 0; filter: blur(20px); animation: hero-focus-pull 1.4s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--delay, 0s); }
       .hero-detail { opacity: 0; transform: translateY(16px); filter: blur(7px); animation: hero-detail .95s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--delay, 0s); }
-      @keyframes hero-line { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+      @keyframes hero-focus-pull { to { opacity: 1; transform: scale(1); filter: blur(0); } }
       @keyframes hero-detail { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
-      @media (prefers-reduced-motion: reduce) { .hero-line, .hero-detail { animation-duration: 0.01ms !important; } }
+      @media (prefers-reduced-motion: reduce) { .hero-focus, .hero-detail { animation-duration: 0.01ms !important; } }
     </style>
     <style>
       /* Mobile nav panel styling */
@@ -122,8 +121,8 @@
           </p>
 
           <h1 class="mt-8 font-display text-5xl leading-[0.9] text-[#f0ece7] md:text-7xl lg:text-[7rem]">
-            <span class="hero-line-wrap"><span class="hero-line" style="--delay: .3s">Let's have a</span></span>
-            <span class="hero-line-wrap"><span class="hero-line text-accent" style="--delay: .55s">conversation.</span></span>
+            <span class="hero-focus" style="--delay: .25s">Let's have a</span>
+            <span class="hero-focus text-accent" style="--delay: .55s">conversation.</span>
           </h1>
 
           <p class="hero-detail mx-auto mt-8 max-w-3xl text-lg leading-8 text-[#d8d1c8]" style="--delay: .85s">

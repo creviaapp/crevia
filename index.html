@@ -127,24 +127,26 @@
   animation: none;
   }
 
-      .hero-line-wrap { display: block; overflow: hidden; padding-bottom: 0.08em; }
-      .hero-line {
+      .hero-focus-line {
         display: block;
-        transform: translateY(112%);
+        transform-origin: left center;
+        transform: scale(1.05);
         opacity: 0;
-        filter: blur(10px);
-        animation: hero-line 1.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        filter: blur(18px);
+        letter-spacing: 0.005em;
+        animation: hero-focus-in 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         animation-delay: var(--delay, 0s);
       }
-      @keyframes hero-line {
+      @keyframes hero-focus-in {
         to {
           opacity: 1;
-          transform: translateY(0);
+          transform: scale(1);
           filter: blur(0);
+          letter-spacing: normal;
         }
       }
       @media (prefers-reduced-motion: reduce) {
-        .hero-line { animation-duration: 0.01ms !important; }
+        .hero-focus-line { animation-duration: 0.01ms !important; }
       }
 
       .africa-pattern {
@@ -1180,8 +1182,8 @@
                 <div className="relative flex min-h-[92vh] w-full items-center px-6 py-20 md:px-10 lg:px-16 xl:px-20">
                   <motion.div variants={STAGGER_CONTAINER} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }} className="max-w-5xl">
                     <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[0.95] text-ivory sm:text-6xl lg:text-7xl">
-                      <span className="hero-line-wrap"><span className="hero-line" style={{ '--delay': '0.3s' }}>Own your story<span className="align-super text-[0.42em] leading-none">™</span>.</span></span>
-                      <span className="hero-line-wrap"><span className="hero-line text-ember" style={{ '--delay': '0.62s' }}>Command your market.</span></span>
+                      <span className="hero-focus-line" style={{ '--delay': '0.2s' }}>Own your story<span className="align-super text-[0.42em] leading-none">™</span>.</span>
+                      <span className="hero-focus-line text-ember" style={{ '--delay': '0.5s' }}>Command your market.</span>
                     </h1>
                     <motion.p variants={STAGGER_ITEM} className="mt-8 max-w-2xl text-base leading-8 text-white/[0.74] sm:text-lg">
                       We are a strategic brand architecture firm that builds premium digital presences and high-stakes physical communities across Africa.
