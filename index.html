@@ -13,7 +13,7 @@
     <link rel="preload" as="image" href="crevia/images/desert_dune_landscape_main.png" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Vollkorn:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Shrikhand&display=swap"
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -551,6 +551,180 @@
         );
       }
 
+      function BrandMarkGlyph({ className, stroke = '#f5efe7', fill = '#f0782f' }) {
+        return (
+          <svg viewBox="0 0 200 200" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="170" cy="100" r="14" fill={stroke} />
+            <circle cx="149.5" cy="149.5" r="7" fill={stroke} />
+            <circle cx="100" cy="170" r="14" fill={stroke} />
+            <circle cx="50.5" cy="149.5" r="7" fill={stroke} />
+            <circle cx="30" cy="100" r="14" fill={stroke} />
+            <circle cx="50.5" cy="50.5" r="7" fill={stroke} />
+            <circle cx="100" cy="30" r="14" fill={stroke} />
+            <circle cx="149.5" cy="50.5" r="7" fill={stroke} />
+            <rect x="88" y="88" width="24" height="24" rx="3" transform="rotate(45 100 100)" fill={fill} />
+          </svg>
+        );
+      }
+
+      function CreviaBottleMockup() {
+        return (
+          <div className="flex h-full items-center justify-center bg-[#efe9df] p-10">
+            <svg width="120" height="240" viewBox="0 0 120 240" xmlns="http://www.w3.org/2000/svg">
+              <rect x="42" y="0" width="36" height="22" rx="6" fill="#111111" />
+              <rect x="50" y="18" width="20" height="24" fill="#111111" />
+              <path d="M50,40 L70,40 L92,62 Q100,70 100,85 L100,215 Q100,230 85,230 L35,230 Q20,230 20,215 L20,85 Q20,70 28,62 Z" fill="#111111" />
+              <rect x="20" y="128" width="80" height="44" fill="#0a0a0a" />
+              <g transform="translate(41,131) scale(0.19)">
+                <circle cx="170" cy="100" r="14" fill="#f5efe7" />
+                <circle cx="149.5" cy="149.5" r="7" fill="#f5efe7" />
+                <circle cx="100" cy="170" r="14" fill="#f5efe7" />
+                <circle cx="50.5" cy="149.5" r="7" fill="#f5efe7" />
+                <circle cx="30" cy="100" r="14" fill="#f5efe7" />
+                <circle cx="50.5" cy="50.5" r="7" fill="#f5efe7" />
+                <circle cx="100" cy="30" r="14" fill="#f5efe7" />
+                <circle cx="149.5" cy="50.5" r="7" fill="#f5efe7" />
+                <rect x="88" y="88" width="24" height="24" rx="3" transform="rotate(45 100 100)" fill="#f0782f" />
+              </g>
+            </svg>
+          </div>
+        );
+      }
+
+      function CreviaTshirtMockup() {
+        return (
+          <div className="relative flex h-full items-center justify-center bg-[#efe9df] p-10">
+            <svg width="150" height="165" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <path d="M70,15 Q100,35 130,15 L175,45 L145,65 L140,205 L60,205 L55,65 L25,45 Z" fill="#111111" />
+            </svg>
+            <BrandMarkGlyph className="absolute h-9 w-9" stroke="#f5efe7" fill="#f0782f" />
+          </div>
+        );
+      }
+
+      const brandGuidelines = {
+        crevia: {
+          name: 'Crevia',
+          eyebrow: 'Brand Identity',
+          description:
+            "Crevia's identity is built to do one job: make authority feel earned, not asserted. Every weight, mark, and color choice exists to hold a brand's story with the same clarity we ask our clients to bring to theirs.",
+          logo: 'crevia/images/digital%20spaces/crevia%20logo.PNG',
+          logoBg: '#060606',
+          logoFit: 'contain',
+          fonts: [
+            { name: 'Vollkorn', family: "'Vollkorn', serif", role: 'Display / Headlines' },
+            { name: 'Poppins', family: "'Poppins', sans-serif", role: 'Body / UI' },
+          ],
+          colors: ['#000000', '#FFFFFF', '#F0782F'],
+          mockups: [
+            { key: 'bottle', label: 'Packaging', render: () => <CreviaBottleMockup /> },
+            { key: 'tshirt', label: 'Apparel', render: () => <CreviaTshirtMockup /> },
+          ],
+        },
+        mzizi: {
+          name: 'Mzizi Organics',
+          eyebrow: 'Brand Identity',
+          description:
+            "Mzizi's identity carries its philosophy in its shape: nourish the root, and everything above it flourishes. The mark, type, and color are all built to feel earthen, warm, and unmistakably premium on the shelf.",
+          logo: 'crevia/images/digital%20spaces/mzizi%20organics%20logo.PNG',
+          logoBg: '#3d0613',
+          logoFit: 'cover',
+          fonts: [
+            { name: 'Shrikhand', family: "'Shrikhand', cursive", role: 'Display / Wordmark' },
+            { name: 'Poppins', family: "'Poppins', sans-serif", role: 'Body / UI' },
+          ],
+          colors: ['#FFFFFF', '#5D0A1C'],
+          mockups: [
+            { key: 'bottle', label: 'Packaging', render: () => <img src="crevia/images/digital%20spaces/mzizi%20organics%20bottle.png" alt="Mzizi Organics bottle" className="h-full w-full object-cover" /> },
+          ],
+        },
+      };
+
+      function BrandGuidelinesModal({ brand, onClose }) {
+        if (!brand) return null;
+        return (
+          <div
+            className="fixed inset-0 z-[90] flex items-center justify-center bg-black/75 px-4 py-8 backdrop-blur-md"
+            onClick={onClose}
+          >
+            <div
+              className="relative flex max-h-[88vh] w-full max-w-4xl flex-col overflow-hidden rounded-[2rem] bg-[#faf7f2] shadow-[0_60px_140px_rgba(0,0,0,0.55)]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between border-b border-black/[0.06] bg-[#faf7f2]/95 px-8 py-5 backdrop-blur sm:px-12">
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-ember">{brand.eyebrow}</p>
+                  <h2 className="mt-1 font-display text-2xl text-[#17110d] sm:text-3xl">{brand.name}</h2>
+                </div>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-black/10 text-[#17110d] transition hover:border-black/20 hover:bg-black/[0.03]"
+                  aria-label="Close"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="overflow-y-auto px-8 py-10 sm:px-12 sm:py-12">
+                <p className="max-w-2xl text-lg leading-8 text-[#17110d]/70">{brand.description}</p>
+
+                <div className="mt-10 overflow-hidden rounded-[1.5rem]" style={{ background: brand.logoBg }}>
+                  <div className="flex items-center justify-center py-16">
+                    <img
+                      src={brand.logo}
+                      alt={`${brand.name} logo`}
+                      className={brand.logoFit === 'contain' ? 'h-28 w-auto object-contain' : 'h-36 w-full object-cover'}
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-12">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#17110d]/40">Typography</p>
+                  <div className="mt-5 grid gap-5 sm:grid-cols-2">
+                    {brand.fonts.map((f) => (
+                      <div key={f.name} className="rounded-2xl border border-black/[0.06] bg-white p-7">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#17110d]/40">{f.role}</p>
+                        <p className="mt-4 text-5xl text-[#17110d]" style={{ fontFamily: f.family }}>Aa</p>
+                        <p className="mt-3 text-sm font-medium text-[#17110d]/70" style={{ fontFamily: f.family }}>{f.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-12">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#17110d]/40">Color Palette</p>
+                  <div className="mt-5 grid gap-4" style={{ gridTemplateColumns: `repeat(${brand.colors.length}, minmax(0, 1fr))` }}>
+                    {brand.colors.map((c) => (
+                      <div key={c} className="overflow-hidden rounded-2xl border border-black/[0.06]">
+                        <div className="h-24" style={{ background: c }} />
+                        <div className="bg-white px-4 py-3 text-center">
+                          <p className="text-xs font-semibold uppercase tracking-[0.1em] text-[#17110d]">{c}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-12">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#17110d]/40">In Application</p>
+                  <div className={`mt-5 grid gap-5 ${brand.mockups.length > 1 ? 'sm:grid-cols-2' : 'mx-auto max-w-sm'}`}>
+                    {brand.mockups.map((m) => (
+                      <div key={m.key} className="overflow-hidden rounded-2xl border border-black/[0.06] bg-white">
+                        <div className="h-72">{m.render()}</div>
+                        <div className="px-4 py-3 text-center">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#17110d]/40">{m.label}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
       function PortfolioMarquee({ events, onSelect }) {
         const [pageIndex, setPageIndex] = useState(0);
         const [playingKey, setPlayingKey] = useState(null);
@@ -685,7 +859,7 @@
         );
       }
 
-      function DigitalSpacesGrid({ items }) {
+      function DigitalSpacesGrid({ items, onOpenGuidelines }) {
         const [pageIndex, setPageIndex] = useState(0);
         const itemsPerPage = 2;
         const totalPages = Math.max(1, Math.ceil(items.length / itemsPerPage));
@@ -714,6 +888,25 @@
                     <p className="text-[10px] uppercase tracking-[.22em] text-coal/50">{item.eyebrow}</p>
                     <h3 className="mt-2 text-2xl font-medium">{item.title}</h3>
                     <p className="mt-3 text-sm leading-6 text-coal/70">{item.body}</p>
+                    {item.link && (
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-5 inline-flex items-center gap-2 rounded-full border border-coal/15 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-coal transition hover:border-ember hover:text-ember"
+                      >
+                        Check it out <span aria-hidden="true">↗</span>
+                      </a>
+                    )}
+                    {item.guidelines && (
+                      <button
+                        type="button"
+                        onClick={() => onOpenGuidelines(item.guidelines)}
+                        className="mt-5 inline-flex items-center gap-2 rounded-full border border-coal/15 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-coal transition hover:border-ember hover:text-ember"
+                      >
+                        Check it out <span aria-hidden="true">↗</span>
+                      </button>
+                    )}
                   </div>
                 </article>
               ))}
@@ -769,6 +962,7 @@
         ];
         const [hoveredNav, setHoveredNav] = useState(null);
         const [selectedEvent, setSelectedEvent] = useState(null);
+        const [selectedGuideline, setSelectedGuideline] = useState(null);
         const [mobileOpen, setMobileOpen] = useState(false);
         const { scrollY } = useScroll();
 
@@ -874,6 +1068,7 @@
             eyebrow: 'Digital Presence — Kaizen Afrika',
             title: 'Operations, without the chaos.',
             body: 'Kaizen Afrika is an app for businesses to run their operations — the infrastructure behind the intelligence and the execution.',
+            link: 'https://kaizenafrika.vercel.app',
           },
           {
             type: 'logo',
@@ -883,6 +1078,7 @@
             eyebrow: 'Brand Identity — Mzizi Organics',
             title: 'A mark that grows from within.',
             body: "The Mzizi mark takes its form from the brand's belief: nourish the root, and everything above it flourishes. Its radiating branches read as both root and vessel — the same structure that draws nourishment in is the one that carries growth out. The deep maroon behind it carries that meaning further: an earthen, blood-warm tone for vitality, groundedness, and the quiet strength of something growing before it ever shows on the surface.",
+            guidelines: 'mzizi',
           },
           {
             type: 'logo',
@@ -893,6 +1089,7 @@
             eyebrow: 'Brand Identity — Crevia',
             title: 'Every story, held at the center.',
             body: "Crevia's mark is a ring of circles, large and small — the enterprises and the founders, the institutions and the independents, every business we've stood beside. At the center sits a single diamond: Crevia, holding their stories and carrying them out to the world. It's a quiet expression of what we believe — that no brand builds authority alone, and that community, not isolation, is the future of business.",
+            guidelines: 'crevia',
           },
         ];
 
@@ -1110,7 +1307,7 @@
                     <p className="text-xs uppercase tracking-[0.42em] text-ember">Portfolio</p>
                     <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] md:text-5xl">SOME OF THE <span className="text-ember">DIGITAL</span> SPACES WE&apos;VE BUILT</h2>
                   </div>
-                  <DigitalSpacesGrid items={digitalSpaceItems} />
+                  <DigitalSpacesGrid items={digitalSpaceItems} onOpenGuidelines={setSelectedGuideline} />
                 </div>
               </motion.section>
 
@@ -1243,6 +1440,7 @@ href="crevia/services.html"
               </motion.footer>
             </main>
             {selectedEvent && <VideoModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />}
+            {selectedGuideline && <BrandGuidelinesModal brand={brandGuidelines[selectedGuideline]} onClose={() => setSelectedGuideline(null)} />}
           </>
         );
       }
