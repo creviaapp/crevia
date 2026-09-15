@@ -34,7 +34,7 @@
 
   const polishStyles = document.createElement('style');
   polishStyles.textContent = `
-    :focus-visible { outline: 2px solid #f0782f; outline-offset: 4px; }
+    :focus-visible { outline: 2px solid #db5d11; outline-offset: 4px; }
     html { text-rendering: optimizeLegibility; }
     img { max-width: 100%; }
     @media (hover: none) { :where(a, button):hover { transform: none !important; } }

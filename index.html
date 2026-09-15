@@ -24,7 +24,7 @@
             colors: {
               coal: '#060606',
               ivory: '#ffffff',
-              ember: '#f0782f',
+              ember: '#db5d11',
             },
             fontFamily: {
               sans: ['DM Sans', 'sans-serif'],
@@ -161,11 +161,11 @@
         mix-blend-mode: screen;
       }
 
-      .site-footer { background: linear-gradient(135deg, #050505 0%, #0b0b0b 52%, #3d1c0f 78%, #F0782F 100%); color: #f5efe7; }
+      .site-footer { background: linear-gradient(135deg, #050505 0%, #0b0b0b 52%, #3d1c0f 78%, #DB5D11 100%); color: #f5efe7; }
       .site-footer .text-coal { color: #f5efe7 !important; }
       .site-footer .text-coal\/\[0\.62\], .site-footer .text-coal\/\[0\.72\], .site-footer .text-coal\/\[0\.56\], .site-footer .text-coal\/\[0\.5\] { color: rgba(245,239,231,.72) !important; }
       .site-footer .border-black\/\[0\.12\], .site-footer .border-black\/\[0\.06\] { border-color: rgba(255,255,255,.14) !important; }
-      .site-footer .rounded-t-\[2\.5rem\] { background: linear-gradient(135deg, #050505 0%, #0b0b0b 52%, #3d1c0f 78%, #F0782F 100%) !important; }
+      .site-footer .rounded-t-\[2\.5rem\] { background: linear-gradient(135deg, #050505 0%, #0b0b0b 52%, #3d1c0f 78%, #DB5D11 100%) !important; }
       .traction-surface .text-white { color: #f5f1eb !important; }
       .traction-surface .text-white\/\[0\.62\] { color: rgba(245,241,235,.78) !important; }
 
@@ -179,10 +179,10 @@
       #reactMobileNav .nav-close { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; background:rgba(245,239,231,.06); border:1px solid rgba(245,239,231,.14); color:#f5efe7; font-size:16px; line-height:1; cursor:pointer; transition:background .25s ease, transform .25s ease; }
       #reactMobileNav .nav-close:active { transform:scale(.9); }
       #reactMobileNav .nav-link { display:flex; align-items:center; justify-content:space-between; padding:15px 2px; font-size:17px; font-weight:500; color:rgba(245,239,231,.8); text-decoration:none; border-bottom:1px solid rgba(245,239,231,.08); }
-      #reactMobileNav .nav-link .arrow { opacity:0; transform:translateX(-4px); transition:opacity .25s ease, transform .25s ease; color:#f0782f; font-size:15px; }
+      #reactMobileNav .nav-link .arrow { opacity:0; transform:translateX(-4px); transition:opacity .25s ease, transform .25s ease; color:#db5d11; font-size:15px; }
       #reactMobileNav .nav-link:hover, #reactMobileNav .nav-link:active { color:#f5efe7; padding-left:8px; }
       #reactMobileNav .nav-link:hover .arrow, #reactMobileNav .nav-link:active .arrow { opacity:1; transform:translateX(0); }
-      #reactMobileNav .nav-cta { margin-top:22px; display:flex; align-items:center; justify-content:center; gap:8px; padding:15px 20px; background:#f0782f; color:#17110d; border-radius:999px; font-weight:600; text-decoration:none; text-align:center; }
+      #reactMobileNav .nav-cta { margin-top:22px; display:flex; align-items:center; justify-content:center; gap:8px; padding:15px 20px; background:#db5d11; color:#17110d; border-radius:999px; font-weight:600; text-decoration:none; text-align:center; }
       body.mobile-open #reactMobileNav .backdrop { opacity:1; pointer-events:auto; }
       body.mobile-open #reactMobileNav .panel { transform:translateX(0); }
       @media (min-width:768px){ #reactMobileNav{display:none!important} }
@@ -311,7 +311,7 @@
           <div ref={elementRef}>
             <SpotlightPanel
               className="rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,14,0.55),rgba(255,255,255,0.02))] p-5 shadow-[0_10px_24px_rgba(0,0,0,0.18)] backdrop-blur-sm"
-              glowClassName="bg-[#f0782f]/[0.4]"
+              glowClassName="bg-[#db5d11]/[0.4]"
               hoverLift
             >
               <p className="font-display text-5xl leading-none text-white sm:text-7xl">{displayValue.toLocaleString()}{suffix}</p>
@@ -585,7 +585,7 @@
             { name: 'Vollkorn', family: "'Vollkorn', serif", role: 'Display / Headlines' },
             { name: 'Poppins', family: "'Poppins', sans-serif", role: 'Body / UI' },
           ],
-          colors: ['#000000', '#FFFFFF', '#F0782F'],
+          colors: ['#000000', '#FFFFFF', '#DB5D11'],
           mockups: [
             { key: 'bottle', label: 'Packaging', aspectStyle: { aspectRatio: '1083 / 1452' }, render: () => <img src="crevia/images/digital%20spaces/crevia%20logo%20on%20bottle.png" alt="Crevia branded bottles" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} /> },
           ],
@@ -1097,7 +1097,7 @@
           <>
             <header className="sticky top-0 z-50 px-4 pt-4 md:px-8">
               <motion.div
-                className="relative rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#090909_0%,#121212_18%,#1a1a1a_34%,#F0782F_72%,#8B3913_100%)] px-4 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.32)] md:px-7"
+                className="relative rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#090909_0%,#121212_18%,#1a1a1a_34%,#DB5D11_72%,#8B3913_100%)] px-4 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.32)] md:px-7"
                 style={{
                   backdropFilter: headerFilter,
                   WebkitBackdropFilter: headerFilter,
@@ -1208,7 +1208,7 @@
               </motion.section>
 
 
-              <motion.section {...SECTION_REVEAL} className="traction-surface relative overflow-hidden px-6 pb-16 md:px-10 md:pb-20 lg:px-16 xl:px-20" style={{ background: 'linear-gradient(135deg, #070707 0%, #111111 18%, #1c1c1c 36%, #f0782f 72%, #8d3d17 100%)' }}>
+              <motion.section {...SECTION_REVEAL} className="traction-surface relative overflow-hidden px-6 pb-16 md:px-10 md:pb-20 lg:px-16 xl:px-20" style={{ background: 'linear-gradient(135deg, #070707 0%, #111111 18%, #1c1c1c 36%, #db5d11 72%, #8d3d17 100%)' }}>
                 <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,244,232,.35),transparent_68%)]" />
                 <div className="relative mx-auto max-w-6xl border-y border-white/15 py-10 sm:py-14">
                   <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/75">Built for the institutions shaping Africa</p>
@@ -1232,7 +1232,7 @@
               </motion.section>
 
               <motion.section {...SECTION_REVEAL} id="our-ecosystem" className="relative overflow-hidden bg-ivory py-20 text-coal md:py-28">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_88%_18%,rgba(240,120,47,.12),transparent_28%)]" aria-hidden="true" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_88%_18%,rgba(219, 93, 17,.12),transparent_28%)]" aria-hidden="true" />
                 <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
                   <div className="mx-auto max-w-7xl">
                     <div className="max-w-4xl">
@@ -1242,7 +1242,7 @@
                     </div>
                     <div className="mt-14 grid gap-5 md:grid-cols-2">
                       <a href="#" className="group flex min-h-[320px] flex-col justify-between rounded-[2rem] border border-coal/10 bg-white p-7 shadow-[0_24px_60px_rgba(23,17,13,.08)] transition-transform duration-500 hover:-translate-y-2 md:p-9"><div><p className="text-[10px] font-bold uppercase tracking-[.28em] text-ember">01 / The studio</p><h3 className="mt-6 font-display text-4xl leading-tight">Crevia</h3><p className="mt-5 text-base leading-7 text-coal/65">We help ambitious organizations own their story through physical spaces, digital presence, and the clarity to move with purpose.</p></div><span className="mt-8 text-sm font-semibold">Build with us <span aria-hidden="true">↗</span></span></a>
-                      <a href="crevia/dira.html" className="group flex min-h-[320px] flex-col justify-between rounded-[2rem] border border-ember/35 bg-ember p-7 text-coal shadow-[0_24px_60px_rgba(240,120,47,.18)] transition-transform duration-500 hover:-translate-y-2 md:p-9"><div><p className="text-[10px] font-bold uppercase tracking-[.28em] text-coal/60">02 / The compass</p><h3 className="mt-6 font-display text-4xl leading-tight">Dira</h3><p className="mt-5 text-base leading-7 text-coal/75">We give founders and entrepreneurs direction through practical programs, experienced perspective, and a stronger sense of what comes next.</p></div><span className="mt-8 text-sm font-semibold">Find direction <span aria-hidden="true">↗</span></span></a>
+                      <a href="crevia/dira.html" className="group flex min-h-[320px] flex-col justify-between rounded-[2rem] border border-ember/35 bg-ember p-7 text-coal shadow-[0_24px_60px_rgba(219, 93, 17,.18)] transition-transform duration-500 hover:-translate-y-2 md:p-9"><div><p className="text-[10px] font-bold uppercase tracking-[.28em] text-coal/60">02 / The compass</p><h3 className="mt-6 font-display text-4xl leading-tight">Dira</h3><p className="mt-5 text-base leading-7 text-coal/75">We give founders and entrepreneurs direction through practical programs, experienced perspective, and a stronger sense of what comes next.</p></div><span className="mt-8 text-sm font-semibold">Find direction <span aria-hidden="true">↗</span></span></a>
                     </div>
                   </div>
                 </div>
@@ -1305,12 +1305,12 @@
               </motion.section>
 
   <motion.section {...SECTION_REVEAL} id="service-focus" className="relative isolate overflow-hidden bg-[#ebe5dc] py-28 md:py-36">
-  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_12%,rgba(240,120,47,.14),transparent_28%),linear-gradient(110deg,transparent_0%,rgba(255,255,255,.42)_48%,transparent_100%)]" />
+  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_12%,rgba(219, 93, 17,.14),transparent_28%),linear-gradient(110deg,transparent_0%,rgba(255,255,255,.42)_48%,transparent_100%)]" />
   <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
   <div className="mx-auto max-w-7xl">
   <div className="flex flex-col gap-8 border-b border-[#17110d]/15 pb-10 md:flex-row md:items-end md:justify-between">
   <div className="max-w-4xl">
-  <p className="text-[11px] font-bold uppercase tracking-[0.38em] text-[#f0782f]">Capabilities / 02</p>
+  <p className="text-[11px] font-bold uppercase tracking-[0.38em] text-[#db5d11]">Capabilities / 02</p>
   <h2 className="mt-5 font-display text-5xl leading-[.94] tracking-[-.04em] text-[#17110d] md:text-7xl">
   Premium stages for<br className="hidden md:block" /> <span className="text-ember">premium brands</span>.
   </h2>
@@ -1320,8 +1320,8 @@
 
   <div className="service-grid mt-12 grid gap-px overflow-hidden border border-[#17110d]/15 bg-[#17110d]/15 md:grid-cols-2">
   <div className="group relative overflow-hidden bg-[#f7f3ee] p-8 transition duration-700 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:bg-[#17110d] md:p-12">
-  <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full border border-[#f0782f]/20 transition duration-700 group-hover:scale-[1.35] group-hover:border-[#f0782f]/50" />
-  <p className="relative text-[10px] font-bold uppercase tracking-[0.28em] text-[#17110d]/55 transition-colors duration-500 group-hover:text-[#f0782f]">Physical Communities</p>
+  <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full border border-[#db5d11]/20 transition duration-700 group-hover:scale-[1.35] group-hover:border-[#db5d11]/50" />
+  <p className="relative text-[10px] font-bold uppercase tracking-[0.28em] text-[#17110d]/55 transition-colors duration-500 group-hover:text-[#db5d11]">Physical Communities</p>
   <h3 className="relative mt-4 font-display text-3xl leading-tight text-[#17110d] transition-colors duration-500 group-hover:text-[#f7f3ee] md:text-4xl">
                           Event <span className="text-ember">Architecture</span>
                         </h3>
@@ -1343,8 +1343,8 @@ href="crevia/services.html"
                       </div>
 
   <div className="group relative overflow-hidden bg-[#17110d] p-8 transition duration-700 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:bg-[#241710] md:p-12">
-  <div className="pointer-events-none absolute -bottom-20 -right-12 h-64 w-64 rounded-full border border-[#f0782f]/25 transition duration-700 group-hover:scale-[1.25] group-hover:border-[#f0782f]/60" />
-  <p className="relative text-[10px] font-bold uppercase tracking-[0.28em] text-[#f0782f]">Digital Presence</p>
+  <div className="pointer-events-none absolute -bottom-20 -right-12 h-64 w-64 rounded-full border border-[#db5d11]/25 transition duration-700 group-hover:scale-[1.25] group-hover:border-[#db5d11]/60" />
+  <p className="relative text-[10px] font-bold uppercase tracking-[0.28em] text-[#db5d11]">Digital Presence</p>
   <h3 className="relative mt-4 font-display text-3xl leading-tight text-[#f7f3ee] md:text-4xl">
                           Digital Experience <span className="text-ember">Architecture</span>
                         </h3>
@@ -1356,7 +1356,7 @@ href="crevia/services.html"
                           <motion.a
 href="crevia/services.html"
                             whileTap={{ scale: 0.97 }}
-  className="premium-button relative inline-flex items-center justify-center rounded-full border border-[#f7f3ee]/30 px-8 py-4 text-sm font-semibold text-[#f7f3ee] transition hover:border-[#f0782f] hover:bg-[#f0782f]"
+  className="premium-button relative inline-flex items-center justify-center rounded-full border border-[#f7f3ee]/30 px-8 py-4 text-sm font-semibold text-[#f7f3ee] transition hover:border-[#db5d11] hover:bg-[#db5d11]"
   >
   Learn more
   </motion.a>
@@ -1394,7 +1394,7 @@ href="crevia/services.html"
                 </div>
               </motion.section>
 
-              <motion.footer {...SECTION_REVEAL} className="border-t border-white/10 px-6 py-14 md:px-10 lg:px-16 xl:px-20" style={{ background: 'linear-gradient(135deg, #050505 0%, #0b0b0b 52%, #3d1c0f 78%, #F0782F 100%)', color: '#f5efe7' }}>
+              <motion.footer {...SECTION_REVEAL} className="border-t border-white/10 px-6 py-14 md:px-10 lg:px-16 xl:px-20" style={{ background: 'linear-gradient(135deg, #050505 0%, #0b0b0b 52%, #3d1c0f 78%, #DB5D11 100%)', color: '#f5efe7' }}>
                 <div className="mx-auto max-w-7xl">
                   <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-[1.4fr_1fr_1fr]">
                     <div>

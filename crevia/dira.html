@@ -14,7 +14,7 @@
       tailwind.config = {
         theme: {
           extend: {
-            colors: { coal: '#070706', paper: '#f3f0e9', ember: '#f0782f' },
+            colors: { coal: '#070706', paper: '#f3f0e9', ember: '#db5d11' },
             fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['Playfair Display', 'serif'] },
           },
         },
@@ -33,17 +33,17 @@
       a:hover .link-arrow { transform: translateX(4px); }
       .archive-card { transition: background-color 650ms cubic-bezier(.16,1,.3,1), transform 650ms cubic-bezier(.16,1,.3,1); }
       .archive-card:hover { background-color: rgba(255,255,255,.055); transform: translateY(-4px); }
-      .focus-ring:focus-visible { outline: 2px solid #f0782f; outline-offset: 4px; }
+      .focus-ring:focus-visible { outline: 2px solid #db5d11; outline-offset: 4px; }
       .surface-paper { background: #f3f0e9; color: #17110d; }
       .surface-paper .text-paper { color: #17110d !important; }
       .surface-paper .text-paper\/75, .surface-paper .text-paper\/70, .surface-paper .text-paper\/65, .surface-paper .text-paper\/60, .surface-paper .text-paper\/50, .surface-paper .text-paper\/45 { color: rgba(23,17,13,.68) !important; }
       .surface-paper .hairline { border-color: rgba(23,17,13,.16) !important; }
-      .surface-ember { background: #f0782f !important; color: #17110d; }
+      .surface-ember { background: #db5d11 !important; color: #17110d; }
       .surface-ember .text-paper, .surface-ember .text-ember { color: #17110d !important; }
       .surface-emerald { background: linear-gradient(118deg, #07110f 0%, #0b3028 48%, #06100e 100%) !important; color: #f3f0e9; }
       .surface-emerald .text-paper { color: #f3f0e9 !important; }
       .surface-emerald .text-paper\/75, .surface-emerald .text-paper\/70, .surface-emerald .text-paper\/65, .surface-emerald .text-paper\/60 { color: rgba(243,240,233,.76) !important; }
-      .surface-emerald .text-ember { color: #F0782F !important; }
+      .surface-emerald .text-ember { color: #DB5D11 !important; }
       .surface-emerald .hairline { border-color: rgba(243,240,233,.2) !important; }
       .surface-ember .text-paper\/70, .surface-ember .text-paper\/65, .surface-ember .text-paper\/60 { color: rgba(23,17,13,.72) !important; }
       .surface-ember .hairline { border-color: rgba(23,17,13,.23) !important; }
@@ -72,10 +72,10 @@
       #mobileNav .mobile-nav-close { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; background:rgba(243,240,233,.06); border:1px solid rgba(243,240,233,.14); color:#f3f0e9; font-size:16px; line-height:1; cursor:pointer; transition:background .25s ease, transform .25s ease; }
       #mobileNav .mobile-nav-close:active { transform:scale(.9); }
       #mobileNav .mobile-nav-link { display:flex; align-items:center; justify-content:space-between; padding:15px 2px; font-size:17px; font-weight:500; color:rgba(243,240,233,.8); text-decoration:none; border-bottom:1px solid rgba(243,240,233,.08); opacity:0; transform:translateX(16px); transition:opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1), color .25s ease, padding-left .25s ease; transition-delay:calc(var(--i,0) * 55ms); }
-      #mobileNav .mobile-nav-link .mobile-nav-arrow { opacity:0; transform:translateX(-4px); transition:opacity .25s ease, transform .25s ease; color:#f0782f; font-size:15px; }
+      #mobileNav .mobile-nav-link .mobile-nav-arrow { opacity:0; transform:translateX(-4px); transition:opacity .25s ease, transform .25s ease; color:#db5d11; font-size:15px; }
       #mobileNav .mobile-nav-link:hover, #mobileNav .mobile-nav-link:active { color:#f3f0e9; padding-left:8px; }
       #mobileNav .mobile-nav-link:hover .mobile-nav-arrow, #mobileNav .mobile-nav-link:active .mobile-nav-arrow { opacity:1; transform:translateX(0); }
-      #mobileNav .mobile-cta { margin-top:22px; display:flex; align-items:center; justify-content:center; gap:8px; padding:15px 20px; background:#f0782f; color:#17110d; border-radius:999px; font-weight:600; text-decoration:none; text-align:center; opacity:0; transform:translateY(12px); transition:opacity .5s cubic-bezier(.16,1,.3,1) .35s, transform .5s cubic-bezier(.16,1,.3,1) .35s, filter .25s ease; }
+      #mobileNav .mobile-cta { margin-top:22px; display:flex; align-items:center; justify-content:center; gap:8px; padding:15px 20px; background:#db5d11; color:#17110d; border-radius:999px; font-weight:600; text-decoration:none; text-align:center; opacity:0; transform:translateY(12px); transition:opacity .5s cubic-bezier(.16,1,.3,1) .35s, transform .5s cubic-bezier(.16,1,.3,1) .35s, filter .25s ease; }
       #mobileNav .mobile-cta:active { filter:brightness(.94); }
       body.mobile-open #mobileNav .mobile-nav-backdrop{ opacity:1; pointer-events:auto; }
       body.mobile-open #mobileNav .mobile-nav-panel{ transform:translateX(0); }
@@ -91,7 +91,7 @@
   <body class="font-sans antialiased">
     <div class="fixed inset-0 pointer-events-none page-noise"></div>
       <header class="sticky inset-x-0 top-0 z-50 px-4 pt-4 md:px-8">
-      <div class="mx-auto grid max-w-[1440px] items-center gap-4 rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#090909_0%,#121212_18%,#1a1a1a_34%,#F0782F_72%,#8B3913_100%)] px-4 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.32)] backdrop-blur-md md:grid-cols-[1fr_auto_1fr] md:px-7 relative">
+      <div class="mx-auto grid max-w-[1440px] items-center gap-4 rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#090909_0%,#121212_18%,#1a1a1a_34%,#DB5D11_72%,#8B3913_100%)] px-4 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.32)] backdrop-blur-md md:grid-cols-[1fr_auto_1fr] md:px-7 relative">
         <div class="flex items-center gap-3">
           <a href="../index.html" class="focus-ring font-display text-2xl font-semibold tracking-tight text-paper">Crevia</a>
           <button id="navToggle" aria-label="Open menu" class="md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-lg bg-white/5 p-2">
@@ -123,7 +123,7 @@
     <main>
       <section class="banding hero-stage relative flex min-h-screen items-end overflow-hidden border-b hairline px-5 pb-14 pt-32 md:px-10 md:pb-20">
         <div class="relative mx-auto w-full max-w-[1440px]">
-          <div class="dira-compass pointer-events-none absolute right-[2%] top-[10%] hidden h-[34vw] max-h-[520px] min-h-[280px] w-[34vw] max-w-[520px] min-w-[280px] items-center justify-center lg:flex" aria-hidden="true"><span class="absolute inset-0 rounded-full border border-ember/45"></span><span class="absolute inset-[10%] rounded-full border border-white/20"></span><span class="absolute inset-[21%] rounded-full border border-ember/30"></span><span class="absolute inset-[34%] rounded-full border border-white/20"></span><span class="absolute h-[86%] w-px rotate-[38deg] bg-ember/45"></span><span class="absolute h-[86%] w-px -rotate-[38deg] bg-white/20"></span><span class="absolute h-3/4 w-3/4 rotate-45 border border-dashed border-white/15"></span><span class="absolute h-5 w-5 rounded-full bg-ember shadow-[0_0_45px_rgba(240,120,47,.8)]"></span></div>
+          <div class="dira-compass pointer-events-none absolute right-[2%] top-[10%] hidden h-[34vw] max-h-[520px] min-h-[280px] w-[34vw] max-w-[520px] min-w-[280px] items-center justify-center lg:flex" aria-hidden="true"><span class="absolute inset-0 rounded-full border border-ember/45"></span><span class="absolute inset-[10%] rounded-full border border-white/20"></span><span class="absolute inset-[21%] rounded-full border border-ember/30"></span><span class="absolute inset-[34%] rounded-full border border-white/20"></span><span class="absolute h-[86%] w-px rotate-[38deg] bg-ember/45"></span><span class="absolute h-[86%] w-px -rotate-[38deg] bg-white/20"></span><span class="absolute h-3/4 w-3/4 rotate-45 border border-dashed border-white/15"></span><span class="absolute h-5 w-5 rounded-full bg-ember shadow-[0_0_45px_rgba(219, 93, 17,.8)]"></span></div>
           <p class="hero-detail eyebrow flex items-center gap-3 text-[11px] font-bold uppercase text-ember" style="--delay: .25s"><span class="h-2 w-2 rounded-full bg-ember"></span> Dira / Education and convenings</p>
           <h1 class="mt-9 max-w-[900px] text-[clamp(4rem,7.6vw,9rem)] font-medium leading-[.88] tracking-[-.06em] text-paper">
             <span class="hero-line-wrap"><span class="hero-line" style="--delay: .30s">We give <span class="text-ember">direction</span></span></span>
@@ -207,7 +207,7 @@
         </div>
       </section>
     </main>
-    <footer class="border-t border-white/10" style="background: linear-gradient(135deg, #050505 0%, #0b0b0b 52%, #3d1c0f 78%, #F0782F 100%); color: #f5efe7;">
+    <footer class="border-t border-white/10" style="background: linear-gradient(135deg, #050505 0%, #0b0b0b 52%, #3d1c0f 78%, #DB5D11 100%); color: #f5efe7;">
       <div class="mx-auto max-w-7xl px-6 py-14 md:px-8">
         <div class="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div><p class="font-display text-4xl text-white">Crevia</p><p class="mt-4 max-w-sm leading-7 text-white/55">We are a strategic brand architecture firm that builds premium digital presences and high-stakes physical communities across Africa.</p></div>
