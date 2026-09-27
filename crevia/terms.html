@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="images/digital%20spaces/crevia%20logo.PNG" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       html,body{margin:0;background:#060606;color:#ffffff;scroll-behavior:smooth}
@@ -23,7 +23,7 @@
         theme: {
           extend: {
             colors: { coal: '#060606', ivory: '#ffffff', ember: '#db5d11' },
-            fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['Playfair Display', 'serif'] },
+            fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['Libre Baskerville', 'serif'] },
           },
         },
       };
@@ -35,7 +35,7 @@
       body.mobile-open #mobileNav { pointer-events: auto; }
       #mobileNav .mobile-nav-panel { position:absolute; top:0; right:0; height:100%; width:86%; max-width:380px; background:linear-gradient(165deg,#0c0b0a 0%,#161311 45%,#301a10 100%); transform:translateX(110%); transition:transform .42s cubic-bezier(.16,1,.3,1); box-shadow:-32px 0 70px rgba(0,0,0,.55); padding:26px 24px; display:flex; flex-direction:column; }
       #mobileNav .mobile-nav-head { display:flex; align-items:center; justify-content:space-between; padding-bottom:20px; margin-bottom:8px; border-bottom:1px solid rgba(245,243,240,.12); }
-      #mobileNav .mobile-nav-brand { font-family:'Playfair Display', serif; font-size:22px; color:#f5f3f0; }
+      #mobileNav .mobile-nav-brand { font-family:'Libre Baskerville', serif; font-size:22px; color:#f5f3f0; }
       #mobileNav .mobile-nav-close { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; background:rgba(245,243,240,.06); border:1px solid rgba(245,243,240,.14); color:#f5f3f0; font-size:16px; line-height:1; cursor:pointer; transition:background .25s ease, transform .25s ease; }
       #mobileNav .mobile-nav-close:active { transform:scale(.9); }
       #mobileNav .mobile-nav-link { display:flex; align-items:center; justify-content:space-between; padding:15px 2px; font-size:17px; font-weight:500; color:rgba(245,243,240,.8); text-decoration:none; border-bottom:1px solid rgba(245,243,240,.08); opacity:0; transform:translateX(16px); transition:opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1), color .25s ease, padding-left .25s ease; transition-delay:calc(var(--i,0) * 55ms); }
