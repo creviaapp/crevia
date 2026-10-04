@@ -412,20 +412,26 @@
                 const isIhub = partner.name === 'iHub Nairobi';
                 const isSuluhu = partner.name === 'Suluhu Studio';
                 const isHackhouse = partner.name === 'HackHouse';
+                const isHeartSpark = partner.name === 'HeartSpark Consultancy';
+                const isAmericanSpaces = partner.name === 'American Spaces';
                 const imgClasses = isLarge
-                  ? 'mx-auto block h-16 w-auto max-w-[220px] object-contain object-center'
+                  ? 'mx-auto block h-20 w-auto max-w-[240px] object-contain object-center'
                   : isIhub
-                    ? 'mx-auto block h-9 w-auto object-contain object-center'
+                    ? 'mx-auto block h-16 w-auto object-contain object-center'
                     : isSuluhu
                       ? 'mx-auto block h-7 w-auto object-contain object-center'
                       : isHackhouse
                         ? 'mx-auto block h-auto w-full max-w-[135px] object-contain object-center'
-                        : 'mx-auto block h-12 w-auto object-contain object-center';
+                        : isHeartSpark
+                          ? 'mx-auto block h-20 w-auto object-contain object-center'
+                          : isAmericanSpaces
+                            ? 'mx-auto block h-20 w-auto object-contain object-center'
+                            : 'mx-auto block h-12 w-auto object-contain object-center';
 
                 return (
                   <div
                     key={`${partner.name || partner}-${index}`}
-                    className="relative flex h-14 items-center justify-center"
+                    className="relative flex h-20 items-center justify-center"
                   >
                     {partner.svg ? (
                       <span className="inline-flex h-14 items-center justify-center" dangerouslySetInnerHTML={{ __html: partner.svg }} />
