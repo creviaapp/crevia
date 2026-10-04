@@ -415,9 +415,9 @@
                 const isHeartSpark = partner.name === 'HeartSpark Consultancy';
                 const isAmericanSpaces = partner.name === 'American Spaces';
                 const imgClasses = isLarge
-                  ? 'mx-auto block h-20 w-auto max-w-[240px] object-contain object-center'
+                  ? 'mx-auto block h-28 w-auto max-w-[300px] object-contain object-center'
                   : isIhub
-                    ? 'mx-auto block h-16 w-auto object-contain object-center'
+                    ? 'mx-auto block h-24 w-auto object-contain object-center'
                     : isSuluhu
                       ? 'mx-auto block h-7 w-auto object-contain object-center'
                       : isHackhouse
@@ -431,7 +431,7 @@
                 return (
                   <div
                     key={`${partner.name || partner}-${index}`}
-                    className="relative flex h-20 items-center justify-center"
+                    className="relative flex h-28 items-center justify-center"
                   >
                     {partner.svg ? (
                       <span className="inline-flex h-14 items-center justify-center" dangerouslySetInnerHTML={{ __html: partner.svg }} />
