@@ -408,13 +408,16 @@
                 const isLarge = partner.name === 'Strathmore University';
                 const isIhub = partner.name === 'iHub Nairobi';
                 const isSuluhu = partner.name === 'Suluhu Studio';
+                const isHackhouse = partner.name === 'HackHouse';
                 const imgClasses = isLarge
                   ? 'mx-auto block h-[132px] w-auto max-w-[280px] object-contain object-center'
                   : isIhub
                     ? 'mx-auto block max-h-[84px] w-auto object-contain object-center'
                     : isSuluhu
                       ? 'mx-auto block max-h-[52px] w-auto object-contain object-center'
-                      : 'mx-auto block max-h-16 w-auto object-contain object-center';
+                      : isHackhouse
+                        ? 'mx-auto block h-auto w-full max-w-[160px] object-contain object-center'
+                        : 'mx-auto block max-h-16 w-auto object-contain object-center';
 
                 return (
                   <div
@@ -950,6 +953,18 @@
           {
             name: 'Nairobi Garage',
             src: 'crevia/images/partners/Nairobi%20garage/LOGOS_NAIROBIGARAGE-03.webp',
+          },
+          {
+            name: 'HackHouse',
+            src: 'crevia/images/partners/hackhouse-full.svg',
+          },
+          {
+            name: 'HeartSpark Consultancy',
+            src: 'crevia/images/partners/heartspark-logo.png',
+          },
+          {
+            name: 'American Spaces',
+            src: 'crevia/images/partners/american-spaces-logo.jpg',
           },
         ];
         const [hoveredNav, setHoveredNav] = useState(null);
