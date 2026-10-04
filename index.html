@@ -398,53 +398,51 @@
 
         return (
           <div
-            className="overflow-hidden rounded-2xl border border-black/5 bg-transparent py-6"
+            className="overflow-hidden bg-transparent py-6"
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
+            style={{
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
+              maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
+            }}
           >
-            <motion.div ref={trackRef} style={{ x, willChange: 'transform' }} className="flex w-max items-center gap-6 py-2 pl-6">
+            <motion.div ref={trackRef} style={{ x, willChange: 'transform' }} className="flex w-max items-center gap-16 py-2 pl-6 md:gap-20">
               {looped.map((partner, index) => {
-                const isDarkBadge = partner.name === 'iHub Nairobi' || partner.name === 'Suluhu Studio';
                 const isLarge = partner.name === 'Strathmore University';
                 const isIhub = partner.name === 'iHub Nairobi';
                 const isSuluhu = partner.name === 'Suluhu Studio';
                 const isHackhouse = partner.name === 'HackHouse';
                 const imgClasses = isLarge
-                  ? 'mx-auto block h-[132px] w-auto max-w-[280px] object-contain object-center'
+                  ? 'mx-auto block h-16 w-auto max-w-[220px] object-contain object-center'
                   : isIhub
-                    ? 'mx-auto block max-h-[84px] w-auto object-contain object-center'
+                    ? 'mx-auto block h-9 w-auto object-contain object-center'
                     : isSuluhu
-                      ? 'mx-auto block max-h-[52px] w-auto object-contain object-center'
+                      ? 'mx-auto block h-7 w-auto object-contain object-center'
                       : isHackhouse
-                        ? 'mx-auto block h-auto w-full max-w-[160px] object-contain object-center'
-                        : 'mx-auto block max-h-16 w-auto object-contain object-center';
+                        ? 'mx-auto block h-auto w-full max-w-[135px] object-contain object-center'
+                        : 'mx-auto block h-12 w-auto object-contain object-center';
 
                 return (
                   <div
                     key={`${partner.name || partner}-${index}`}
-                    className={`relative mx-2 h-24 overflow-hidden text-center rounded-[1.5rem] px-4 shadow-[0_12px_28px_rgba(0,0,0,0.06)] min-w-[190px] ${isDarkBadge ? 'border border-[#1a1a1a] bg-[#0d0d0d]' : 'bg-white/80'}`}
-                    style={{
-                      background: isDarkBadge ? 'linear-gradient(135deg, #0c0c0c 0%, #191919 100%)' : 'transparent',
-                    }}
+                    className="relative flex h-14 items-center justify-center"
                   >
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      {partner.svg ? (
-                        <span className="inline-flex max-h-16 w-full items-center justify-center" dangerouslySetInnerHTML={{ __html: partner.svg }} />
-                      ) : partner.src ? (
-                        <img
-                          src={partner.src}
-                          alt={partner.name}
-                          className={imgClasses}
-                          style={{
-                            filter: isDarkBadge ? 'drop-shadow(0 8px 18px rgba(255,255,255,0.08))' : 'drop-shadow(0 8px 18px rgba(17,17,17,0.08))',
-                            display: 'block',
-                            objectPosition: 'center center',
-                          }}
-                        />
-                      ) : (
-                        <span className="text-lg font-semibold tracking-wide text-black/[0.7]">{partner.name || partner}</span>
-                      )}
-                    </div>
+                    {partner.svg ? (
+                      <span className="inline-flex h-14 items-center justify-center" dangerouslySetInnerHTML={{ __html: partner.svg }} />
+                    ) : partner.src ? (
+                      <img
+                        src={partner.src}
+                        alt={partner.name}
+                        className={imgClasses}
+                        style={{
+                          filter: isIhub ? 'invert(1)' : 'none',
+                          display: 'block',
+                          objectPosition: 'center center',
+                        }}
+                      />
+                    ) : (
+                      <span className="text-lg font-semibold tracking-wide text-black/[0.7]">{partner.name || partner}</span>
+                    )}
                   </div>
                 );
               })}
@@ -1118,11 +1116,11 @@
                   WebkitBackdropFilter: headerFilter,
                 }}
               >
-                <div className="relative grid items-center gap-4 md:grid-cols-[1fr_auto_1fr]">
+                <div className="relative grid grid-cols-[1fr_auto_1fr] items-center gap-4">
                   <a href="#" className="justify-self-start font-display text-2xl leading-none text-white transition duration-300 hover:tracking-[0.04em]">
                     Crevia
                   </a>
-                  <button onClick={()=>{ setMobileOpen(true); document.body.classList.add('mobile-open'); }} className="md:hidden inline-flex items-center justify-center rounded-lg bg-white/5 p-2" style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}>
+                  <button onClick={()=>{ setMobileOpen(true); document.body.classList.add('mobile-open'); }} className="md:hidden inline-flex items-center justify-center justify-self-center rounded-lg bg-white/5 p-2">
                     <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.75 1.25H19.25" stroke="#F5F3F0" stroke-width="1.5" stroke-linecap="round"/><path d="M0.75 7H19.25" stroke="#F5F3F0" stroke-width="1.5" stroke-linecap="round"/><path d="M0.75 12.75H19.25" stroke="#F5F3F0" stroke-width="1.5" stroke-linecap="round"/></svg>
                   </button>
 
@@ -1237,12 +1235,15 @@
 
               <motion.section {...SECTION_REVEAL} id="ecosystem" className="bg-ivory py-20 text-coal md:py-24">
                 <div className="w-full px-6 md:px-10 lg:px-16 xl:px-20">
-                  <div className="mb-8 text-center">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.38em] text-[#17110d]/68">
+                  <div className="mx-auto max-w-7xl">
+                    <p className="inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.38em] text-[#17110d]/55">
+                      <span className="h-px w-6 bg-ember" aria-hidden="true"></span>
                       Organizations we&apos;ve worked with
                     </p>
                   </div>
-                  <PartnerMarquee items={partners} />
+                  <div className="mt-12">
+                    <PartnerMarquee items={partners} />
+                  </div>
                 </div>
               </motion.section>
 
