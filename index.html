@@ -220,7 +220,7 @@
     <div id="root"></div>
     <script type="text/babel">
       const { useEffect, useRef, useState } = React;
-      const { motion, useAnimationFrame, useMotionTemplate, useMotionValue, useScroll, useSpring, useTransform } = window.Motion;
+      const { motion, AnimatePresence, useAnimationFrame, useMotionTemplate, useMotionValue, useScroll, useSpring, useTransform } = window.Motion;
 
       const REVEAL_EASE = [0.16, 1, 0.3, 1];
       const REVEAL_TRANSITION = { duration: 0.72, ease: REVEAL_EASE };
@@ -577,13 +577,24 @@
         );
       }
 
+      const DIGITAL_SPACE_FILTERS = [
+        { key: 'all', label: 'All Work' },
+        { key: 'website', label: 'Websites' },
+        { key: 'app', label: 'Apps' },
+        { key: 'brand', label: 'Brand Identities' },
+      ];
+
       function DigitalSpacesGrid({ items, onOpenGuidelines }) {
+        const [activeFilter, setActiveFilter] = useState('all');
         const [pageIndex, setPageIndex] = useState(0);
         const itemsPerPage = 2;
-        const totalPages = Math.max(1, Math.ceil(items.length / itemsPerPage));
-        const currentItems = items.slice(pageIndex * itemsPerPage, pageIndex * itemsPerPage + itemsPerPage);
         const gridRef = useRef(null);
         const isFirstRender = useRef(true);
+
+        const filteredItems = activeFilter === 'all' ? items : items.filter((item) => item.category === activeFilter);
+        const totalPages = Math.max(1, Math.ceil(filteredItems.length / itemsPerPage));
+        const currentItems = filteredItems.slice(pageIndex * itemsPerPage, pageIndex * itemsPerPage + itemsPerPage);
+        const isSingleCard = currentItems.length === 1;
 
         useEffect(() => {
           if (isFirstRender.current) {
@@ -595,51 +606,95 @@
           }
         }, [pageIndex]);
 
+        const handleFilterChange = (key) => {
+          if (key === activeFilter) return;
+          setActiveFilter(key);
+          setPageIndex(0);
+        };
+
         const goPrevious = () => setPageIndex((current) => (current === 0 ? totalPages - 1 : current - 1));
         const goNext = () => setPageIndex((current) => (current + 1) % totalPages);
 
         return (
-          <div className="space-y-8">
-            <div ref={gridRef} className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2" style={{ scrollMarginTop: '96px', overflowAnchor: 'none' }}>
-              {currentItems.map((item, index) => (
-                <article key={`${pageIndex}-${index}`} className="overflow-hidden rounded-[2rem] bg-white shadow-[0_22px_45px_rgba(0,0,0,.12)]">
-                  <div className="h-80 overflow-hidden" style={{ background: item.bg }}>
-                    <img
-                      src={item.img}
-                      alt={item.alt}
-                      className={
-                        item.fit === 'contain'
-                          ? 'h-full w-full object-contain p-12'
-                          : `h-full w-full object-cover ${item.type === 'site' ? 'object-top' : ''}`
-                      }
-                    />
-                  </div>
-                  <div className="p-6">
-                    <p className="text-[10px] uppercase tracking-[.22em] text-coal/50">{item.eyebrow}</p>
-                    <h3 className="mt-2 text-2xl font-medium">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-6 text-coal/70">{item.body}</p>
-                    {item.link && (
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-5 inline-flex items-center gap-2 rounded-full border border-coal/15 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-coal transition hover:border-ember hover:text-ember"
-                      >
-                        Check it out <span aria-hidden="true">↗</span>
-                      </a>
+          <div className="space-y-10">
+            <div className="flex justify-center">
+              <div className="inline-flex flex-wrap items-center justify-center gap-1 rounded-full border border-coal/10 bg-white/70 p-1.5 shadow-[0_18px_40px_rgba(23,17,13,0.08)] backdrop-blur-md">
+                {DIGITAL_SPACE_FILTERS.map((filter) => (
+                  <button
+                    key={filter.key}
+                    type="button"
+                    onClick={() => handleFilterChange(filter.key)}
+                    className={`relative rounded-full px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] transition-colors duration-300 ${
+                      activeFilter === filter.key ? 'text-white' : 'text-coal/55 hover:text-coal'
+                    }`}
+                  >
+                    {activeFilter === filter.key && (
+                      <motion.span
+                        layoutId="digitalSpacesFilterPill"
+                        className="absolute inset-0 rounded-full bg-coal shadow-[0_8px_20px_rgba(23,17,13,0.35)]"
+                        transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                      />
                     )}
-                    {item.guidelines && (
-                      <button
-                        type="button"
-                        onClick={() => onOpenGuidelines(item.guidelines)}
-                        className="mt-5 inline-flex items-center gap-2 rounded-full border border-coal/15 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-coal transition hover:border-ember hover:text-ember"
-                      >
-                        Check it out <span aria-hidden="true">↗</span>
-                      </button>
-                    )}
-                  </div>
-                </article>
-              ))}
+                    <span className="relative z-10">{filter.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div
+              ref={gridRef}
+              className={`mx-auto grid max-w-6xl gap-8 ${isSingleCard ? 'max-w-2xl md:grid-cols-1' : 'md:grid-cols-2'}`}
+              style={{ scrollMarginTop: '96px', overflowAnchor: 'none' }}
+            >
+              <AnimatePresence mode="popLayout">
+                {currentItems.map((item, index) => (
+                  <motion.article
+                    key={`${activeFilter}-${pageIndex}-${item.alt}`}
+                    layout
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.05 }}
+                    className="overflow-hidden rounded-[2rem] bg-white shadow-[0_22px_45px_rgba(0,0,0,.12)]"
+                  >
+                    <div className="h-80 overflow-hidden" style={{ background: item.bg }}>
+                      <img
+                        src={item.img}
+                        alt={item.alt}
+                        className={
+                          item.fit === 'contain'
+                            ? 'h-full w-full object-contain p-12'
+                            : `h-full w-full object-cover ${item.type === 'site' ? 'object-top' : ''}`
+                        }
+                      />
+                    </div>
+                    <div className="p-6">
+                      <p className="text-[10px] uppercase tracking-[.22em] text-coal/50">{item.eyebrow}</p>
+                      <h3 className="mt-2 text-2xl font-medium">{item.title}</h3>
+                      <p className="mt-3 text-sm leading-6 text-coal/70">{item.body}</p>
+                      {item.link && (
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-5 inline-flex items-center gap-2 rounded-full border border-coal/15 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-coal transition hover:border-ember hover:text-ember"
+                        >
+                          Check it out <span aria-hidden="true">↗</span>
+                        </a>
+                      )}
+                      {item.guidelines && (
+                        <button
+                          type="button"
+                          onClick={() => onOpenGuidelines(item.guidelines)}
+                          className="mt-5 inline-flex items-center gap-2 rounded-full border border-coal/15 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-coal transition hover:border-ember hover:text-ember"
+                        >
+                          Check it out <span aria-hidden="true">↗</span>
+                        </button>
+                      )}
+                    </div>
+                  </motion.article>
+                ))}
+              </AnimatePresence>
             </div>
 
             <div className="flex items-center justify-center gap-5">
@@ -738,6 +793,7 @@
         const digitalSpaceItems = [
           {
             type: 'site',
+            category: 'website',
             bg: '#0a0908',
             img: 'crevia/images/digital%20spaces/Screenshot%202026-09-11%20100145.png',
             alt: 'Crevia homepage',
@@ -747,6 +803,7 @@
           },
           {
             type: 'site',
+            category: 'website',
             bg: '#3d0613',
             img: 'crevia/images/digital%20spaces/Screenshot%202026-09-11%20094909.png',
             alt: 'Mzizi Organics homepage',
@@ -756,6 +813,7 @@
           },
           {
             type: 'site',
+            category: 'app',
             bg: '#17110d',
             img: 'crevia/images/digital%20spaces/Screenshot%202026-09-11%20101211.png',
             alt: 'Kaizen Afrika homepage',
@@ -766,6 +824,7 @@
           },
           {
             type: 'site',
+            category: 'website',
             bg: '#0d1f16',
             img: 'crevia/images/digital%20spaces/amin%20hussein%20website.png',
             alt: 'Amin Hussein portfolio website',
@@ -776,6 +835,7 @@
           },
           {
             type: 'logo',
+            category: 'brand',
             bg: '#3d0613',
             img: 'crevia/images/digital%20spaces/mzizi%20organics%20logo.PNG',
             alt: 'Mzizi Organics logo',
@@ -786,6 +846,7 @@
           },
           {
             type: 'logo',
+            category: 'brand',
             fit: 'contain',
             bg: '#060606',
             img: 'crevia/images/digital%20spaces/crevia%20logo.PNG',
