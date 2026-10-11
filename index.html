@@ -457,129 +457,6 @@
         );
       }
 
-      function VideoModal({ event, onClose }) {
-        if (!event) return null;
-        const [hasVideoError, setHasVideoError] = useState(false);
-        const [resolvedSrc, setResolvedSrc] = useState(null);
-        const [loadError, setLoadError] = useState(false);
-
-        useEffect(() => {
-          let isActive = true;
-          let objectUrl = null;
-
-          setResolvedSrc(event.playerType === 'file' ? null : event.embedUrl);
-          setLoadError(false);
-
-          if (event.playerType !== 'file') {
-            return () => {
-              isActive = false;
-            };
-          }
-
-          fetch(event.videoSrc)
-            .then((response) => {
-              if (!response.ok) throw new Error(`Failed to load video: ${response.status}`);
-              return response.blob();
-            })
-            .then((blob) => {
-              if (!isActive) return;
-              const mimeType = event.videoSrc.endsWith('.webm') ? 'video/webm' : 'video/mp4';
-              objectUrl = URL.createObjectURL(new Blob([blob], { type: mimeType }));
-              setResolvedSrc(objectUrl);
-            })
-            .catch(() => {
-              if (isActive) setResolvedSrc(event.videoSrc);
-            });
-
-          return () => {
-            isActive = false;
-            if (objectUrl) URL.revokeObjectURL(objectUrl);
-          };
-        }, [event.embedUrl, event.playerType, event.videoSrc]);
-
-        return (
-          <div
-            className="fixed inset-0 z-[80] flex items-center justify-center bg-black/80 px-4 backdrop-blur-md"
-            onClick={onClose}
-          >
-            <div
-              className="relative w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/15 bg-[#0b0b0f] shadow-[0_40px_120px_rgba(0,0,0,0.7)]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex items-center justify-between border-b border-white/10 px-5 py-4 text-white/80">
-                <div>
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-white/60">Featured event</p>
-                  <h3 className="mt-1 text-lg font-medium text-white">{event.title}</h3>
-                </div>
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-lg text-white/80 transition hover:bg-white/10 hover:text-white"
-                  aria-label="Close video"
-                >
-                  ×
-                </button>
-              </div>
-
-              <div className="aspect-video w-full bg-black">
-                {event.playerType === 'file' && resolvedSrc && !loadError ? (
-                  <video
-                    className="h-full w-full bg-black object-cover"
-                    src={resolvedSrc}
-                    poster={event.poster}
-                    controls
-                    autoPlay
-                    playsInline
-                    preload="auto"
-                    muted={false}
-                    defaultMuted={false}
-                    onLoadedMetadata={(loadedEvent) => {
-                      loadedEvent.currentTarget.muted = false;
-                      loadedEvent.currentTarget.defaultMuted = false;
-                      loadedEvent.currentTarget.volume = 1;
-                    }}
-                    onError={() => {
-                      if (resolvedSrc && resolvedSrc.startsWith('blob:')) {
-                        setResolvedSrc(event.videoSrc);
-                      } else {
-                        setLoadError(true);
-                      }
-                    }}
-                  />
-                ) : event.playerType === 'file' && !loadError ? (
-                  <div className="flex h-full items-center justify-center bg-gradient-to-br from-[#101010] via-[#1a1a1a] to-[#070707] px-8 text-center text-white">
-                    <div>
-                      <p className="text-[10px] uppercase tracking-[0.22em] text-white/60">Loading video</p>
-                      <p className="mt-3 text-lg text-white/80">Preparing playback...</p>
-                    </div>
-                  </div>
-                ) : event.playerType === 'file' ? (
-                  <div className="flex h-full flex-col items-center justify-center gap-5 bg-gradient-to-br from-[#101010] via-[#1a1a1a] to-[#070707] px-8 text-center text-white">
-                    <div className="max-w-md">
-                      <p className="text-[10px] uppercase tracking-[0.22em] text-white/60">Video unavailable</p>
-                      <h4 className="mt-3 text-2xl font-medium text-white">{event.title}</h4>
-                      <p className="mt-4 text-sm leading-7 text-white/72">
-                        The browser could not load this clip directly. The file is still available in the project media
-                        folder.
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  <iframe
-                    className="h-full w-full"
-                    src={event.embedUrl}
-                    title={event.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-        );
-      }
-
       const brandGuidelines = {
         crevia: {
           name: 'Crevia',
@@ -695,152 +572,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        );
-      }
-
-      function PortfolioMarquee({ events, onSelect }) {
-        const [pageIndex, setPageIndex] = useState(0);
-        const [playingKey, setPlayingKey] = useState(null);
-        const eventsPerPage = 2;
-        const totalPages = Math.max(1, Math.ceil(events.length / eventsPerPage));
-        const currentEvents = events.slice(pageIndex * eventsPerPage, pageIndex * eventsPerPage + eventsPerPage);
-        const gridRef = useRef(null);
-        const isFirstRender = useRef(true);
-
-        useEffect(() => {
-          if (isFirstRender.current) {
-            isFirstRender.current = false;
-            return;
-          }
-          if (typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches) {
-            gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }, [pageIndex]);
-
-        const goPrevious = () => {
-          setPlayingKey(null);
-          setPageIndex((current) => (current === 0 ? totalPages - 1 : current - 1));
-        };
-
-        const goNext = () => {
-          setPlayingKey(null);
-          setPageIndex((current) => (current + 1) % totalPages);
-        };
-
-        const handleCardClick = (event, index) => {
-          if (event.playerType === 'youtube') {
-            setPlayingKey(`${pageIndex}-${index}`);
-          } else {
-            onSelect(event);
-          }
-        };
-
-        return (
-          <div className="space-y-8">
-            <div ref={gridRef} className="grid gap-6 md:grid-cols-2" style={{ scrollMarginTop: '96px', overflowAnchor: 'none' }}>
-              {currentEvents.map((event, index) => {
-                const cardKey = `${pageIndex}-${index}`;
-                const isPlaying = playingKey === cardKey;
-                return (
-                <article
-                  key={cardKey}
-                  onClick={() => !isPlaying && handleCardClick(event, index)}
-                  className={`group overflow-hidden rounded-[2rem] border border-white/[0.12] bg-[#101010] shadow-[0_22px_45px_rgba(0,0,0,0.35)] transition ${isPlaying ? '' : 'cursor-pointer hover:brightness-110'} ${event.tilt}`}
-                >
-                  <div className="relative h-[360px] overflow-hidden bg-[#0b0b0f]">
-                    {isPlaying && event.playerType === 'youtube' ? (
-                      <iframe
-                        className="absolute inset-0 h-full w-full"
-                        src={event.embedUrl}
-                        title={event.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        referrerPolicy="strict-origin-when-cross-origin"
-                        allowFullScreen
-                      />
-                    ) : event.poster ? (
-                      <>
-                        <img
-                          src={event.poster}
-                          alt={event.title}
-                          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.16),rgba(0,0,0,0.72))]" />
-                      </>
-                    ) : (
-                      <>
-                        <div className={`flex h-full w-full flex-col justify-between bg-gradient-to-br ${event.tone} px-6 py-6`}>
-                          <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-white/70">
-                            <span>Portfolio preview</span>
-                            <span>{event.year}</span>
-                          </div>
-                          <div>
-                            <p className="max-w-sm text-3xl font-medium leading-tight text-white">{event.title}</p>
-                            <p className="mt-3 text-sm text-white/75">{event.location}</p>
-                          </div>
-                        </div>
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_42%)]" />
-                      </>
-                    )}
-
-                    {!isPlaying && (
-                      <>
-                        <div className="absolute inset-x-0 top-0 flex items-center justify-between px-4 py-3">
-                          <span className="rounded-full border border-white/15 bg-black/20 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-md">
-                            Featured
-                          </span>
-                          <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/25 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur-md transition hover:border-white/30 hover:bg-black/35">
-                            Play <span aria-hidden="true">▶</span>
-                          </span>
-                        </div>
-
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/25 bg-black/30 shadow-[0_12px_35px_rgba(0,0,0,0.52)] backdrop-blur-sm transition group-hover:scale-110 group-hover:border-white/40">
-                            <div className="ml-1 h-0 w-0 border-y-[10px] border-l-[18px] border-y-transparent border-l-white" />
-                          </div>
-                        </div>
-                      </>
-                    )}
-                  </div>
-
-                  <div className="bg-white px-5 py-5 text-coal">
-                    <div className="flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.2em] text-coal/55">
-                      <span>{event.location}</span>
-                      <span>{event.year}</span>
-                    </div>
-                    <h3 className="mt-3 text-[1.55rem] font-medium leading-tight text-coal">{event.title}</h3>
-                    {event.description && <p className="mt-3 text-sm leading-6 text-coal/70">{event.description}</p>}
-                  </div>
-                </article>
-                );
-              })}
-            </div>
-
-            <div className="flex items-center justify-center gap-5">
-              <button
-                type="button"
-                onClick={goPrevious}
-                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10"
-                aria-label="Show previous portfolio items"
-              >
-                <span aria-hidden="true">←</span>
-              </button>
-
-              <div className="flex items-center gap-3 text-sm font-medium tabular-nums tracking-[0.08em]">
-                <span className="text-white">{String(pageIndex + 1).padStart(2, '0')}</span>
-                <span className="h-px w-4 bg-white/20" aria-hidden="true" />
-                <span className="text-white/40">{String(totalPages).padStart(2, '0')}</span>
-              </div>
-
-              <button
-                type="button"
-                onClick={goNext}
-                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10"
-                aria-label="Show next portfolio items"
-              >
-                <span aria-hidden="true">→</span>
-              </button>
             </div>
           </div>
         );
@@ -972,7 +703,6 @@
           },
         ];
         const [hoveredNav, setHoveredNav] = useState(null);
-        const [selectedEvent, setSelectedEvent] = useState(null);
         const [selectedGuideline, setSelectedGuideline] = useState(null);
         const [mobileOpen, setMobileOpen] = useState(false);
         const { scrollY } = useScroll();
@@ -1002,53 +732,6 @@
               'We trusted Crevia with a high-stakes convening and they owned it end-to-end. The outcome quality reflected institutional-grade control.',
             name: 'L. Mensah',
             role: 'CEO, Frontier Systems',
-          },
-        ];
-
-        const portfolioEvents = [
-          {
-            title: 'Freelancers Summit 2024',
-            location: 'Nairobi, Kenya',
-            year: '2024',
-            description: 'Empowering digital independence. Freelancers Summit brought independent professionals together to share practical lessons, build community, and strengthen the systems that help digital talent work with greater freedom.',
-            playerType: 'youtube',
-            embedUrl: 'https://www.youtube.com/embed/-20xdAqoBfo?autoplay=1&rel=0&modestbranding=1',
-            poster: 'crevia/images/freelancers%20summit/freelancers%20group%20photo.jpeg',
-            tone: 'from-[#0b1120] via-[#13273d] to-[#262c38]',
-            tilt: '-rotate-[2deg]',
-          },
-          {
-            title: 'AI Summit 2025',
-            location: 'Nairobi, Kenya',
-            year: '2025',
-            description: 'Building AI for impact. AI Summit 2025 explored how builders across Africa can apply artificial intelligence to real challenges — moving beyond the hype toward useful, responsible, and measurable solutions.',
-            playerType: 'youtube',
-            embedUrl: 'https://www.youtube.com/embed/BKaxVxiLz0Y?autoplay=1&rel=0&modestbranding=1',
-            poster: 'crevia/images/AI%20summit%20group%20photo%20strathmore.jpeg',
-            tone: 'from-[#141920] via-[#1d2f39] to-[#3d4758]',
-            tilt: 'rotate-[2deg]',
-          },
-          {
-            title: 'Crevia Summit 2026',
-            location: 'Nairobi, Kenya',
-            year: '2026',
-            description: 'How to build a personal brand that lasts. Crevia Summit brought together ambitious builders to explore how a clear, credible story creates trust, opportunity, and long-term influence.',
-            playerType: 'youtube',
-            embedUrl: 'https://www.youtube.com/embed/v1ao9s77lpI?autoplay=1&rel=0&modestbranding=1',
-            poster: 'crevia/images/crevia%20summit/crevia%20summit%20group%20photo.PNG',
-            tone: 'from-[#1d2d1f] via-[#2d5341] to-[#0c120f]',
-            tilt: '-rotate-[1deg]',
-          },
-          {
-            title: "Lang'ata Islamic Centre Creatives Meet 2026",
-            location: 'Nairobi, Kenya',
-            year: '2026',
-            description: "A room built around a shared cause. Muslim content creators gathered over Arabian cuisine in Upperhill to shape how the flagship Lang'ata Islamic Centre gets built — trading the fundraising ideas that turn a shared vision into a physical home for the community.",
-            playerType: 'youtube',
-            embedUrl: 'https://www.youtube.com/embed/iRAUyoGCKIY?autoplay=1&rel=0&modestbranding=1',
-            poster: 'crevia/images/Langata%20islamic%20centre/LIC%20image.png',
-            tone: 'from-[#1d1a1a] via-[#403a38] to-[#111212]',
-            tilt: 'rotate-[1deg]',
           },
         ];
 
@@ -1280,52 +963,6 @@
                 </div>
               </motion.section>
 
-              <motion.section {...SECTION_REVEAL} id="past-convenings" className="relative isolate overflow-hidden bg-coal py-20 text-white md:py-24">
-                <div className="africa-pattern" />
-                <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
-                  <div className="mb-12 text-center">
-                    <p className="text-xs uppercase tracking-[0.42em] text-ember/[0.9]">Portfolio</p>
-                    <h2 className="mt-4 font-display text-4xl uppercase tracking-[0.06em] md:text-5xl">
-                      SOME OF THE <span className="text-ember">PHYSICAL</span> SPACES WE&apos;VE BUILT
-                    </h2>
-                  </div>
-
-                  <PortfolioMarquee events={portfolioEvents} onSelect={setSelectedEvent} />
-                  {false && (
-                  <div className="portfolio-carousel overflow-hidden">
-                    <div className="portfolio-track gap-6 py-2">
-                      {loopedPortfolioEvents.map((event, index) => (
-                        <article
-                          key={`${event.title}-${index}`}
-                          className={`group min-w-[82vw] overflow-hidden rounded-[2rem] border border-white/[0.12] bg-[#101010] shadow-[0_22px_45px_rgba(0,0,0,0.35)] sm:min-w-[460px] lg:min-w-[520px] ${event.tilt}`}
-                        >
-                          <div className={`relative h-[320px] bg-gradient-to-br ${event.tone}`}>
-                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,255,255,0.2),transparent_42%)]" />
-                            <div className="absolute inset-0 bg-black/[0.38]" />
-                            <div className="absolute left-5 top-5 rounded-full border border-white/[0.35] px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-white/[0.88]">
-                              Hosted Event
-                            </div>
-                            <div className="absolute bottom-5 left-5 right-5 text-xs uppercase tracking-[0.22em] text-white/[0.7]">
-                              {event.location} · {event.year}
-                            </div>
-                            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/[0.75] to-transparent" />
-                          </div>
-                          <div className="bg-white px-6 py-5 text-coal">
-                            <p className="text-2xl leading-tight">
-                              {(index % portfolioEvents.length) + 1 < 10
-                                ? `0${(index % portfolioEvents.length) + 1}`
-                                : (index % portfolioEvents.length) + 1}
-                            </p>
-                            <h3 className="mt-2 text-[1.65rem] font-medium leading-tight">{event.title}</h3>
-                          </div>
-                        </article>
-                      ))}
-                    </div>
-                  </div>
-                  )}
-                </div>
-              </motion.section>
-
               <motion.section {...SECTION_REVEAL} id="digital-spaces" className="relative isolate overflow-hidden bg-[#f3efe9] py-20 text-coal md:py-24">
                 <div className="relative w-full px-6 md:px-10 lg:px-16 xl:px-20">
                   <div className="mb-12 text-center">
@@ -1474,7 +1111,6 @@ href="crevia/services.html"
                 </div>
               </motion.footer>
             </main>
-            {selectedEvent && <VideoModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />}
             {selectedGuideline && <BrandGuidelinesModal brand={brandGuidelines[selectedGuideline]} onClose={() => setSelectedGuideline(null)} />}
           </>
         );

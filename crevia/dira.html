@@ -33,6 +33,15 @@
       a:hover .link-arrow { transform: translateX(4px); }
       .archive-card { transition: background-color 650ms cubic-bezier(.16,1,.3,1), transform 650ms cubic-bezier(.16,1,.3,1); }
       .archive-card:hover { background-color: rgba(255,255,255,.055); transform: translateY(-4px); }
+      .africa-pattern {
+        position: absolute; inset: 0; pointer-events: none; opacity: 0.14;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.35' stroke-width='1.1'%3E%3Cpath d='M20 40H120V140H20zM40 60H100V120H40zM160 20h100v100H160zM180 40h60v60h-60zM20 180h100v80H20zM40 200h60v40H40zM160 160c20 0 20 40 40 40s20-40 40-40 20 40 40 40'/%3E%3Cpath d='M150 220c15 0 15 25 30 25s15-25 30-25 15 25 30 25'/%3E%3C/g%3E%3C/svg%3E");
+        background-size: 280px 280px; background-repeat: repeat; mix-blend-mode: screen;
+      }
+      .portfolio-card { cursor: pointer; transition: filter 420ms ease; }
+      .portfolio-card:hover { filter: brightness(1.1); }
+      .portfolio-card.is-playing { cursor: default; }
+      .portfolio-card.is-playing:hover { filter: none; }
       .focus-ring:focus-visible { outline: 2px solid #db5d11; outline-offset: 4px; }
       .surface-paper { background: #f3f0e9; color: #17110d; }
       .surface-paper .text-paper { color: #17110d !important; }
@@ -176,19 +185,26 @@
         </div>
       </section>
 
-      <section id="archive" class="surface-paper scroll-reveal border-b hairline px-5 py-24 md:px-10 md:py-36" data-reveal>
-        <div class="mx-auto max-w-[1440px]">
-          <div class="grid gap-7 md:grid-cols-2 md:items-end"><p class="eyebrow text-[11px] font-bold uppercase text-ember">03 / Archive</p><p class="max-w-lg text-lg leading-8 text-paper/65 md:justify-self-end">Foundational rooms, built with the same operating discipline: the right people, a clear mandate, and no wasted motion.</p></div>
-          <div class="mt-16 border-t hairline">
-            <article class="archive-card scroll-reveal grid gap-8 border-b hairline py-9 md:grid-cols-[130px_1fr_1.25fr] md:items-start md:gap-12" data-reveal style="--reveal-delay: 70ms">
-              <p class="eyebrow text-[11px] font-bold uppercase text-ember">2026</p><div><h3 class="font-display text-3xl font-semibold text-paper">Crevia Summit 2026</h3><p class="mt-2 text-sm text-paper/50">iHub Nairobi</p></div><p class="max-w-xl leading-7 text-paper/70">How to build a successful personal brand. Crevia Summit brought together ambitious builders to explore how a clear, credible personal story can create trust, opportunity, and long-term influence.</p>
-            </article>
-            <article class="archive-card scroll-reveal grid gap-8 border-b hairline py-9 md:grid-cols-[130px_1fr_1.25fr] md:items-start md:gap-12" data-reveal style="--reveal-delay: 150ms">
-              <p class="eyebrow text-[11px] font-bold uppercase text-ember">2025</p><div><h3 class="font-display text-3xl font-semibold text-paper">AI Summit 2025</h3><p class="mt-2 text-sm text-paper/50">Strathmore University</p></div><p class="max-w-xl leading-7 text-paper/70">Building AI for Impact. AI Summit 2025 explored how builders across Africa can apply artificial intelligence to real challenges — moving beyond excitement toward useful, responsible, and measurable solutions.</p>
-            </article>
-            <article class="archive-card scroll-reveal grid gap-8 border-b hairline py-9 md:grid-cols-[130px_1fr_1.25fr] md:items-start md:gap-12" data-reveal style="--reveal-delay: 230ms">
-              <p class="eyebrow text-[11px] font-bold uppercase text-ember">2024</p><div><h3 class="font-display text-3xl font-semibold text-paper">Freelancers Summit 2024</h3><p class="mt-2 text-sm text-paper/50">iHub Nairobi</p></div><p class="max-w-xl leading-7 text-paper/70">Empowering digital independence. Freelancers Summit 2024 brought independent professionals together to share practical lessons, build community, and strengthen the systems that help digital talent work with greater freedom.</p>
-            </article>
+      <section id="archive" class="scroll-reveal relative isolate overflow-hidden border-b hairline bg-coal px-5 py-24 text-paper md:px-10 md:py-36" data-reveal>
+        <div class="africa-pattern"></div>
+        <div class="relative mx-auto max-w-[1440px]">
+          <div class="grid gap-7 md:grid-cols-2 md:items-end">
+            <p class="eyebrow text-[11px] font-bold uppercase text-ember">03 / Archive</p>
+            <p class="max-w-lg text-lg leading-8 text-paper/65 md:justify-self-end">Foundational rooms, built with the same operating discipline: the right people, a clear mandate, and no wasted motion.</p>
+          </div>
+          <h2 class="mt-7 max-w-4xl font-display text-4xl font-semibold leading-[1.05] tracking-[-.03em] text-paper md:text-6xl">Some of the physical spaces we&rsquo;ve built.</h2>
+
+          <div class="mt-16">
+            <div id="archiveGrid" class="grid gap-6 md:grid-cols-2" style="scroll-margin-top:96px"></div>
+            <div class="mt-10 flex items-center justify-center gap-5">
+              <button type="button" id="archivePrev" aria-label="Show previous archive items" class="focus-ring inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-paper transition hover:border-white/30 hover:bg-white/10"><span aria-hidden="true">←</span></button>
+              <div class="flex items-center gap-3 text-sm font-medium tabular-nums tracking-[.08em]">
+                <span id="archiveCurrent" class="text-paper">01</span>
+                <span class="h-px w-4 bg-white/20" aria-hidden="true"></span>
+                <span id="archiveTotal" class="text-paper/40">02</span>
+              </div>
+              <button type="button" id="archiveNext" aria-label="Show next archive items" class="focus-ring inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-paper transition hover:border-white/30 hover:bg-white/10"><span aria-hidden="true">→</span></button>
+            </div>
           </div>
         </div>
       </section>
@@ -238,6 +254,127 @@
 
       function toggleMobileNav(){ document.body.classList.toggle('mobile-open'); }
       const _navToggle = document.getElementById('navToggle'); if(_navToggle) _navToggle.addEventListener('click', toggleMobileNav);
+
+      (function () {
+        const events = [
+          {
+            title: 'Freelancers Summit 2024',
+            location: 'Nairobi, Kenya',
+            year: '2024',
+            description: 'Empowering digital independence. Freelancers Summit brought independent professionals together to share practical lessons, build community, and strengthen the systems that help digital talent work with greater freedom.',
+            embedUrl: 'https://www.youtube.com/embed/-20xdAqoBfo?autoplay=1&rel=0&modestbranding=1',
+            poster: 'images/freelancers%20summit/freelancers%20group%20photo.jpeg',
+          },
+          {
+            title: 'AI Summit 2025',
+            location: 'Nairobi, Kenya',
+            year: '2025',
+            description: 'Building AI for impact. AI Summit 2025 explored how builders across Africa can apply artificial intelligence to real challenges — moving beyond the hype toward useful, responsible, and measurable solutions.',
+            embedUrl: 'https://www.youtube.com/embed/BKaxVxiLz0Y?autoplay=1&rel=0&modestbranding=1',
+            poster: 'images/AI%20summit%20group%20photo%20strathmore.jpeg',
+          },
+          {
+            title: 'Crevia Summit 2026',
+            location: 'Nairobi, Kenya',
+            year: '2026',
+            description: 'How to build a personal brand that lasts. Crevia Summit brought together ambitious builders to explore how a clear, credible story creates trust, opportunity, and long-term influence.',
+            embedUrl: 'https://www.youtube.com/embed/v1ao9s77lpI?autoplay=1&rel=0&modestbranding=1',
+            poster: 'images/crevia%20summit/crevia%20summit%20group%20photo.PNG',
+          },
+          {
+            title: "Lang'ata Islamic Centre Creatives Meet 2026",
+            location: 'Nairobi, Kenya',
+            year: '2026',
+            description: "A room built around a shared cause. Muslim content creators gathered over Arabian cuisine in Upperhill to shape how the flagship Lang'ata Islamic Centre gets built — trading the fundraising ideas that turn a shared vision into a physical home for the community.",
+            embedUrl: 'https://www.youtube.com/embed/iRAUyoGCKIY?autoplay=1&rel=0&modestbranding=1',
+            poster: 'images/Langata%20islamic%20centre/LIC%20image.png',
+          },
+        ];
+
+        const grid = document.getElementById('archiveGrid');
+        if (!grid) return;
+        const prevBtn = document.getElementById('archivePrev');
+        const nextBtn = document.getElementById('archiveNext');
+        const currentLabel = document.getElementById('archiveCurrent');
+        const totalLabel = document.getElementById('archiveTotal');
+
+        const perPage = 2;
+        const totalPages = Math.max(1, Math.ceil(events.length / perPage));
+        let pageIndex = 0;
+        let playingIndex = null;
+        let isFirstRender = true;
+
+        function pad(n) { return String(n).padStart(2, '0'); }
+
+        function cardMarkup(event, indexOnPage) {
+          const isPlaying = playingIndex === indexOnPage;
+          const mediaInner = isPlaying
+            ? `<iframe class="absolute inset-0 h-full w-full" src="${event.embedUrl}" title="${event.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
+            : `<img src="${event.poster}" alt="${event.title}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+               <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.16),rgba(0,0,0,0.72))]"></div>
+               <div class="absolute inset-x-0 top-0 flex items-center justify-between px-4 py-3">
+                 <span class="rounded-full border border-white/15 bg-black/20 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-md">Featured</span>
+                 <span class="inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/25 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur-md">Play <span aria-hidden="true">▶</span></span>
+               </div>
+               <div class="absolute inset-0 flex items-center justify-center">
+                 <div class="flex h-16 w-16 items-center justify-center rounded-full border border-white/25 bg-black/30 shadow-[0_12px_35px_rgba(0,0,0,0.52)] backdrop-blur-sm transition group-hover:scale-110 group-hover:border-white/40">
+                   <div class="ml-1 h-0 w-0 border-y-[10px] border-l-[18px] border-y-transparent border-l-white"></div>
+                 </div>
+               </div>`;
+
+          return `
+            <article class="portfolio-card group overflow-hidden rounded-[2rem] border border-white/[0.12] bg-[#101010] shadow-[0_22px_45px_rgba(0,0,0,0.35)]${isPlaying ? ' is-playing' : ''}" data-index="${indexOnPage}">
+              <div class="relative h-[360px] overflow-hidden bg-[#0b0b0f]">${mediaInner}</div>
+              <div class="bg-white px-5 py-5 text-coal">
+                <div class="flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.2em] text-coal/55">
+                  <span>${event.location}</span><span>${event.year}</span>
+                </div>
+                <h3 class="mt-3 text-[1.55rem] font-medium leading-tight text-coal">${event.title}</h3>
+                <p class="mt-3 text-sm leading-6 text-coal/70">${event.description}</p>
+              </div>
+            </article>`;
+        }
+
+        function render() {
+          playingIndex = null;
+          const pageEvents = events.slice(pageIndex * perPage, pageIndex * perPage + perPage);
+          grid.innerHTML = pageEvents.map((event, i) => cardMarkup(event, i)).join('');
+          grid.querySelectorAll('.portfolio-card').forEach((card) => {
+            card.addEventListener('click', () => {
+              const idx = Number(card.dataset.index);
+              if (playingIndex === idx) return;
+              playingIndex = idx;
+              const event = pageEvents[idx];
+              grid.querySelectorAll('.portfolio-card').forEach((c) => c.classList.remove('is-playing'));
+              card.classList.add('is-playing');
+              card.innerHTML = `
+                <div class="relative h-[360px] overflow-hidden bg-[#0b0b0f]"><iframe class="absolute inset-0 h-full w-full" src="${event.embedUrl}" title="${event.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                <div class="bg-white px-5 py-5 text-coal">
+                  <div class="flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.2em] text-coal/55"><span>${event.location}</span><span>${event.year}</span></div>
+                  <h3 class="mt-3 text-[1.55rem] font-medium leading-tight text-coal">${event.title}</h3>
+                  <p class="mt-3 text-sm leading-6 text-coal/70">${event.description}</p>
+                </div>`;
+            });
+          });
+          currentLabel.textContent = pad(pageIndex + 1);
+          totalLabel.textContent = pad(totalPages);
+          if (!isFirstRender && window.matchMedia('(max-width: 767px)').matches) {
+            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          isFirstRender = false;
+        }
+
+        prevBtn.addEventListener('click', () => {
+          pageIndex = pageIndex === 0 ? totalPages - 1 : pageIndex - 1;
+          render();
+        });
+        nextBtn.addEventListener('click', () => {
+          pageIndex = (pageIndex + 1) % totalPages;
+          render();
+        });
+
+        render();
+      })();
     </script>
   <script src="performance.js" type="module"></script>
   </body>
