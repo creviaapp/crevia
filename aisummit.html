@@ -11,7 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+    <script src="https://js.paystack.co/v2/inline.js"></script>
+    <script>
     tailwind.config = { theme: { extend: {
       colors: { coal: '#060606', ivory: '#f5f3f0', ember: '#db5d11', forest: '#0B2B20' },
       fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['Libre Baskerville', 'serif'] },
@@ -174,7 +175,7 @@
                   <div><label for="attendeeOrganization" class="mb-1.5 block text-sm font-semibold text-[#26231f]">Company or organization <span class="font-normal text-black/40">(optional)</span></label><input id="attendeeOrganization" name="organization" autocomplete="organization" maxlength="120" class="focus-ring min-h-12 w-full rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-sm text-[#17110d] outline-none transition placeholder:text-black/35 focus:border-forest" placeholder="Where you work"></div>
                 </div>
                 <button type="submit" class="focus-ring mt-6 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-xl bg-forest px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#124233]">Continue to review <span aria-hidden="true">&rarr;</span></button>
-                <p class="mt-4 text-center text-xs leading-5 text-black/40">Your attendee details stay in this checkout until payment is connected.</p>
+                <p class="mt-4 text-center text-xs leading-5 text-black/40">Your details are sent securely to start your payment and reserve your ticket.</p>
               </form>
 
               <div id="paymentStep" class="hidden" aria-labelledby="paymentHeading">
@@ -191,7 +192,8 @@
                 </div>
                 <button id="payButton" type="button" class="focus-ring mt-6 inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-forest px-6 py-4 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(11,43,32,.2)] transition hover:bg-[#124233]">Pay 1,500 KES</button>
                 <p id="paymentMessage" class="mt-4 hidden rounded-xl bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950" role="status" aria-live="polite"></p>
-                <p class="mt-4 text-center text-xs leading-5 text-black/40">No payment is taken until checkout is complete.</p>
+                <button id="paymentRetry" type="button" class="focus-ring mt-3 hidden w-full rounded-xl border border-black/10 px-4 py-3 text-sm font-semibold text-forest hover:bg-[#f7f8f6]">Retry payment confirmation</button>
+                <p class="mt-4 text-center text-xs leading-5 text-black/40">Secure checkout by Paystack. Your card or M-Pesa details are handled by Paystack.</p>
               </div>
             </section>
             <p class="px-5 py-4 text-center text-xs leading-5 text-white/40">Questions? <a href="mailto:hello@crevia.app" class="focus-ring rounded text-white/75 underline decoration-white/20 underline-offset-4 hover:text-white">Contact the organisers</a></p>
@@ -236,6 +238,11 @@
     const attendeeForm = document.getElementById('attendeeForm');
     const paymentStep = document.getElementById('paymentStep');
     const paymentMessage = document.getElementById('paymentMessage');
+    const paymentRetry = document.getElementById('paymentRetry');
+    const payButton = document.getElementById('payButton');
+    const payButtonLabel = payButton.innerHTML;
+    let checkoutBusy = false;
+    let lastReference = sessionStorage.getItem('aisummit_checkout_reference');
     const attendeeFields = {
       name: document.getElementById('attendeeName'),
       email: document.getElementById('attendeeEmail'),
@@ -260,10 +267,117 @@
       document.getElementById('payButton').focus();
     });
     document.getElementById('editDetails').addEventListener('click', () => { paymentMessage.classList.add('hidden'); paymentStep.classList.add('hidden'); attendeeForm.classList.remove('hidden'); attendeeFields.name.focus(); });
-    document.getElementById('payButton').addEventListener('click', () => {
-      paymentMessage.textContent = 'Online checkout is not connected yet. Your details have not been sent and you have not been charged. Please contact the organisers to complete your registration.';
-      paymentMessage.classList.remove('hidden');
-    });
+    function setPaymentMessage(message, kind = 'pending') {
+      paymentMessage.textContent = message;
+      paymentMessage.className = `mt-4 rounded-xl px-4 py-3 text-sm leading-6 ${kind === 'success' ? 'bg-emerald-50 text-emerald-950' : kind === 'error' ? 'bg-rose-50 text-rose-950' : 'bg-amber-50 text-amber-950'}`;
+    }
+    function setPayBusy(busy, label = 'Pay 1,500 KES') {
+      checkoutBusy = busy;
+      payButton.disabled = busy;
+      payButton.setAttribute('aria-busy', String(busy));
+      payButton.innerHTML = busy
+        ? `<svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity=".3" stroke-width="3"/><path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>${label}`
+        : payButtonLabel;
+    }
+    async function verifyPayment(reference, attempt = 0) {
+      try {
+        const response = await fetch('/api/paystack/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ reference })
+        });
+        const result = await response.json().catch(() => ({}));
+        if (response.ok && result.paid) {
+          paymentStep.classList.remove('hidden');
+          attendeeForm.classList.add('hidden');
+          payButton.classList.add('hidden');
+          setPaymentMessage('Payment confirmed. Your AI Summit 2027 ticket is reserved. Keep your Paystack receipt for your records.', 'success');
+          paymentRetry.classList.add('hidden');
+          history.replaceState({}, '', '/aisummit');
+          sessionStorage.removeItem('aisummit_checkout_reference');
+          return true;
+        }
+        if (attempt < 2 && response.status >= 500) {
+          await new Promise((resolve) => setTimeout(resolve, 1200 * (attempt + 1)));
+          return verifyPayment(reference, attempt + 1);
+        }
+        setPaymentMessage(result.error || 'Payment is not confirmed yet. If you completed payment, please wait a moment and retry confirmation.', 'error');
+        payButton.classList.add('hidden');
+        paymentRetry.classList.remove('hidden');
+      } catch {
+        if (attempt < 2) {
+          await new Promise((resolve) => setTimeout(resolve, 1200 * (attempt + 1)));
+          return verifyPayment(reference, attempt + 1);
+        }
+        setPaymentMessage('We could not confirm payment right now. Your reference is saved so you can safely retry; please contact hello@crevia.app if the issue continues.', 'error');
+        payButton.classList.add('hidden');
+        paymentRetry.classList.remove('hidden');
+      }
+      setPayBusy(false);
+      return false;
+    }
+    async function startCheckout() {
+      if (checkoutBusy) return;
+      setPayBusy(true, 'Starting secure checkout…');
+      paymentMessage.classList.add('hidden');
+      try {
+        const response = await fetch('/api/paystack/initialize', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({
+            name: attendeeFields.name.value.trim(),
+            email: attendeeFields.email.value.trim(),
+            phone: attendeeFields.phone.value.trim(),
+            organization: attendeeFields.organization.value.trim()
+          })
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.accessCode || !result.reference) throw new Error(result.error || 'Secure checkout could not start. Please try again.');
+        sessionStorage.setItem('aisummit_checkout_reference', result.reference);
+        lastReference = result.reference;
+        if (!window.PaystackPop) throw new Error('Secure checkout is unavailable right now. Please try again in a moment.');
+        const popup = new PaystackPop();
+        popup.resumeTransaction(result.accessCode, {
+          onSuccess: (transaction) => {
+            if (transaction?.reference !== result.reference) {
+              setPayBusy(true, 'Verifying payment…');
+              setPaymentMessage('Verifying your payment securely…');
+              verifyPayment(result.reference);
+              return;
+            }
+            setPayBusy(true, 'Verifying payment…');
+            setPaymentMessage('Verifying your payment securely…');
+            verifyPayment(result.reference);
+          },
+          onCancel: () => {
+            setPayBusy(false);
+            setPaymentMessage('Checkout was closed before payment was completed. You can try again whenever you’re ready.', 'pending');
+          },
+          onError: () => {
+            setPayBusy(false);
+            setPaymentMessage('Paystack could not complete checkout. Please try again.', 'error');
+          }
+        });
+      } catch (error) {
+        setPayBusy(false);
+        setPaymentMessage(error.message || 'Secure checkout could not start. Please try again.', 'error');
+      }
+    }
+    payButton.addEventListener('click', startCheckout);
+    paymentRetry.addEventListener('click', () => { if (lastReference) { setPayBusy(true, 'Verifying payment…'); paymentRetry.classList.add('hidden'); verifyPayment(lastReference); } });
+    const callbackReference = new URLSearchParams(location.search).get('reference') || new URLSearchParams(location.search).get('trxref');
+    if (callbackReference && /^aisummit_[a-f0-9]{32}$/.test(callbackReference)) {
+      lastReference = callbackReference;
+      sessionStorage.setItem('aisummit_checkout_reference', callbackReference);
+      ticketDetails.classList.add('hidden');
+      attendeeForm.classList.add('hidden');
+      paymentStep.classList.remove('hidden');
+      setPayBusy(true, 'Verifying payment…');
+      setPaymentMessage('Verifying your payment securely…');
+      verifyPayment(callbackReference);
+    }
   </script>
 </body>
 </html>
