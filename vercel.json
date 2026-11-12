@@ -4,5 +4,10 @@
   "installCommand": "",
   "outputDirectory": ".",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/abc2027", "destination": "/aisummit", "permanent": true },
+    { "source": "/abc-2027", "destination": "/aisummit", "permanent": true },
+    { "source": "/crevia/abc-2027", "destination": "/aisummit", "permanent": true }
+  ]
 }

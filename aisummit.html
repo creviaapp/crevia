@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#060606">
+  <meta name="description" content="Join founders, builders, and investors at The 2nd Annual AI Summit: The Blueprint in Nairobi on March 27, 2027.">
+  <title>AI Summit 2027: The Blueprint | Crevia</title>
+  <link rel="icon" type="image/png" href="crevia/images/digital%20spaces/crevia%20logo.PNG">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { coal: '#060606', ivory: '#f5f3f0', ember: '#db5d11', forest: '#0B2B20' },
+      fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['Libre Baskerville', 'serif'] },
+      boxShadow: { glow: '0 24px 80px rgba(201,103,45,0.18)', soft: '0 18px 60px rgba(0,0,0,0.12)' }
+    }}};
+  </script>
+  <style>
+    :root { color-scheme: dark; }
+    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+    body { margin: 0; background: #060606; color: #f5f3f0; font-family: 'DM Sans', sans-serif; }
+    .grain { background-image: radial-gradient(rgba(255,255,255,.055) .55px, transparent .55px); background-size: 5px 5px; }
+    .hero-glow { background: radial-gradient(ellipse 38% 55% at 82% 42%, rgba(219,93,17,.16), transparent 76%), radial-gradient(ellipse 45% 55% at 12% 70%, rgba(11,43,32,.65), transparent 72%); }
+    .focus-ring:focus-visible { outline: 2px solid #db5d11; outline-offset: 4px; }
+    .hero-copy { opacity: 0; transform: translateY(18px); filter: blur(6px); animation: rise-in .9s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--delay, 0s); }
+    .hero-poster { opacity: 0; transform: translateY(20px) scale(.985); animation: poster-in 1.1s cubic-bezier(.16,1,.3,1) forwards; animation-delay: .3s; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); transition-delay: var(--delay, 0ms); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .premium-card { transition: transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s cubic-bezier(.16,1,.3,1), border-color .3s ease; }
+    .premium-card:hover { transform: translateY(-5px); box-shadow: 0 24px 70px rgba(0,0,0,.18); }
+    .paper-card:hover { box-shadow: 0 24px 64px rgba(14,21,17,.12); }
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; left: 50%; bottom: -7px; width: 0; height: 1px; background: #db5d11; transform: translateX(-50%); transition: width .35s cubic-bezier(.16,1,.3,1); }
+    .nav-link:hover::after, .nav-link[aria-current="page"]::after { width: calc(100% - 8px); }
+    #mobileNav { position: fixed; inset: 0; z-index: 70; pointer-events: none; visibility: hidden; }
+    #mobileNav .nav-backdrop { position: absolute; inset: 0; background: rgba(5,4,3,.78); opacity: 0; transition: opacity .32s ease; }
+    #mobileNav .nav-panel { position: absolute; inset: 0 0 0 auto; display: flex; width: min(88%, 420px); flex-direction: column; padding: 28px 26px; background: linear-gradient(165deg,#0c0b0a 0%,#161311 52%,#301a10 100%); box-shadow: -32px 0 70px rgba(0,0,0,.55); transform: translateX(105%); transition: transform .42s cubic-bezier(.16,1,.3,1); }
+    #mobileNav .nav-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 2px; border-bottom: 1px solid rgba(245,243,240,.1); color: rgba(245,243,240,.82); text-decoration: none; opacity: 0; transform: translateX(14px); transition: opacity .4s ease, transform .4s ease, color .25s ease; transition-delay: calc(var(--i, 0) * 45ms); }
+    body.mobile-open #mobileNav { pointer-events: auto; visibility: visible; }
+    body.mobile-open #mobileNav .nav-backdrop { opacity: 1; }
+    body.mobile-open #mobileNav .nav-panel { transform: translateX(0); }
+    body.mobile-open #mobileNav .nav-item { opacity: 1; transform: translateX(0); }
+    @keyframes rise-in { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+    @keyframes poster-in { to { opacity: 1; transform: translateY(0) scale(1); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .hero-copy, .hero-poster, .reveal { opacity: 1; transform: none; filter: none; }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-ember selection:text-black">
+  <div class="grain min-h-screen overflow-hidden">
+    <div class="hero-glow pointer-events-none fixed inset-0"></div>
+
+    <header class="sticky inset-x-0 top-0 z-50 px-4 pt-4 md:px-8">
+      <div class="premium-card relative mx-auto max-w-[1440px] rounded-2xl border border-white/10 bg-[linear-gradient(115deg,rgba(9,9,9,.96)_0%,rgba(19,18,17,.94)_48%,rgba(73,36,18,.92)_100%)] px-4 py-3 shadow-[0_12px_34px_rgba(0,0,0,.35)] backdrop-blur-xl md:px-7">
+        <div class="grid grid-cols-[1fr_auto] items-center gap-4 md:grid-cols-[auto_1fr_auto]">
+          <a href="/" class="focus-ring justify-self-start font-display text-2xl leading-none text-white">Crevia</a>
+          <nav aria-label="Main navigation" class="hidden items-center justify-center gap-3 md:flex xl:gap-5">
+            <a href="/" class="nav-link focus-ring rounded text-xs font-medium text-white/75 transition hover:text-white xl:text-sm">Home</a>
+            <a href="/crevia/about.html" class="nav-link focus-ring rounded text-xs font-medium text-white/75 transition hover:text-white xl:text-sm">About Us</a>
+            <a href="/crevia/services.html" class="nav-link focus-ring rounded text-xs font-medium text-white/75 transition hover:text-white xl:text-sm">Services</a>
+            <a href="/aisummit" aria-current="page" class="nav-link focus-ring rounded text-xs font-semibold text-white xl:text-sm">AI Summit 2027</a>
+            <a href="/crevia/dira.html" class="nav-link focus-ring rounded text-xs font-medium text-white/75 transition hover:text-white xl:text-sm">Crevia Academy</a>
+            <a href="/crevia/contact.html" class="nav-link focus-ring rounded text-xs font-medium text-white/75 transition hover:text-white xl:text-sm">Contact</a>
+          </nav>
+          <a href="#tickets" class="focus-ring hidden justify-self-end rounded-full bg-ember px-5 py-2.5 text-sm font-semibold text-[#17110d] transition hover:brightness-110 xl:inline-flex">Get Tickets <span class="ml-2" aria-hidden="true">&rarr;</span></a>
+          <button id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" class="focus-ring inline-flex h-10 w-10 items-center justify-center justify-self-end rounded-xl border border-white/10 bg-white/[0.04] md:hidden">
+            <svg width="20" height="16" viewBox="0 0 20 16" fill="none" aria-hidden="true"><path d="M1 2h18M1 8h18M1 14h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div id="mobileNav" aria-hidden="true">
+      <div class="nav-backdrop" data-close-nav></div>
+      <nav class="nav-panel" aria-label="Mobile navigation">
+        <div class="mb-7 flex items-center justify-between border-b border-white/10 pb-5">
+          <span class="font-display text-xl">Crevia</span>
+          <button id="navClose" type="button" aria-label="Close menu" class="focus-ring grid h-10 w-10 place-items-center rounded-full border border-white/15 text-xl">&times;</button>
+        </div>
+        <a href="/" class="nav-item" style="--i:0">Home <span>&rarr;</span></a>
+        <a href="/crevia/about.html" class="nav-item" style="--i:1">About Us <span>&rarr;</span></a>
+        <a href="/crevia/services.html" class="nav-item" style="--i:2">Services <span>&rarr;</span></a>
+        <a href="/aisummit" aria-current="page" class="nav-item" style="--i:3">AI Summit 2027 <span>&rarr;</span></a>
+        <a href="/crevia/dira.html" class="nav-item" style="--i:4">Crevia Academy <span>&rarr;</span></a>
+        <a href="/crevia/contact.html" class="nav-item" style="--i:5">Contact <span>&rarr;</span></a>
+        <a href="#tickets" data-close-nav class="mt-8 inline-flex items-center justify-center rounded-full bg-ember px-6 py-3 font-semibold text-[#17110d]">Get Tickets</a>
+      </nav>
+    </div>
+
+    <main>
+      <section class="relative border-b border-white/10">
+        <div class="relative mx-auto grid max-w-[1440px] items-center gap-10 px-5 pb-16 pt-12 sm:px-8 md:gap-12 md:pb-24 md:pt-16 lg:grid-cols-[.95fr_1.05fr] lg:px-12 lg:pb-28 lg:pt-20">
+          <div class="relative z-10">
+            <p class="hero-copy flex items-center gap-3 text-[11px] font-bold uppercase tracking-[.32em] text-ember" style="--delay:.12s"><span class="h-2 w-2 rounded-full bg-ember shadow-[0_0_20px_rgba(219,93,17,.8)]"></span> Nairobi &middot; 27 March 2027</p>
+            <h1 class="hero-copy mt-7 max-w-3xl font-display text-4xl leading-[1.06] tracking-[-.04em] text-white sm:text-5xl md:text-6xl xl:text-[4.65rem]" style="--delay:.22s">The 2nd Annual <span class="text-ember">AI Summit:</span> The Blueprint</h1>
+            <p class="hero-copy mt-7 max-w-xl text-base leading-7 text-white/65 sm:text-lg sm:leading-8" style="--delay:.34s">A working summit for founders, builders, and investors scaling African businesses with operational AI.</p>
+            <div class="hero-copy mt-8 flex flex-wrap gap-3" style="--delay:.44s">
+              <a href="#tickets" class="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-forest px-6 py-3.5 text-sm font-semibold text-white shadow-[0_12px_32px_rgba(11,43,32,.38)] transition hover:bg-[#124233]">Get Tickets <span aria-hidden="true">&rarr;</span></a>
+              <a href="#about" class="focus-ring inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3.5 text-sm font-medium text-white/80 transition hover:border-white/30 hover:text-white">Explore the summit</a>
+            </div>
+            <div class="hero-copy mt-11 grid max-w-xl grid-cols-3 border-t border-white/10 pt-6" style="--delay:.54s">
+              <div class="pr-4"><p class="text-[10px] uppercase tracking-[.2em] text-white/45">Date</p><p class="mt-2 text-sm font-semibold text-white sm:text-base">27 March 2027</p></div>
+              <div class="border-l border-white/10 px-4"><p class="text-[10px] uppercase tracking-[.2em] text-white/45">Time</p><p class="mt-2 text-sm font-semibold text-white sm:text-base">2:00 - 8:00 PM</p></div>
+              <div class="border-l border-white/10 pl-4"><p class="text-[10px] uppercase tracking-[.2em] text-white/45">Location</p><p class="mt-2 text-sm font-semibold text-white sm:text-base">Nairobi, Kenya</p></div>
+            </div>
+          </div>
+
+          <div class="hero-poster relative mx-auto w-full max-w-[650px] lg:justify-self-end">
+            <div class="absolute -inset-5 rounded-[2.5rem] bg-[radial-gradient(ellipse_at_center,rgba(219,93,17,.20),transparent_70%)] blur-xl"></div>
+            <div class="premium-card relative overflow-hidden rounded-[1.8rem] border border-white/15 bg-[#f4f2ed] p-2 shadow-[0_30px_100px_rgba(0,0,0,.48)] sm:rounded-[2.25rem] sm:p-3">
+              <img src="crevia/images/ai-summit-2027-poster.png" alt="Full AI Summit 2027 poster: Scaling African Businesses with AI" class="mx-auto block h-auto max-h-[72vh] w-full rounded-[1.3rem] object-contain object-center sm:rounded-[1.75rem]" fetchpriority="high" decoding="async">
+            </div>
+            <div class="absolute -bottom-5 left-5 rounded-2xl border border-white/15 bg-[#10100f]/90 px-4 py-3 shadow-xl backdrop-blur-xl sm:bottom-6 sm:left-[-1.25rem] sm:px-5">
+              <p class="text-[9px] font-bold uppercase tracking-[.24em] text-ember">In person</p>
+              <p class="mt-1 text-sm font-semibold text-white">Nairobi, Kenya</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="bg-[#f5f1eb] text-[#17110d]">
+        <div class="mx-auto grid max-w-[1440px] items-start gap-12 px-5 py-16 sm:px-8 md:py-24 lg:grid-cols-[minmax(0,1.55fr)_minmax(330px,.8fr)] lg:gap-16 lg:px-12">
+          <article class="min-w-0">
+            <div class="reveal">
+              <p class="text-[10px] font-bold uppercase tracking-[.3em] text-forest">The conversation</p>
+              <h2 class="mt-4 max-w-3xl font-display text-3xl leading-tight tracking-[-.03em] sm:text-4xl md:text-5xl">Less talking.<br><span class="text-forest">More doing.</span></h2>
+              <div class="mt-7 max-w-3xl space-y-5 text-[15px] leading-7 text-[#514d47] sm:text-base sm:leading-8">
+                <p>The old ways of building are breaking down. AI isn't just changing how fast we can work; it is fundamentally rewriting how African businesses operate, scale, and compete.</p>
+                <p>Following the success of our 1st Edition AI Summit at Strathmore, Crevia is proud to present our 4th annual convening. This year, we are moving away from theoretical discussions and bringing the heavy lifting into the room. This summit is focused on pure operational AI: building resilient infrastructure, automating core business systems, and deploying reality-tested solutions.</p>
+                <p>Join founders, builders, and investors as we break down the exact blueprints needed to scale African businesses the right way. Less talking. More doing.</p>
+              </div>
+            </div>
+
+            <div class="reveal mt-12" style="--delay:120ms">
+              <div class="flex items-end justify-between gap-4 border-b border-black/10 pb-4">
+                <div><p class="text-[10px] font-bold uppercase tracking-[.3em] text-forest">On the agenda</p><h2 class="mt-2 font-display text-2xl tracking-[-.02em] sm:text-3xl">What we will cover</h2></div>
+                <span class="hidden font-display text-4xl text-black/10 sm:block">03</span>
+              </div>
+              <div class="mt-5 grid gap-3 sm:grid-cols-3">
+                <div class="paper-card premium-card rounded-2xl border border-black/[.06] bg-white/80 p-5 sm:p-6"><span class="font-display text-sm text-ember">01</span><p class="mt-5 text-base font-semibold leading-6">AI Infrastructure for African businesses</p></div>
+                <div class="paper-card premium-card rounded-2xl border border-black/[.06] bg-white/80 p-5 sm:p-6"><span class="font-display text-sm text-ember">02</span><p class="mt-5 text-base font-semibold leading-6">Scaling your Business with Automations</p></div>
+                <div class="paper-card premium-card rounded-2xl border border-black/[.06] bg-white/80 p-5 sm:p-6"><span class="font-display text-sm text-ember">03</span><p class="mt-5 text-base font-semibold leading-6">Using AI as your Co-founder</p></div>
+              </div>
+            </div>
+          </article>
+
+          <aside id="tickets" class="reveal lg:sticky lg:top-28" style="--delay:100ms">
+            <section class="rounded-[1.8rem] bg-white p-6 shadow-[0_18px_60px_rgba(0,0,0,.11)] sm:rounded-[2rem] sm:p-8" aria-labelledby="registration-heading">
+              <div id="ticketDetails">
+                <p class="text-[10px] font-bold uppercase tracking-[.26em] text-forest">Your seat at the table</p>
+                <h2 id="registration-heading" class="mt-3 font-display text-2xl leading-tight tracking-[-.025em] text-[#17110d]">Reserve your spot</h2>
+                <div class="my-6 border-t border-black/[.08]"></div>
+                <p class="text-[10px] font-bold uppercase tracking-[.2em] text-black/45">General admission</p>
+                <p class="mt-2 text-4xl font-semibold tracking-[-.06em] text-[#17110d]">1,500 <span class="font-sans text-lg font-medium tracking-normal">KES</span></p>
+                <p class="mt-2 text-sm text-black/55">1 ticket &middot; In person in Nairobi</p>
+                <button id="ticketButton" type="button" class="focus-ring mt-7 inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-xl bg-forest px-6 py-4 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(11,43,32,.2)] transition hover:bg-[#124233]">Get Tickets <span aria-hidden="true">&rarr;</span></button>
+                <div class="mt-5 flex items-center gap-2 text-xs text-black/45"><svg width="15" height="15" viewBox="0 0 20 20" fill="none" class="text-forest" aria-hidden="true"><rect x="4" y="8.5" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 8.5V6a3 3 0 0 1 6 0v2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>M-Pesa and card checkout</span></div>
+              </div>
+
+              <form id="attendeeForm" class="hidden" novalidate>
+                <button id="backToDetails" type="button" class="focus-ring -ml-2 mb-5 inline-flex items-center gap-2 rounded-lg px-2 py-1 text-sm font-medium text-black/55 hover:text-forest"><span aria-hidden="true">&larr;</span> Back</button>
+                <p class="text-[10px] font-bold uppercase tracking-[.26em] text-forest">Almost there</p>
+                <h2 class="mt-3 font-display text-2xl tracking-[-.025em] text-[#17110d]">Your details</h2>
+                <p class="mt-2 text-sm leading-6 text-black/55">Who should we expect at the summit?</p>
+                <div class="mt-6 space-y-4">
+                  <div><label for="attendeeName" class="mb-1.5 block text-sm font-semibold text-[#26231f]">Full name</label><input id="attendeeName" name="name" autocomplete="name" required maxlength="100" class="focus-ring min-h-12 w-full rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-sm text-[#17110d] outline-none transition placeholder:text-black/35 focus:border-forest" placeholder="Your full name"></div>
+                  <div><label for="attendeeEmail" class="mb-1.5 block text-sm font-semibold text-[#26231f]">Email address</label><input id="attendeeEmail" name="email" type="email" autocomplete="email" required maxlength="254" class="focus-ring min-h-12 w-full rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-sm text-[#17110d] outline-none transition placeholder:text-black/35 focus:border-forest" placeholder="you@example.com"></div>
+                  <div><label for="attendeePhone" class="mb-1.5 block text-sm font-semibold text-[#26231f]">Phone number</label><input id="attendeePhone" name="phone" type="tel" autocomplete="tel" required maxlength="30" class="focus-ring min-h-12 w-full rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-sm text-[#17110d] outline-none transition placeholder:text-black/35 focus:border-forest" placeholder="+254 7XX XXX XXX"></div>
+                  <div><label for="attendeeOrganization" class="mb-1.5 block text-sm font-semibold text-[#26231f]">Company or organization <span class="font-normal text-black/40">(optional)</span></label><input id="attendeeOrganization" name="organization" autocomplete="organization" maxlength="120" class="focus-ring min-h-12 w-full rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-sm text-[#17110d] outline-none transition placeholder:text-black/35 focus:border-forest" placeholder="Where you work"></div>
+                </div>
+                <button type="submit" class="focus-ring mt-6 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-xl bg-forest px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#124233]">Continue to review <span aria-hidden="true">&rarr;</span></button>
+                <p class="mt-4 text-center text-xs leading-5 text-black/40">Your attendee details stay in this checkout until payment is connected.</p>
+              </form>
+
+              <div id="paymentStep" class="hidden" aria-labelledby="paymentHeading">
+                <button id="editDetails" type="button" class="focus-ring -ml-2 mb-5 inline-flex items-center gap-2 rounded-lg px-2 py-1 text-sm font-medium text-black/55 hover:text-forest"><span aria-hidden="true">&larr;</span> Edit details</button>
+                <p class="text-[10px] font-bold uppercase tracking-[.26em] text-forest">Final step</p>
+                <h2 id="paymentHeading" class="mt-3 font-display text-2xl text-[#17110d]">Review your order</h2>
+                <div class="mt-6 rounded-2xl bg-[#f6f5f2] p-4">
+                  <div class="flex items-start justify-between gap-4"><div><p class="font-semibold text-[#17110d]">General admission</p><p class="mt-1 text-sm text-black/50">1 ticket &middot; Nairobi</p></div><p class="shrink-0 font-semibold text-[#17110d]">1,500 KES</p></div>
+                  <div class="my-4 border-t border-black/10"></div>
+                  <p id="orderAttendee" class="text-sm font-semibold text-[#17110d]"></p>
+                  <p id="orderEmail" class="mt-1 break-all text-sm text-black/55"></p>
+                  <p id="orderPhone" class="mt-1 text-sm text-black/55"></p>
+                  <p id="orderOrganization" class="mt-1 text-sm text-black/55"></p>
+                </div>
+                <button id="payButton" type="button" class="focus-ring mt-6 inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-forest px-6 py-4 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(11,43,32,.2)] transition hover:bg-[#124233]">Pay 1,500 KES</button>
+                <p id="paymentMessage" class="mt-4 hidden rounded-xl bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950" role="status" aria-live="polite"></p>
+                <p class="mt-4 text-center text-xs leading-5 text-black/40">No payment is taken until checkout is complete.</p>
+              </div>
+            </section>
+            <p class="px-5 py-4 text-center text-xs leading-5 text-white/40">Questions? <a href="mailto:hello@crevia.app" class="focus-ring rounded text-white/75 underline decoration-white/20 underline-offset-4 hover:text-white">Contact the organisers</a></p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="border-t border-white/10 bg-[linear-gradient(130deg,#070807_0%,#0b2118_50%,#090807_100%)]">
+        <div class="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-14 sm:px-8 md:flex-row md:items-end md:justify-between md:py-20 lg:px-12">
+          <div class="reveal max-w-3xl"><p class="text-[10px] font-bold uppercase tracking-[.3em] text-ember">The Blueprint</p><h2 class="mt-4 font-display text-3xl leading-tight text-white sm:text-4xl md:text-5xl">Build for what comes next.</h2><p class="mt-5 max-w-2xl text-base leading-7 text-white/60">Join the people putting practical AI to work across African business.</p></div>
+          <a href="#tickets" class="reveal focus-ring inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-ember px-7 py-4 text-sm font-semibold text-[#17110d] transition hover:brightness-110" style="--delay:100ms">Reserve your ticket <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-white/10 bg-[linear-gradient(135deg,#050505_0%,#0b0b0b_55%,#351b10_100%)]">
+      <div class="mx-auto flex max-w-[1440px] flex-col gap-5 px-5 py-8 text-xs text-white/45 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
+        <a href="/" class="font-display text-xl text-white">Crevia</a>
+        <p>&copy; 2027 Crevia. Building the right way for Africa.</p>
+        <a href="/aisummit" class="focus-ring rounded text-white/70 hover:text-white">AI Summit 2027</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const menu = document.getElementById('mobileNav');
+    const menuToggle = document.getElementById('navToggle');
+    function closeMenu() { document.body.classList.remove('mobile-open'); menu.setAttribute('aria-hidden', 'true'); menuToggle.setAttribute('aria-expanded', 'false'); }
+    function openMenu() { document.body.classList.add('mobile-open'); menu.setAttribute('aria-hidden', 'false'); menuToggle.setAttribute('aria-expanded', 'true'); document.getElementById('navClose').focus(); }
+    menuToggle.addEventListener('click', openMenu);
+    document.getElementById('navClose').addEventListener('click', closeMenu);
+    menu.querySelector('[data-close-nav]').addEventListener('click', closeMenu);
+    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+
+    const ticketDetails = document.getElementById('ticketDetails');
+    const attendeeForm = document.getElementById('attendeeForm');
+    const paymentStep = document.getElementById('paymentStep');
+    const paymentMessage = document.getElementById('paymentMessage');
+    const attendeeFields = {
+      name: document.getElementById('attendeeName'),
+      email: document.getElementById('attendeeEmail'),
+      phone: document.getElementById('attendeePhone'),
+      organization: document.getElementById('attendeeOrganization')
+    };
+
+    document.getElementById('ticketButton').addEventListener('click', () => { ticketDetails.classList.add('hidden'); attendeeForm.classList.remove('hidden'); attendeeFields.name.focus(); });
+    document.getElementById('backToDetails').addEventListener('click', () => { attendeeForm.classList.add('hidden'); ticketDetails.classList.remove('hidden'); document.getElementById('ticketButton').focus(); });
+    attendeeForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!attendeeForm.reportValidity()) return;
+      document.getElementById('orderAttendee').textContent = attendeeFields.name.value.trim();
+      document.getElementById('orderEmail').textContent = attendeeFields.email.value.trim();
+      document.getElementById('orderPhone').textContent = attendeeFields.phone.value.trim();
+      const organization = attendeeFields.organization.value.trim();
+      const orderOrganization = document.getElementById('orderOrganization');
+      orderOrganization.textContent = organization;
+      orderOrganization.classList.toggle('hidden', !organization);
+      attendeeForm.classList.add('hidden');
+      paymentStep.classList.remove('hidden');
+      document.getElementById('payButton').focus();
+    });
+    document.getElementById('editDetails').addEventListener('click', () => { paymentMessage.classList.add('hidden'); paymentStep.classList.add('hidden'); attendeeForm.classList.remove('hidden'); attendeeFields.name.focus(); });
+    document.getElementById('payButton').addEventListener('click', () => {
+      paymentMessage.textContent = 'Online checkout is not connected yet. Your details have not been sent and you have not been charged. Please contact the organisers to complete your registration.';
+      paymentMessage.classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
