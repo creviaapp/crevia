@@ -1,243 +1,144 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crevia Summit 2027 | Crevia</title>
-    <link rel="icon" type="image/png" href="images/digital%20spaces/crevia%20logo.PNG" />
-    <meta name="description" content="Crevia Summit 2027 is the flagship continental gathering for founders, investors, institutions, and ecosystem builders. Theme: Building the right way for Africa." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preload" as="image" href="images/AI%20summit%20group%20photo%20strathmore.jpeg" fetchpriority="high" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: { coal: '#070706', paper: '#f3f0e9', ember: '#db5d11', maroon: '#5D0A1C' },
-            fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['Libre Baskerville', 'serif'] },
-          },
-        },
-      };
-    </script>
-    <style>
-      :root { color-scheme: dark; }
-      html { scroll-behavior: smooth; }
-      body { margin: 0; background: #070706; color: #f3f0e9; }
-      .page-noise { background-image: radial-gradient(rgba(255,255,255,.04) .55px, transparent .55px); background-size: 5px 5px; opacity: .11; }
-      .hairline { border-color: rgba(243,240,233,.15); }
-      .eyebrow { letter-spacing: .22em; }
-      .link-arrow { transition: transform 480ms cubic-bezier(.16,1,.3,1); }
-      a:hover .link-arrow { transform: translateX(4px); }
-      .focus-ring:focus-visible { outline: 2px solid #db5d11; outline-offset: 4px; }
-      .hero-wipe { display: block; clip-path: inset(0 100% 0 0); opacity: 0; filter: blur(4px); animation: hero-wipe-in 1.3s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--delay); }
-      .hero-detail { opacity: 0; transform: translateY(16px); filter: blur(7px); animation: hero-detail .95s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--delay); }
-      @keyframes hero-wipe-in { to { clip-path: inset(0 0% 0 0); opacity: 1; filter: blur(0); } }
-      .scroll-reveal { opacity: 0; transform: translate3d(0, 22px, 0); transition: opacity 1.05s cubic-bezier(.16,1,.3,1), transform 1.05s cubic-bezier(.16,1,.3,1); transition-delay: var(--reveal-delay, 0ms); }
-      .scroll-reveal.is-visible { opacity: 1; transform: translate3d(0, 0, 0); }
-      .magnetic { transition: transform 520ms cubic-bezier(.16,1,.3,1), background-color 420ms ease, color 420ms ease; will-change: transform; }
-      .text-link { position: relative; }
-      .text-link::after { content: ''; position: absolute; left: 50%; bottom: -5px; width: 0; height: 1px; background: currentColor; transform: translateX(-50%); transition: width 420ms cubic-bezier(.16,1,.3,1); }
-      .text-link:hover::after { width: 100%; }
-      .maroon-glow-lg { background: radial-gradient(ellipse 70% 80% at 30% 40%, rgba(93,10,28,.35) 0%, rgba(93,10,28,.12) 50%, transparent 75%); }
-      .card-hover { transition: background-color 650ms cubic-bezier(.16,1,.3,1), transform 650ms cubic-bezier(.16,1,.3,1); }
-      .card-hover:hover { background-color: rgba(255,255,255,.04); transform: translateY(-4px); }
-      .status-tag { transition: border-color 520ms cubic-bezier(.16,1,.3,1); }
-      .status-tag:hover { border-color: rgba(219, 93, 17,.5); }
-      @keyframes hero-stage { from { opacity: 0; } to { opacity: 1; } }
-      .hero-bg-img { animation: none; }
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f9f7">
+  <meta name="description" content="Join founders, builders, and investors at The 2nd Annual AI Summit: The Blueprint in Nairobi, Kenya, on March 27, 2027.">
+  <title>The 2nd Annual AI Summit: The Blueprint | Crevia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { forest: '#0B2B20' },
+        fontFamily: { sans: ['Inter', 'sans-serif'] },
+        boxShadow: { soft: '0 8px 30px rgb(0 0 0 / 0.04)' }
+      }}
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, sans-serif; }
+    .focus-ring:focus-visible { outline: 3px solid #568c74; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-900 antialiased selection:bg-forest selection:text-white">
+  <header class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 lg:px-12">
+    <a href="../index.html" class="focus-ring inline-flex items-center gap-2 rounded-lg text-lg font-bold tracking-tight text-forest" aria-label="Crevia home">
+      <span class="grid h-8 w-8 place-items-center rounded-full bg-forest text-sm text-white">C</span> Crevia
+    </a>
+    <a href="#tickets" class="focus-ring rounded-full px-4 py-2 text-sm font-semibold text-gray-600 transition hover:bg-white hover:text-forest">Event details <span aria-hidden="true">↓</span></a>
+  </header>
 
-      .surface-paper { background: #f3f0e9; color: #17110d; }
-      .surface-paper .text-paper { color: #17110d !important; }
-      .surface-paper .text-paper\/75, .surface-paper .text-paper\/65, .surface-paper .text-paper\/70, .surface-paper .text-paper\/60, .surface-paper .text-paper\/55, .surface-paper .text-paper\/50, .surface-paper .text-paper\/45 { color: rgba(23,17,13,.68) !important; }
-      .surface-paper .hairline { border-color: rgba(23,17,13,.16) !important; }
-      .surface-paper .text-ember { color: #db5d11 !important; }
-      .surface-emerald { background: linear-gradient(118deg, #07110f 0%, #0b3028 48%, #06100e 100%) !important; color: #f3f0e9; }
-      .surface-emerald .text-paper { color: #f3f0e9 !important; }
-      .surface-emerald .text-paper\/75, .surface-emerald .text-paper\/70, .surface-emerald .text-paper\/65, .surface-emerald .text-paper\/60 { color: rgba(243,240,233,.76) !important; }
-      .surface-emerald .text-ember { color: #DB5D11 !important; }
-      .surface-emerald .hairline { border-color: rgba(243,240,233,.2) !important; }
-      @keyframes hero-detail { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
-      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
-      #mobileNav { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
-      #mobileNav .mobile-nav-backdrop { position:absolute; inset:0; background:rgba(5,4,3,.74); opacity:0; transition:opacity .32s ease; pointer-events:none; }
-      body.mobile-open #mobileNav { pointer-events: auto; }
-      #mobileNav .mobile-nav-panel { position:absolute; top:0; right:0; height:100%; width:86%; max-width:380px; background:linear-gradient(165deg,#0c0b0a 0%,#161311 45%,#301a10 100%); transform:translateX(110%); transition:transform .42s cubic-bezier(.16,1,.3,1); box-shadow:-32px 0 70px rgba(0,0,0,.55); padding:26px 24px; display:flex; flex-direction:column; }
-      #mobileNav .mobile-nav-head { display:flex; align-items:center; justify-content:space-between; padding-bottom:20px; margin-bottom:8px; border-bottom:1px solid rgba(243,240,233,.12); }
-      #mobileNav .mobile-nav-brand { font-family:'Libre Baskerville', serif; font-size:22px; color:#f3f0e9; }
-      #mobileNav .mobile-nav-close { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; background:rgba(243,240,233,.06); border:1px solid rgba(243,240,233,.14); color:#f3f0e9; font-size:16px; line-height:1; cursor:pointer; transition:background .25s ease, transform .25s ease; }
-      #mobileNav .mobile-nav-close:active { transform:scale(.9); }
-      #mobileNav .mobile-nav-link { display:flex; align-items:center; justify-content:space-between; padding:15px 2px; font-size:17px; font-weight:500; color:rgba(243,240,233,.8); text-decoration:none; border-bottom:1px solid rgba(243,240,233,.08); opacity:0; transform:translateX(16px); transition:opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1), color .25s ease, padding-left .25s ease; transition-delay:calc(var(--i,0) * 55ms); }
-      #mobileNav .mobile-nav-link .mobile-nav-arrow { opacity:0; transform:translateX(-4px); transition:opacity .25s ease, transform .25s ease; color:#db5d11; font-size:15px; }
-      #mobileNav .mobile-nav-link:hover, #mobileNav .mobile-nav-link:active { color:#f3f0e9; padding-left:8px; }
-      #mobileNav .mobile-nav-link:hover .mobile-nav-arrow, #mobileNav .mobile-nav-link:active .mobile-nav-arrow { opacity:1; transform:translateX(0); }
-      #mobileNav .mobile-cta { margin-top:22px; display:flex; align-items:center; justify-content:center; gap:8px; padding:15px 20px; background:#db5d11; color:#17110d; border-radius:999px; font-weight:600; text-decoration:none; text-align:center; opacity:0; transform:translateY(12px); transition:opacity .5s cubic-bezier(.16,1,.3,1) .35s, transform .5s cubic-bezier(.16,1,.3,1) .35s, filter .25s ease; }
-      #mobileNav .mobile-cta:active { filter:brightness(.94); }
-      body.mobile-open #mobileNav .mobile-nav-backdrop{ opacity:1; pointer-events:auto; }
-      body.mobile-open #mobileNav .mobile-nav-panel{ transform:translateX(0); }
-      body.mobile-open #mobileNav .mobile-nav-link, body.mobile-open #mobileNav .mobile-cta{ opacity:1; transform:translateX(0) translateY(0); }
-      @media (min-width: 768px){ #mobileNav{display:none!important} }
-      :where(a, button) { transition: transform .42s cubic-bezier(.16,1,.3,1), color .32s ease, background-color .42s ease, box-shadow .42s ease, border-color .42s ease; }
-      :where(a, button):hover { transform: translateY(-2px); }
-      :where(button):active, :where(a):active { transform: translateY(0) scale(.985); }
-      :where(article, .card-hover, .premium-card):hover { transform: translateY(-5px); box-shadow: 0 22px 54px rgba(0,0,0,.18); }
-      @media (prefers-reduced-motion: reduce) { :where(a, button, article, .card-hover, .premium-card) { transition: none !important; transform: none !important; } }
-    </style>
-  </head>
-  <body class="font-sans antialiased">
-    <div class="fixed inset-0 pointer-events-none page-noise"></div>
-
-    <header class="sticky inset-x-0 top-0 z-50 px-4 pt-4 md:px-8">
-      <div class="mx-auto grid max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#090909_0%,#121212_18%,#1a1a1a_34%,#DB5D11_72%,#8B3913_100%)] px-4 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.32)] backdrop-blur-md md:px-7 relative">
-        <a href="../index.html" class="focus-ring font-display text-2xl font-semibold tracking-tight text-paper">Crevia</a>
-        <button id="navToggle" aria-label="Open menu" class="md:hidden inline-flex items-center justify-center justify-self-center rounded-lg bg-white/5 p-2" style="transform:translateX(4px)">
-            <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.75 1.25H19.25" stroke="#F3F0E9" stroke-width="1.5" stroke-linecap="round"/><path d="M0.75 7H19.25" stroke="#F3F0E9" stroke-width="1.5" stroke-linecap="round"/><path d="M0.75 12.75H19.25" stroke="#F3F0E9" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
-        <nav aria-label="Main navigation" class="hidden items-center justify-center gap-7 text-sm font-medium text-paper/80 md:flex"><a href="../index.html" class="focus-ring text-link hover:text-paper">Home</a><a href="about.html" class="focus-ring text-link hover:text-paper">About Us</a><a href="services.html" class="focus-ring text-link hover:text-paper">Services</a><a href="dira.html" class="focus-ring text-link hover:text-paper">Crevia Academy</a><a href="contact.html" class="focus-ring text-link hover:text-paper">Contact</a></nav>
-        <a href="contact.html" class="focus-ring magnetic justify-self-end hidden md:inline-flex rounded-full bg-ember px-5 py-2.5 text-sm font-semibold text-[#111111] transition hover:bg-ember">Let's Talk</a>
+  <main id="tickets" class="mx-auto grid max-w-7xl grid-cols-1 items-start gap-8 px-5 pb-16 pt-3 sm:px-8 md:gap-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(320px,1fr)] lg:gap-14 lg:px-12 lg:pt-8">
+    <article class="min-w-0">
+      <div class="overflow-hidden rounded-3xl bg-white shadow-soft">
+        <img src="images/ai-summit-2027-poster.png" alt="Crevia AI Summit 2027: Scaling African Businesses with AI" class="aspect-[4/3] w-full object-cover sm:aspect-[16/9]" fetchpriority="high">
       </div>
-    </header>
 
-    <div id="mobileNav" class="fixed inset-0 z-60">
-      <div class="mobile-nav-backdrop" onclick="toggleMobileNav()"></div>
-      <nav class="mobile-nav-panel">
-        <div class="mobile-nav-head">
-          <span class="mobile-nav-brand">Crevia</span>
-          <button type="button" class="mobile-nav-close" aria-label="Close menu" onclick="toggleMobileNav()">✕</button>
+      <div class="px-1 pb-4 pt-8 sm:pt-10">
+        <div class="mb-4 flex flex-wrap items-center gap-2 text-xs font-semibold text-forest">
+          <span class="rounded-full bg-emerald-50 px-3 py-1.5">IN PERSON</span>
+          <span class="rounded-full bg-emerald-50 px-3 py-1.5">NAIROBI, KENYA</span>
         </div>
-        <a href="../index.html" class="mobile-nav-link" style="--i:0" onclick="toggleMobileNav()"><span>Home</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
-        <a href="about.html" class="mobile-nav-link" style="--i:1" onclick="toggleMobileNav()"><span>About Us</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
-        <a href="services.html" class="mobile-nav-link" style="--i:2" onclick="toggleMobileNav()"><span>Services</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
-        <a href="dira.html" class="mobile-nav-link" style="--i:3" onclick="toggleMobileNav()"><span>Crevia Academy</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
-        <a href="contact.html" class="mobile-nav-link" style="--i:4" onclick="toggleMobileNav()"><span>Contact</span><span class="mobile-nav-arrow" aria-hidden="true">→</span></a>
-        <a href="contact.html" class="mobile-cta" style="--i:5" onclick="toggleMobileNav()">Let's Talk</a>
-      </nav>
+        <h1 class="max-w-3xl text-3xl font-bold tracking-[-0.045em] text-gray-950 sm:text-4xl lg:text-[2.7rem] lg:leading-[1.12]">The 2nd Annual AI Summit: The Blueprint</h1>
+
+        <div class="mt-7 grid gap-4 sm:grid-cols-3">
+          <div class="flex items-start gap-3 rounded-2xl bg-white p-4 shadow-soft">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-forest" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="16" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M7.5 3.5v3M16.5 3.5v3M4 9.5h16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </span>
+            <div><p class="text-xs font-medium text-gray-500">Date</p><p class="mt-1 text-sm font-semibold leading-5">March 27th, 2027</p></div>
+          </div>
+          <div class="flex items-start gap-3 rounded-2xl bg-white p-4 shadow-soft">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-forest" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div><p class="text-xs font-medium text-gray-500">Time</p><p class="mt-1 text-sm font-semibold leading-5">2:00 PM - 8:00 PM</p></div>
+          </div>
+          <div class="flex items-start gap-3 rounded-2xl bg-white p-4 shadow-soft">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-forest" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="10" r="2.3" stroke="currentColor" stroke-width="1.7"/></svg>
+            </span>
+            <div><p class="text-xs font-medium text-gray-500">Location</p><p class="mt-1 text-sm font-semibold leading-5">Nairobi</p></div>
+          </div>
+        </div>
+
+        <section class="mt-10 sm:mt-12" aria-labelledby="about-heading">
+          <h2 id="about-heading" class="text-xl font-bold tracking-tight">About the event</h2>
+          <div class="mt-4 max-w-3xl space-y-4 text-[15px] leading-7 text-gray-600">
+            <p>The old ways of building are breaking down. AI isn't just changing how fast we can work; it is fundamentally rewriting how African businesses operate, scale, and compete.</p>
+            <p>Following the success of our 1st Edition AI Summit at Strathmore, Crevia is proud to present our 4th annual convening. This year, we are moving away from theoretical discussions and bringing the heavy lifting into the room. This summit is focused on pure operational AI: building resilient infrastructure, automating core business systems, and deploying reality-tested solutions.</p>
+            <p>Join founders, builders, and investors as we break down the exact blueprints needed to scale African businesses the right way. Less talking. More doing.</p>
+          </div>
+        </section>
+
+        <section class="mt-9 rounded-3xl bg-white p-6 shadow-soft sm:mt-10 sm:p-7" aria-labelledby="cover-heading">
+          <h2 id="cover-heading" class="text-xl font-bold tracking-tight">What we will cover</h2>
+          <ul class="mt-5 space-y-4 text-[15px] font-medium text-gray-700">
+            <li class="flex items-start gap-3"><svg class="mt-0.5 shrink-0 text-forest" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10.2 3.8 3.8L16 5.8" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI Infrastructure for African businesses</span></li>
+            <li class="flex items-start gap-3"><svg class="mt-0.5 shrink-0 text-forest" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10.2 3.8 3.8L16 5.8" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Scaling your Business with Automations</span></li>
+            <li class="flex items-start gap-3"><svg class="mt-0.5 shrink-0 text-forest" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10.2 3.8 3.8L16 5.8" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Using AI as your Co-founder</span></li>
+          </ul>
+        </section>
+      </div>
+    </article>
+
+    <aside class="lg:sticky lg:top-8">
+      <section class="rounded-3xl bg-white p-6 shadow-[0_8px_30px_rgb(0,0,0,0.06)] sm:p-8" aria-labelledby="registration-heading">
+        <p class="text-sm font-medium text-gray-500">The 2nd Annual AI Summit</p>
+        <h2 id="registration-heading" class="mt-1 text-xl font-bold tracking-tight">Reserve your spot</h2>
+        <div class="my-6 border-t border-gray-100"></div>
+        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500">General admission</p>
+        <p class="mt-2 text-4xl font-bold tracking-[-0.05em] text-gray-950">1,500 <span class="text-2xl font-semibold tracking-tight">KES</span></p>
+        <p class="mt-2 text-sm text-gray-500">One ticket · In person in Nairobi</p>
+        <button id="ticketButton" type="button" class="focus-ring mt-7 inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-forest px-6 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-[#123b2d] hover:shadow-md disabled:cursor-wait disabled:opacity-90">
+          <span id="buttonLabel">Get Tickets</span>
+          <svg id="buttonArrow" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg id="buttonSpinner" class="hidden animate-spin" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity=".28" stroke-width="3"/><path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+        </button>
+        <p id="ticketStatus" class="mt-4 hidden rounded-2xl bg-emerald-50 px-4 py-3 text-sm font-medium leading-6 text-forest" role="status" aria-live="polite"></p>
+        <div class="mt-6 flex items-center justify-center gap-2 text-xs text-gray-500">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" class="text-forest" aria-hidden="true"><rect x="4" y="8.5" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 8.5V6a3 3 0 0 1 6 0v2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span>Secure checkout via Paystack</span>
+        </div>
+      </section>
+      <p class="px-5 py-4 text-center text-xs leading-5 text-gray-400">Questions about the summit? <a href="mailto:hello@crevia.app" class="focus-ring rounded text-forest underline decoration-forest/30 underline-offset-4 hover:decoration-forest">Contact the organisers</a></p>
+    </aside>
+  </main>
+
+  <footer class="mx-auto max-w-7xl px-5 pb-8 sm:px-8 lg:px-12">
+    <div class="flex flex-col gap-2 border-t border-gray-200/80 pt-5 text-xs text-gray-400 sm:flex-row sm:items-center sm:justify-between">
+      <span>© 2027 Crevia. All rights reserved.</span><span>Building the right way for Africa.</span>
     </div>
+  </footer>
 
-    <main>
-      <!-- SECTION 1: THE HERO -->
-      <section class="relative flex min-h-[100svh] items-center overflow-hidden border-b hairline bg-[#070706] px-5 pt-32 pb-20 md:px-10 md:pb-28" style="contain:paint;">
-        <div class="absolute inset-0" aria-hidden="true">
-          <img src="images/AI%20summit%20group%20photo%20strathmore.jpeg" alt="Crevia Summit 2027 convening" loading="eager" fetchpriority="high" decoding="sync" class="hero-bg-img absolute inset-0 h-full w-full scale-[1.015] object-cover object-center" />
-          <div class="absolute inset-0 bg-[#070706]/[0.75]"></div>
-        </div>
-        <div class="relative mx-auto w-full max-w-[1440px]">
-          <div class="max-w-4xl lg:pl-6">
-            <p class="hero-detail eyebrow text-[11px] font-bold uppercase text-paper/60" style="--delay: .25s">2027 / Building the right way for Africa</p>
-            <h1 class="mt-8 font-display text-[clamp(2.4rem,7vw,8rem)] font-semibold italic leading-[.92] tracking-[-.04em] text-paper">
-              <span class="hero-wipe" style="--delay: .30s">Crevia Summit</span>
-              <span class="hero-wipe" style="--delay: .6s"><span class="text-ember">2027</span></span>
-            </h1>
-            <p class="hero-detail mt-8 text-sm font-semibold uppercase tracking-[.18em] text-ember" style="--delay: .85s">Theme: Building the right way for Africa.</p>
-            <p class="hero-detail mt-8 max-w-2xl text-lg leading-8 text-paper/80 md:text-xl md:leading-9" style="--delay: 1s">We are moving past the era of fast hype. Crevia Summit 2027 is the definitive gathering for the founders, investors, and institutions laying the true groundwork for the continent's economic future. Own your story<span class="align-super text-[0.42em] leading-none">™</span> by building it right.</p>
-            <div class="hero-detail mt-14 flex flex-col items-start justify-start gap-4 sm:flex-row" style="--delay: 1.15s">
-              <a href="#partners" class="focus-ring magnetic inline-flex items-center gap-4 rounded-full bg-ember px-8 py-4 text-xs font-bold uppercase tracking-[.13em] text-[#19110d] transition hover:bg-ember">Become a Partner <span class="link-arrow text-lg" aria-hidden="true">→</span></a>
-            </div>
-          </div>
-        </div>
-      </section>
+  <script>
+    const ticketButton = document.getElementById('ticketButton');
+    const buttonLabel = document.getElementById('buttonLabel');
+    const buttonArrow = document.getElementById('buttonArrow');
+    const buttonSpinner = document.getElementById('buttonSpinner');
+    const ticketStatus = document.getElementById('ticketStatus');
 
-      <!-- SECTION 2: THE MANIFESTO -->
-      <section class="scroll-reveal surface-paper relative overflow-hidden border-b hairline px-5 py-28 md:px-10 md:py-44" data-reveal>
-        <div class="relative mx-auto max-w-[1440px]">
-          <div class="mx-auto max-w-4xl text-center">
-            <p class="eyebrow text-[11px] font-bold uppercase text-ember">The Preview</p>
-            <h2 class="mt-10 font-display text-4xl font-semibold italic leading-[1.05] tracking-[-.035em] text-paper md:text-6xl md:text-7xl">What to Expect</h2>
-            <p class="mt-12 text-lg leading-9 text-paper/75 md:text-xl md:leading-10">In 2027, founders, investors, policy makers, and ecosystem builders will gather around one urgent question: what does it mean to build the right way for Africa? This is a practical forum for examining the complexities that shape growth on the continent — and for learning from people who have worked through them.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SECTION 3: THE ROOM ARCHITECTURE -->
-      <section class="surface-emerald scroll-reveal relative overflow-hidden border-b hairline px-5 py-28 md:px-10 md:py-44" data-reveal>
-        <div class="pointer-events-none absolute -right-40 -top-40 h-[620px] w-[620px] rounded-full border border-white/10 opacity-60"></div>
-        <div class="pointer-events-none absolute bottom-0 left-[18%] h-px w-1/2 bg-white/10"></div>
-        <div class="relative mx-auto max-w-[1440px]">
-          <p class="eyebrow text-[11px] font-bold uppercase text-ember">How the room works</p>
-          <h2 class="mt-8 max-w-3xl font-display text-4xl font-semibold leading-[.98] tracking-[-.04em] text-paper md:text-6xl">Three ways to move the work <span class="text-ember">forward</span>.</h2>
-          <div class="mt-20 grid gap-px overflow-hidden rounded-2xl border hairline md:grid-cols-3">
-            <div class="card-hover border-b hairline p-10 md:border-b-0 md:border-r md:p-12">
-              <div class="flex h-10 w-10 items-center justify-center rounded-full border border-ember/40 text-xs font-bold text-ember">01</div>
-              <h3 class="mt-8 text-xl font-semibold text-paper">The Right Network.</h3>
-              <p class="mt-5 leading-8 text-paper/60">We curate the room so you don't have to. Expect direct access to founders, active investors, and enterprise leaders who are ready to partner and do real business.</p>
-            </div>
-            <div class="card-hover border-b hairline p-10 md:border-b-0 md:border-r md:p-12">
-              <div class="flex h-10 w-10 items-center justify-center rounded-full border border-ember/40 text-xs font-bold text-ember">02</div>
-              <h3 class="mt-8 text-xl font-semibold text-paper">Practical Masterclasses.</h3>
-              <p class="mt-5 leading-8 text-paper/60">No abstract theory. We host closed-door sessions focused on the real challenges of building in Africa, led by operators who have actually scaled.</p>
-            </div>
-            <div class="card-hover p-10 md:p-12">
-              <div class="flex h-10 w-10 items-center justify-center rounded-full border border-ember/40 text-xs font-bold text-ember">03</div>
-              <h3 class="mt-8 text-xl font-semibold text-paper">Unfiltered Conversations.</h3>
-              <p class="mt-5 leading-8 text-paper/60">Direct, honest access to the policy makers and decision-makers shaping the continent's future. Real talk about what it actually takes to succeed.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SECTION 4: THE CURATION PHASE -->
-      <section class="scroll-reveal surface-paper relative overflow-hidden border-b hairline px-5 py-28 md:px-10 md:py-44" data-reveal>
-        <div class="relative mx-auto max-w-[1440px]">
-          <div class="mx-auto max-w-3xl text-center">
-            <p class="eyebrow text-[11px] font-bold uppercase text-ember">The Curation Phase</p>
-            <h2 class="mt-10 font-display text-4xl font-semibold italic leading-[1.08] tracking-[-.035em] text-paper md:text-5xl md:text-6xl">The <span class="text-ember">2027</span> program is currently in curation.</h2>
-            <p class="mt-12 text-lg leading-9 text-paper/65 md:text-xl md:leading-10">We are actively selecting the voices, speakers, and enterprise partners who truly represent the future of African business. To maintain an uncompromising standard of quality, the exact dates in March and the finalized venue will be shared soon. </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SECTION 5: CALL FOR PARTNERS & SPONSORS -->
-      <section id="partners" class="surface-emerald scroll-reveal relative overflow-hidden px-5 py-28 md:px-10 md:py-44" data-reveal>
-        <div class="pointer-events-none absolute -right-40 -top-40 h-[620px] w-[620px] rounded-full border border-white/10 opacity-60"></div>
-        <div class="pointer-events-none absolute bottom-0 left-[18%] h-px w-1/2 bg-white/10"></div>
-        <div class="relative mx-auto max-w-[1440px]">
-          <p class="eyebrow text-[11px] font-bold uppercase text-ember">Call for Partners &amp; Sponsors</p>
-          <div class="mt-8 grid gap-12 lg:grid-cols-[1.2fr_.8fr] lg:items-end lg:gap-20">
-            <h2 class="max-w-2xl font-display text-4xl font-semibold leading-[1] tracking-[-.04em] text-paper md:text-6xl">Shape the <span class="text-ember">room</span>. Become a <span class="text-ember">partner</span>.</h2>
-            <div>
-              <p class="max-w-xl text-lg leading-9 text-paper/75">We are currently allocating sponsorship slots and institutional partnerships for organizations that align with our mission of building the right way. Put your brand at the center of the continent's most important business conversation.</p>
-              <a href="contact.html" class="focus-ring magnetic mt-8 inline-flex items-center gap-4 rounded-full bg-ember px-8 py-4 text-xs font-bold uppercase tracking-[.13em] text-[#19110d] transition hover:bg-ember">Partner with us <span class="link-arrow text-lg" aria-hidden="true">→</span></a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </main>
-
-    <footer class="border-t border-white/10" style="background: linear-gradient(135deg, #050505 0%, #0b0b0b 52%, #3d1c0f 78%, #DB5D11 100%); color: #f5efe7;">
-      <div class="mx-auto max-w-7xl px-6 py-14 md:px-8">
-        <div class="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-[1.2fr_.75fr_.75fr_.9fr]">
-          <div><p class="font-display text-4xl text-white">Crevia</p><p class="mt-4 max-w-sm leading-7 text-white/55">We are a strategic brand architecture firm that builds premium digital presences and high-stakes physical communities across Africa.</p></div>
-          <div><p class="text-[10px] font-bold uppercase tracking-[.22em] text-ember">Navigate</p><div class="mt-5 space-y-3 text-sm text-white/65"><a class="block hover:text-white" href="../index.html">Home</a><a class="block hover:text-white" href="about.html">About Us</a><a class="block hover:text-white" href="services.html">Services</a><a class="block hover:text-white" href="dira.html">Crevia Academy</a><a class="block hover:text-white" href="contact.html">Contact</a></div></div>
-          <div><p class="text-[10px] font-bold uppercase tracking-[.22em] text-ember">Base</p><p class="mt-5 text-sm text-white/65">Nairobi, Kenya</p><a class="mt-3 block text-sm text-white/65 hover:text-white" href="mailto:crevia.app@gmail.com">crevia.app@gmail.com</a></div><div><p class="text-[10px] font-bold uppercase tracking-[.22em] text-ember">Follow us</p><div class="mt-5 flex flex-wrap gap-3"><a href="https://bit.ly/4zh0Koz" target="_blank" rel="noopener noreferrer" aria-label="Crevia WhatsApp Community" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-white/30 hover:text-white"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M12.001 2C6.478 2 2 6.478 2 12.001c0 1.945.542 3.816 1.57 5.456L2 22l4.656-1.54A9.957 9.957 0 0012.001 22C17.523 22 22 17.523 22 12.001 22 6.478 17.523 2 12.001 2zm0 18.167c-1.656 0-3.28-.447-4.699-1.291l-.337-.2-3.477.916.93-3.386-.22-.348a8.165 8.165 0 01-1.266-4.357c0-4.509 3.669-8.178 8.179-8.178 4.509 0 8.178 3.669 8.178 8.178 0 4.51-3.669 8.666-8.288 8.666z"/></svg></a><a href="https://www.linkedin.com/company/creviaapp/" target="_blank" rel="noopener noreferrer" aria-label="Crevia on LinkedIn" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-white/30 hover:text-white"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.446-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.114 20.452H3.558V9h3.556v11.452z"/></svg></a><a href="https://youtube.com/@crevia-hq" target="_blank" rel="noopener noreferrer" aria-label="Crevia on YouTube" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-white/30 hover:text-white"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a2.994 2.994 0 0 0-2.107-2.117C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.391.524A2.994 2.994 0 0 0 .502 6.186 31.26 31.26 0 0 0 0 12a31.26 31.26 0 0 0 .502 5.814 2.994 2.994 0 0 0 2.107 2.117c1.886.524 9.391.524 9.391.524s7.505 0 9.391-.524a2.994 2.994 0 0 0 2.107-2.117A31.26 31.26 0 0 0 24 12a31.26 31.26 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a href="https://www.instagram.com/creviahq" target="_blank" rel="noopener noreferrer" aria-label="Crevia on Instagram" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-white/30 hover:text-white"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a><a href="https://www.tiktok.com/@crevia.app" target="_blank" rel="noopener noreferrer" aria-label="Crevia on TikTok" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-white/30 hover:text-white"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg></a></div></div>
-        </div>
-        <div class="mt-6 flex flex-col gap-3 text-xs text-white/40 md:flex-row md:justify-between"><span>© 2026 Crevia. All rights reserved.</span><div class="flex gap-5"><a href="privacy.html" class="hover:text-white">Privacy</a><a href="terms.html" class="hover:text-white">Terms</a></div></div>
-      </div>
-    </footer>
-
-    <script>
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target); } });
-      }, { threshold: 0.14 });
-      document.querySelectorAll('[data-reveal]').forEach((element) => revealObserver.observe(element));
-
-      if (!reduceMotion) {
-        document.querySelectorAll('.magnetic').forEach((button) => {
-          button.addEventListener('mousemove', (event) => {
-            const rect = button.getBoundingClientRect();
-            const x = (event.clientX - rect.left - rect.width / 2) * .10;
-            const y = (event.clientY - rect.top - rect.height / 2) * .14;
-            button.style.transform = `translate(${x}px, ${y}px)`;
-          });
-          button.addEventListener('mouseleave', () => { button.style.transform = ''; });
-        });
-      }
-
-      function toggleMobileNav(){ document.body.classList.toggle('mobile-open'); }
-      const _navToggle = document.getElementById('navToggle'); if(_navToggle) _navToggle.addEventListener('click', toggleMobileNav);
-    </script>
-  <script src="performance.js" type="module"></script>
-  </body>
+    ticketButton.addEventListener('click', () => {
+      if (ticketButton.disabled) return;
+      ticketButton.disabled = true;
+      buttonLabel.textContent = 'Processing...';
+      buttonArrow.classList.add('hidden');
+      buttonSpinner.classList.remove('hidden');
+      window.setTimeout(() => {
+        buttonLabel.textContent = 'Get Tickets';
+        buttonSpinner.classList.add('hidden');
+        buttonArrow.classList.remove('hidden');
+        ticketButton.disabled = false;
+        ticketStatus.textContent = 'Redirecting to Paystack (M-Pesa/Card)...';
+        ticketStatus.classList.remove('hidden');
+      }, 1000);
+    });
+  </script>
+</body>
 </html>
