@@ -16,7 +16,7 @@ Redeploy after setting the variables. Do not use the public `pk_live_…` key as
 
 ## 2. Create the private registration table
 
-Run [`crevia/ai-summit-registrations.sql`](crevia/ai-summit-registrations.sql) in the Crevia Supabase SQL editor. It creates the `registrations` table and denies browser roles access; only the server function uses the service-role key. Registrations are inserted only after Paystack confirms a successful 1,500 KES payment.
+Run [`crevia/ai-summit-registrations.sql`](crevia/ai-summit-registrations.sql) in the Crevia Supabase SQL editor. It creates the `registrations` table and denies browser roles access; only the server function uses the service-role key. The current test ticket price is 50 KES; the table constraint also preserves existing 1,500 KES registrations.
 
 ## 3. Configure payment notifications
 

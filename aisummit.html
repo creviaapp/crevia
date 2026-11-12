@@ -157,7 +157,7 @@
                 <h2 id="registration-heading" class="mt-3 font-display text-2xl leading-tight tracking-[-.025em] text-[#17110d]">Reserve your spot</h2>
                 <div class="my-6 border-t border-black/[.08]"></div>
                 <p class="text-[10px] font-bold uppercase tracking-[.2em] text-black/45">General admission</p>
-                <p class="mt-2 text-4xl font-semibold tracking-[-.06em] text-[#17110d]">1,500 <span class="font-sans text-lg font-medium tracking-normal">KES</span></p>
+                <p class="mt-2 text-4xl font-semibold tracking-[-.06em] text-[#17110d]">50 <span class="font-sans text-lg font-medium tracking-normal">KES</span></p>
                 <p class="mt-2 text-sm text-black/55">1 ticket &middot; In person in Nairobi</p>
                 <button id="ticketButton" type="button" class="focus-ring mt-7 inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-xl bg-forest px-6 py-4 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(11,43,32,.2)] transition hover:bg-[#124233]">Get Tickets <span aria-hidden="true">&rarr;</span></button>
                 <div class="mt-5 flex items-center gap-2 text-xs text-black/45"><svg width="15" height="15" viewBox="0 0 20 20" fill="none" class="text-forest" aria-hidden="true"><rect x="4" y="8.5" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 8.5V6a3 3 0 0 1 6 0v2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>M-Pesa and card checkout</span></div>
@@ -183,14 +183,14 @@
                 <p class="text-[10px] font-bold uppercase tracking-[.26em] text-forest">Final step</p>
                 <h2 id="paymentHeading" class="mt-3 font-display text-2xl text-[#17110d]">Review your order</h2>
                 <div class="mt-6 rounded-2xl bg-[#f6f5f2] p-4">
-                  <div class="flex items-start justify-between gap-4"><div><p class="font-semibold text-[#17110d]">General admission</p><p class="mt-1 text-sm text-black/50">1 ticket &middot; Nairobi</p></div><p class="shrink-0 font-semibold text-[#17110d]">1,500 KES</p></div>
+                  <div class="flex items-start justify-between gap-4"><div><p class="font-semibold text-[#17110d]">General admission</p><p class="mt-1 text-sm text-black/50">1 ticket &middot; Nairobi</p></div><p class="shrink-0 font-semibold text-[#17110d]">50 KES</p></div>
                   <div class="my-4 border-t border-black/10"></div>
                   <p id="orderAttendee" class="text-sm font-semibold text-[#17110d]"></p>
                   <p id="orderEmail" class="mt-1 break-all text-sm text-black/55"></p>
                   <p id="orderPhone" class="mt-1 text-sm text-black/55"></p>
                   <p id="orderOrganization" class="mt-1 text-sm text-black/55"></p>
                 </div>
-                <button id="payButton" type="button" class="focus-ring mt-6 inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-forest px-6 py-4 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(11,43,32,.2)] transition hover:bg-[#124233]">Pay 1,500 KES</button>
+                <button id="payButton" type="button" class="focus-ring mt-6 inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-forest px-6 py-4 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(11,43,32,.2)] transition hover:bg-[#124233]">Pay 50 KES</button>
                 <p id="paymentMessage" class="mt-4 hidden rounded-xl bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950" role="status" aria-live="polite"></p>
                 <button id="paymentRetry" type="button" class="focus-ring mt-3 hidden w-full rounded-xl border border-black/10 px-4 py-3 text-sm font-semibold text-forest hover:bg-[#f7f8f6]">Retry payment confirmation</button>
                 <p class="mt-4 text-center text-xs leading-5 text-black/40">Secure checkout by Paystack. Your card or M-Pesa details are handled by Paystack.</p>
@@ -271,7 +271,7 @@
       paymentMessage.textContent = message;
       paymentMessage.className = `mt-4 rounded-xl px-4 py-3 text-sm leading-6 ${kind === 'success' ? 'bg-emerald-50 text-emerald-950' : kind === 'error' ? 'bg-rose-50 text-rose-950' : 'bg-amber-50 text-amber-950'}`;
     }
-    function setPayBusy(busy, label = 'Pay 1,500 KES') {
+    function setPayBusy(busy, label = 'Pay 50 KES') {
       checkoutBusy = busy;
       payButton.disabled = busy;
       payButton.setAttribute('aria-busy', String(busy));
