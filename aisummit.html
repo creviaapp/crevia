@@ -280,6 +280,7 @@
         : payButtonLabel;
     }
     async function verifyPayment(reference, attempt = 0) {
+      lastReference = reference;
       try {
         const response = await fetch('/api/paystack/verify', {
           method: 'POST',
@@ -292,10 +293,20 @@
           paymentStep.classList.remove('hidden');
           attendeeForm.classList.add('hidden');
           payButton.classList.add('hidden');
-          setPaymentMessage('Payment confirmed. Your AI Summit 2027 ticket is reserved. Keep your Paystack receipt for your records.', 'success');
-          paymentRetry.classList.add('hidden');
+          sessionStorage.setItem('aisummit_payment_confirmed', 'true');
+          setPaymentMessage(result.emailSent
+            ? 'Payment confirmed. Your AI Summit 2027 ticket is reserved, and the confirmation email was sent. Check your inbox and spam folder.'
+            : 'Payment confirmed and your ticket is reserved. The confirmation email could not be sent automatically; please contact hello@crevia.app for your ticket details.', 'success');
+          if (result.emailSent) {
+            paymentRetry.classList.add('hidden');
+            sessionStorage.removeItem('aisummit_checkout_reference');
+            sessionStorage.removeItem('aisummit_payment_confirmed');
+          } else {
+            paymentRetry.textContent = 'Retry confirmation email';
+            paymentRetry.classList.remove('hidden');
+            sessionStorage.setItem('aisummit_checkout_reference', reference);
+          }
           history.replaceState({}, '', '/aisummit');
-          sessionStorage.removeItem('aisummit_checkout_reference');
           return true;
         }
         if (attempt < 2 && response.status >= 500) {
@@ -353,6 +364,8 @@
           },
           onCancel: () => {
             setPayBusy(false);
+            sessionStorage.removeItem('aisummit_checkout_reference');
+            sessionStorage.removeItem('aisummit_payment_confirmed');
             setPaymentMessage('Checkout was closed before payment was completed. You can try again whenever you’re ready.', 'pending');
           },
           onError: () => {
@@ -366,7 +379,18 @@
       }
     }
     payButton.addEventListener('click', startCheckout);
-    paymentRetry.addEventListener('click', () => { if (lastReference) { setPayBusy(true, 'Verifying payment…'); paymentRetry.classList.add('hidden'); verifyPayment(lastReference); } });
+    paymentRetry.addEventListener('click', async () => {
+      if (!lastReference) return;
+      paymentRetry.disabled = true;
+      paymentRetry.textContent = 'Retrying confirmation…';
+      await verifyPayment(lastReference);
+      paymentRetry.disabled = false;
+      if (!paymentRetry.classList.contains('hidden') && payButton.classList.contains('hidden')) {
+        paymentRetry.textContent = 'Retry confirmation email';
+      } else if (!paymentRetry.classList.contains('hidden')) {
+        paymentRetry.textContent = 'Retry payment confirmation';
+      }
+    });
     const callbackReference = new URLSearchParams(location.search).get('reference') || new URLSearchParams(location.search).get('trxref');
     if (callbackReference && /^aisummit_[a-f0-9]{32}$/.test(callbackReference)) {
       lastReference = callbackReference;
@@ -377,6 +401,18 @@
       setPayBusy(true, 'Verifying payment…');
       setPaymentMessage('Verifying your payment securely…');
       verifyPayment(callbackReference);
+    } else if (lastReference) {
+      ticketDetails.classList.add('hidden');
+      attendeeForm.classList.add('hidden');
+      paymentStep.classList.remove('hidden');
+      payButton.classList.add('hidden');
+      const paymentConfirmed = sessionStorage.getItem('aisummit_payment_confirmed') === 'true';
+      paymentMessage.textContent = paymentConfirmed
+        ? 'Your payment was confirmed. You can retry sending the ticket email below.'
+        : 'A payment attempt is awaiting confirmation. Retry the same payment confirmation before starting another checkout.';
+      paymentMessage.classList.remove('hidden');
+      paymentRetry.textContent = paymentConfirmed ? 'Retry confirmation email' : 'Retry payment confirmation';
+      paymentRetry.classList.remove('hidden');
     }
   </script>
 </body>

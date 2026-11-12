@@ -30,6 +30,6 @@ The webhook validates Paystack's HMAC signature and independently verifies each 
 
 The browser submits attendee details to `/api/paystack/initialize`. The server fixes the amount and currency, creates a unique reference, and initializes the Paystack transaction using the secret key. The browser resumes that transaction using Paystack InlineJS. A browser callback alone never marks the order paid: `/api/paystack/verify` checks Paystack's transaction status, amount, currency, event metadata, and reference, then saves the registration. The signed webhook covers cases where the browser closes before returning.
 
-After a verified payment is saved, `/api/paystack/webhook` sends a confirmation email through Resend. Email delivery is best-effort and idempotent by Paystack reference; an email failure is logged but does not make Paystack retry the webhook. Install the SDK with `npm install resend` (already included in this repository).
+After a verified payment is saved, both `/api/paystack/webhook` and `/api/paystack/verify` can send a confirmation email through Resend. This lets an attendee safely retry confirmation if the webhook arrived before the registration table was ready. Email delivery is best-effort and idempotent by Paystack reference; an email failure is logged but does not undo the ticket or make Paystack retry. Install the SDK with `npm install resend` (already included in this repository).
 
 Only collect the attendee information needed for this event. Payment card and M-Pesa details are entered with Paystack and are not collected by Crevia's page.
