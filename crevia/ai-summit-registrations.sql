@@ -1,18 +1,23 @@
 -- Apply in the Supabase SQL editor for the Crevia project.
-create table if not exists public.ai_summit_registrations (
+create table if not exists public.registrations (
   id uuid primary key default gen_random_uuid(),
   paystack_reference text not null unique,
-  full_name text not null,
   email text not null,
-  phone text not null,
-  organization text,
-  amount_kes integer not null check (amount_kes = 1500),
-  currency text not null check (currency = 'KES'),
-  status text not null check (status = 'paid'),
-  paid_at timestamptz not null,
+  amount integer not null default 1500 check (amount = 1500),
+  currency text not null default 'KES' check (currency = 'KES'),
+  status text not null default 'confirmed' check (status = 'confirmed'),
   created_at timestamptz not null default now()
 );
 
-alter table public.ai_summit_registrations enable row level security;
-revoke all on public.ai_summit_registrations from anon, authenticated;
-grant all on public.ai_summit_registrations to service_role;
+alter table public.registrations enable row level security;
+revoke all on table public.registrations from public, anon, authenticated;
+
+drop policy if exists "Deny all client access" on public.registrations;
+create policy "Deny all client access"
+  on public.registrations
+  for all
+  to anon, authenticated
+  using (false)
+  with check (false);
+
+grant all on table public.registrations to service_role;
