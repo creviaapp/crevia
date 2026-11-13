@@ -12,8 +12,15 @@ module.exports = async function handler(req, res) {
   const email = safeText(body.email, 254).toLowerCase();
   const phone = safeText(body.phone, 30);
   const organization = safeText(body.organization, 120);
-  if (name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || phone.length < 7) {
-    return json(res, 400, { error: 'Please check your name, email, and phone number.' });
+  const goal = safeText(body.goal, 120);
+  const allowedGoals = new Set([
+    'Apply AI to business operations',
+    'Automate workflows and scale',
+    'Explore AI tools and infrastructure',
+    'Meet founders, builders, and investors'
+  ]);
+  if (name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || phone.length < 7 || organization.length < 2 || !allowedGoals.has(goal)) {
+    return json(res, 400, { error: 'Please complete all required attendee details.' });
   }
   const reference = `aisummit_${randomUUID().replaceAll('-', '')}`;
   try {
@@ -27,11 +34,12 @@ module.exports = async function handler(req, res) {
         callback_url: 'https://crevia.app/aisummit?checkout=return',
         metadata: {
           event_code: EVENT_CODE,
-          attendee: { name, phone, organization },
+          attendee: { name, phone, organization, goal },
           custom_fields: [
             { display_name: 'Attendee name', variable_name: 'attendee_name', value: name },
             { display_name: 'Phone number', variable_name: 'attendee_phone', value: phone },
-            { display_name: 'Organization', variable_name: 'organization', value: organization || 'Not provided' }
+            { display_name: 'Organization', variable_name: 'organization', value: organization },
+            { display_name: 'Event goal', variable_name: 'event_goal', value: goal }
           ]
         }
       })
