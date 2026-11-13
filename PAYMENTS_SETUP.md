@@ -7,7 +7,6 @@ Checkout is implemented with server-side transaction initialization and verifica
 In the Crevia Vercel project, add these variables for **Production**:
 
 - `PAYSTACK_SECRET_KEY`: the Paystack **secret** key (`sk_live_…`), copied directly from the Paystack dashboard. Never add it to this repository or browser code, and never send it in chat.
-- `PAYSTACK_WEBHOOK_SECRET`: the dedicated Paystack webhook signing secret (`whsec_…`). The webhook now requires Paystack's timestamped `Paystack-Signature` header and rejects legacy unsigned-timestamp replayable deliveries.
 - `SUPABASE_URL`: the existing Crevia Supabase project URL.
 - `SUPABASE_SERVICE_ROLE_KEY`: that project's service-role key. Keep it only in server environment variables; it bypasses database row-level security.
 - `RESEND_API_KEY`: the server-side Resend API key used for ticket confirmations.
@@ -31,11 +30,11 @@ Confirm the editor reports `UPDATE 1`, then sign in again at `/crevia/admin.html
 
 ## 3. Configure payment notifications
 
-In Paystack dashboard settings, enable timestamped webhook signatures, copy the webhook signing secret into Vercel as `PAYSTACK_WEBHOOK_SECRET`, and add the production webhook URL:
+Add the production webhook URL in Paystack dashboard settings:
 
 `https://crevia.app/api/paystack/webhook`
 
-The webhook validates the timestamped HMAC signature and independently verifies each matching payment before saving it. The browser's return callback also verifies server-side and uses the Paystack reference as an idempotent database key.
+The webhook validates Paystack's x-paystack-signature as an HMAC-SHA512 of the exact raw request body, using PAYSTACK_SECRET_KEY, and independently verifies each matching payment before saving it. The browser's return callback also verifies server-side and uses the Paystack reference as an idempotent database key.
 
 ## Payment flow
 
