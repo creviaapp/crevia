@@ -45,8 +45,12 @@
           <h1 class="font-display text-3xl mb-6 text-ink">Admin Login</h1>
           <form id="loginForm" class="space-y-4">
             <label class="block">
-              <span class="text-sm text-ink/70">Admin Password</span>
-              <input id="passwordInput" type="password" required class="mt-2 w-full rounded border border-ink/15 bg-white px-3 py-2 outline-none text-ink" />
+              <span class="text-sm text-ink/70">Admin email</span>
+              <input id="emailInput" type="email" autocomplete="username" required class="mt-2 w-full rounded border border-ink/15 bg-white px-3 py-2 outline-none text-ink" />
+            </label>
+            <label class="block">
+              <span class="text-sm text-ink/70">Password</span>
+              <input id="passwordInput" type="password" autocomplete="current-password" required class="mt-2 w-full rounded border border-ink/15 bg-white px-3 py-2 outline-none text-ink" />
             </label>
             <button type="submit" class="premium-button w-full rounded-full bg-accent px-6 py-3 font-semibold text-ink hover:shadow-[0_10px_30px_rgba(219, 93, 17,0.3)]">Login</button>
           </form>
@@ -134,46 +138,59 @@
 
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        const ADMIN_PASSWORD = 'clova@%';
         let submissionsData = [];
 
         const loginScreen = document.getElementById('loginScreen');
         const dashboardScreen = document.getElementById('dashboardScreen');
         const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('emailInput');
         const passwordInput = document.getElementById('passwordInput');
         const loginError = document.getElementById('loginError');
         const logoutBtn = document.getElementById('logoutBtn');
 
-        // Check if already unlocked this session
-        if (sessionStorage.getItem('crevia_admin_unlocked') === '1') {
-          showDashboard();
-        }
+        restoreAdminSession();
 
-        loginForm.addEventListener('submit', (e) => {
+        loginForm.addEventListener('submit', async (e) => {
           e.preventDefault();
           loginError.classList.add('hidden');
           loginError.textContent = '';
-
-          const password = passwordInput.value;
-
-          if (password === ADMIN_PASSWORD) {
-            sessionStorage.setItem('crevia_admin_unlocked', '1');
+          try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+              email: emailInput.value.trim(),
+              password: passwordInput.value
+            });
             passwordInput.value = '';
-            showDashboard();
-          } else {
-            loginError.textContent = 'Incorrect password.';
+            if (!error && data.user?.app_metadata?.role === 'admin') {
+              showDashboard();
+            } else {
+              await supabase.auth.signOut();
+              loginError.textContent = 'Sign-in failed or this account is not an administrator.';
+              loginError.classList.remove('hidden');
+            }
+          } catch {
+            passwordInput.value = '';
+            loginError.textContent = 'Sign-in is unavailable right now. Please try again.';
             loginError.classList.remove('hidden');
-            passwordInput.value = '';
           }
         });
 
-        logoutBtn.addEventListener('click', () => {
-          sessionStorage.removeItem('crevia_admin_unlocked');
+        logoutBtn.addEventListener('click', async () => {
+          await supabase.auth.signOut();
           passwordInput.value = '';
+          emailInput.value = '';
           loginScreen.classList.remove('hidden');
           dashboardScreen.classList.add('hidden');
           logoutBtn.classList.add('hidden');
         });
+
+        async function restoreAdminSession() {
+          const { data, error } = await supabase.auth.getSession();
+          if (!error && data.session?.user?.app_metadata?.role === 'admin') {
+            showDashboard();
+          } else if (data.session) {
+            await supabase.auth.signOut();
+          }
+        }
 
         async function showDashboard() {
           loginScreen.classList.add('hidden');

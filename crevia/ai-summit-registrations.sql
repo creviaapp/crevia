@@ -21,6 +21,7 @@ revoke all on table public.registrations from public, anon, authenticated;
 drop policy if exists "Deny all client access" on public.registrations;
 create policy "Deny all client access"
   on public.registrations
+  as restrictive
   for all
   to anon, authenticated
   using (false)

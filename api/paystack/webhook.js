@@ -1,9 +1,12 @@
 const crypto = require('node:crypto');
-const { sendTicketConfirmation } = require('../../lib/confirmation-email');
+const { sendTicketConfirmationOnce } = require('../../lib/confirmation-email');
 const { json, paystack, persistPaidRegistration, isValidPaidTransaction } = require('../../lib/paystack');
 
 async function getRawBody(req) {
-  if (Buffer.isBuffer(req.body)) return req.body;
+  if (Buffer.isBuffer(req.body)) {
+    if (req.body.length > 1024 * 1024) throw new Error('WEBHOOK_BODY_TOO_LARGE');
+    return req.body;
+  }
   const chunks = [];
   let size = 0;
   for await (const chunk of req) {
@@ -14,17 +17,40 @@ async function getRawBody(req) {
   return Buffer.concat(chunks);
 }
 
+function verifyPaystackSignature(rawBody, header, secret, now = Math.floor(Date.now() / 1000)) {
+  if (!Buffer.isBuffer(rawBody) || typeof header !== 'string' || !secret) return false;
+  let timestamp = null;
+  const signatures = [];
+  for (const part of header.split(',')) {
+    const separator = part.indexOf('=');
+    if (separator < 0) continue;
+    const name = part.slice(0, separator).trim();
+    const value = part.slice(separator + 1).trim();
+    if (name === 't') {
+      if (timestamp !== null || !/^\d+$/.test(value)) return false;
+      timestamp = Number(value);
+    } else if (name === 'v1') {
+      const keySeparator = value.indexOf(':');
+      if (keySeparator > 0) signatures.push(value.slice(keySeparator + 1));
+    }
+  }
+  if (!Number.isSafeInteger(timestamp) || Math.abs(now - timestamp) > 300 || signatures.length === 0) return false;
+
+  const expected = crypto.createHmac('sha512', secret).update(`${timestamp}.`).update(rawBody).digest();
+  return signatures.some((signature) => {
+    if (!/^[0-9a-f]{128}$/.test(signature)) return false;
+    return crypto.timingSafeEqual(expected, Buffer.from(signature, 'hex'));
+  });
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed.' });
-  const secret = process.env.PAYSTACK_SECRET_KEY;
-  const signature = req.headers['x-paystack-signature'];
-  if (!secret || typeof signature !== 'string') return json(res, 401, { error: 'Invalid webhook signature.' });
+  const secret = process.env.PAYSTACK_WEBHOOK_SECRET;
+  const signature = req.headers['paystack-signature'];
+  if (!secret) return json(res, 503, { error: 'Webhook signing is not configured.' });
   let rawBody;
   try { rawBody = await getRawBody(req); } catch { return json(res, 413, { error: 'Webhook payload too large.' }); }
-  const expected = crypto.createHmac('sha512', secret).update(rawBody).digest('hex');
-  const actualBuffer = Buffer.from(signature, 'utf8');
-  const expectedBuffer = Buffer.from(expected, 'utf8');
-  if (actualBuffer.length !== expectedBuffer.length || !crypto.timingSafeEqual(actualBuffer, expectedBuffer)) {
+  if (!verifyPaystackSignature(rawBody, signature, secret)) {
     return json(res, 401, { error: 'Invalid webhook signature.' });
   }
   let event;
@@ -42,7 +68,7 @@ module.exports = async function handler(req, res) {
     const recipient = event.data?.customer?.email;
     const verifiedEmail = verified.customer?.email;
     const emailMatchesPayment = typeof recipient === 'string' && typeof verifiedEmail === 'string' && recipient.toLowerCase() === verifiedEmail.toLowerCase();
-    if (emailMatchesPayment) await sendTicketConfirmation(verified, reference, recipient);
+    if (emailMatchesPayment) await sendTicketConfirmationOnce(verified, reference, recipient);
     else console.error('AI Summit confirmation email skipped: webhook email did not match the verified transaction.');
 
     return res.status(200).end();

@@ -18,7 +18,8 @@ create table if not exists public.contacts (
 -- Enable Row Level Security
 alter table public.contacts enable row level security;
 
--- Example restrictive policy allowing anonymous inserts with basic validation
+drop policy if exists allow_anon_insert on public.contacts;
+-- Allow anonymous contact-form submissions with basic validation.
 create policy allow_anon_insert on public.contacts
   for insert
   with check (
@@ -28,21 +29,25 @@ create policy allow_anon_insert on public.contacts
     and char_length(coalesce(message, '')) > 10
   );
 
--- NOTE: SELECT policy intentionally removed
--- Admin dashboard uses password-only client-side auth (not ideal for production)
--- For production: implement a backend API endpoint that:
--- 1. Uses SERVICE_ROLE key (never expose in frontend)
--- 2. Validates admin session server-side
--- 3. Returns submissions securely
--- See todo: "Implement serverless submission endpoint"
+-- Public users may submit contact forms but may not read or alter submissions.
+revoke all on table public.contacts from public, anon, authenticated;
+grant insert on table public.contacts to anon;
+grant select on table public.contacts to authenticated;
 
--- Grant permissions
-grant insert on public.contacts to anon;
-grant select on public.contacts to anon;
+-- Dashboard access requires a Supabase Auth user with app_metadata.role = 'admin'.
+drop policy if exists contacts_admin_select on public.contacts;
+create policy contacts_admin_select on public.contacts
+  for select to authenticated
+  using ((select auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
+drop policy if exists contacts_select_requires_admin on public.contacts;
+create policy contacts_select_requires_admin on public.contacts
+  as restrictive for select to authenticated
+  using ((select auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
+drop policy if exists contacts_deny_anon_select on public.contacts;
+create policy contacts_deny_anon_select on public.contacts
+  as restrictive for select to anon
+  using (false);
 
 -- Notes:
--- 1) For production, prefer a server-side endpoint that uses the SERVICE_ROLE key
---    and keep the SERVICE_ROLE key in environment variables (do NOT store in frontend).
--- 2) Use server-side validation, CAPTCHA verification, and rate-limiting to reduce abuse.
--- 3) Tailor the RLS policy to your exact validation needs; Postgres functions can help
---    with more advanced checks (spam scoring, domain allowlists, etc.).
+-- Use a publishable key in the browser; RLS protects private rows.
+-- Assign app_metadata.role = 'admin' only to trusted Supabase Auth users.

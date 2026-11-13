@@ -1,11 +1,16 @@
 const { randomUUID } = require('node:crypto');
-const { AMOUNT_SUBUNITS, CURRENCY, EVENT_CODE, json, paystack, validOrigin, safeText } = require('../../lib/paystack');
+const { AMOUNT_SUBUNITS, CURRENCY, EVENT_CODE, json, paystack, validOrigin, safeText, consumeRateLimit } = require('../../lib/paystack');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed.' });
   if (!validOrigin(req)) return json(res, 403, { error: 'Request origin not allowed.' });
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
     return json(res, 503, { error: 'Checkout is being configured. Please try again shortly.' });
+  }
+  try {
+    if (!await consumeRateLimit(req, 'initialize', 5, 900)) return json(res, 429, { error: 'Too many checkout attempts. Please wait a few minutes and try again.' });
+  } catch {
+    return json(res, 503, { error: 'Checkout is temporarily unavailable. Please retry shortly.' });
   }
   const body = req.body || {};
   const name = safeText(body.name, 100);
