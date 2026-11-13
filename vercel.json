@@ -8,6 +8,11 @@
   "redirects": [
     { "source": "/abc2027", "destination": "/aisummit", "permanent": true },
     { "source": "/abc-2027", "destination": "/aisummit", "permanent": true },
-    { "source": "/crevia/abc-2027", "destination": "/aisummit", "permanent": true }
+    { "source": "/crevia/abc-2027", "destination": "/aisummit", "permanent": true },
+    { "source": "/dira", "destination": "/academy", "permanent": true },
+    { "source": "/crevia/dira", "destination": "/academy", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/academy", "destination": "/crevia/dira.html" }
   ]
 }
