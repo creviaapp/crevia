@@ -39,6 +39,13 @@
     #mobileNav { position: fixed; inset: 0; z-index: 70; pointer-events: none; visibility: hidden; }
     #mobileNav .nav-backdrop { position: absolute; inset: 0; background: rgba(5,4,3,.78); opacity: 0; transition: opacity .32s ease; }
     #mobileNav .nav-panel { position: absolute; inset: 0 0 0 auto; display: flex; width: min(88%, 420px); flex-direction: column; padding: 28px 26px; background: linear-gradient(165deg,#0c0b0a 0%,#161311 52%,#301a10 100%); box-shadow: -32px 0 70px rgba(0,0,0,.55); transform: translateX(105%); transition: transform .42s cubic-bezier(.16,1,.3,1); }
+    #checkoutDialog { position: fixed; inset: auto 12px 12px; width: min(480px, calc(100% - 24px)); max-width: none; max-height: min(88dvh, 760px); margin: 0 auto; padding: 0; overflow: auto; overscroll-behavior: contain; border: 0; border-radius: 28px; background: #fff; color: #17110d; box-shadow: 0 30px 100px rgba(0,0,0,.35); }
+    #checkoutDialog input, #checkoutDialog select { box-sizing: border-box; width: 100%; min-width: 0; font-size: 16px !important; line-height: 1.5; }
+    #checkoutDialog::backdrop { background: rgba(5,7,6,.68); backdrop-filter: blur(8px); }
+    #checkoutDialog[open] { animation: checkout-in .32s cubic-bezier(.16,1,.3,1) both; }
+    @keyframes checkout-in { from { opacity: 0; transform: translateY(24px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @media (min-width: 640px) { #checkoutDialog { inset: 50% auto auto 50%; width: min(480px, calc(100% - 40px)); max-height: min(86dvh, 800px); transform: translate(-50%, -50%); } @keyframes checkout-in { from { opacity: 0; translate: 0 18px; scale: .99; } to { opacity: 1; translate: 0 0; scale: 1; } } }
+    @media (prefers-reduced-motion: reduce) { #checkoutDialog[open] { animation: none; } }
     #mobileNav .nav-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 2px; border-bottom: 1px solid rgba(245,243,240,.1); color: rgba(245,243,240,.82); text-decoration: none; opacity: 0; transform: translateX(14px); transition: opacity .4s ease, transform .4s ease, color .25s ease; transition-delay: calc(var(--i, 0) * 45ms); }
     body.mobile-open #mobileNav { pointer-events: auto; visibility: visible; }
     body.mobile-open #mobileNav .nav-backdrop { opacity: 1; }
@@ -158,46 +165,55 @@
                 <p class="text-[10px] font-bold uppercase tracking-[.2em] text-black/45">General admission</p>
                 <p class="mt-2 text-4xl font-semibold tracking-[-.06em] text-[#17110d]">1,500 <span class="font-sans text-lg font-medium tracking-normal">KES</span></p>
                 <p class="mt-2 text-sm text-black/55">1 ticket &middot; In person in Nairobi</p>
-                <button id="ticketButton" type="button" class="focus-ring mt-7 inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-xl bg-forest px-6 py-4 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(11,43,32,.2)] transition hover:bg-[#124233]">Get Tickets <span aria-hidden="true">&rarr;</span></button>
+                <button id="ticketButton" type="button" aria-haspopup="dialog" aria-controls="checkoutDialog" class="focus-ring mt-7 inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-xl bg-forest px-6 py-4 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(11,43,32,.2)] transition hover:bg-[#124233]">Get Tickets <span aria-hidden="true">&rarr;</span></button>
                 <div class="mt-5 flex items-center gap-2 text-xs text-black/45"><svg width="15" height="15" viewBox="0 0 20 20" fill="none" class="text-forest" aria-hidden="true"><rect x="4" y="8.5" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 8.5V6a3 3 0 0 1 6 0v2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>M-Pesa and card checkout</span></div>
               </div>
 
+            </section>
+            <p class="px-5 py-4 text-center text-xs leading-5 text-black/60">Questions? <a href="/crevia/contact.html" class="focus-ring rounded font-semibold text-black underline decoration-black/30 underline-offset-4 hover:text-forest">Contact the organisers</a></p>
+          </aside>
+
+          <dialog id="checkoutDialog" aria-labelledby="checkoutDialogTitle" aria-modal="true">
+            <div class="p-6 sm:p-8">
+              <div class="mb-6 flex items-start justify-between gap-4 border-b border-black/[.08] pb-5">
+                <div><p class="text-[10px] font-bold uppercase tracking-[.24em] text-forest">Crevia AI Summit 2027</p><h2 id="checkoutDialogTitle" class="mt-2 font-display text-xl tracking-[-.025em] text-[#17110d]">Secure ticket checkout</h2></div>
+                <button id="closeCheckout" type="button" aria-label="Close checkout" class="focus-ring grid h-10 w-10 shrink-0 place-items-center rounded-full bg-black/[.045] text-xl text-black/60 transition hover:bg-black/[.08]">&times;</button>
+              </div>
               <form id="attendeeForm" class="hidden" novalidate>
-                <button id="backToDetails" type="button" class="focus-ring -ml-2 mb-5 inline-flex items-center gap-2 rounded-lg px-2 py-1 text-sm font-medium text-black/55 hover:text-forest"><span aria-hidden="true">&larr;</span> Back</button>
+                <button id="backToDetails" type="button" class="focus-ring -ml-2 mb-5 inline-flex min-h-10 items-center gap-2 rounded-lg px-2 py-1 text-sm font-medium text-black/55 hover:text-forest"><span aria-hidden="true">&larr;</span> Back to ticket</button>
                 <p class="text-[10px] font-bold uppercase tracking-[.26em] text-forest">Almost there</p>
                 <h2 class="mt-3 font-display text-2xl tracking-[-.025em] text-[#17110d]">Your details</h2>
                 <p class="mt-2 text-sm leading-6 text-black/55">Who should we expect at the summit?</p>
                 <div class="mt-6 space-y-4">
-                  <div><label for="attendeeName" class="mb-1.5 block text-sm font-semibold text-[#26231f]">Full name</label><input id="attendeeName" name="name" autocomplete="name" required maxlength="100" class="focus-ring min-h-12 w-full rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-sm text-[#17110d] outline-none transition placeholder:text-black/35 focus:border-forest" placeholder="Your full name"></div>
-                  <div><label for="attendeeEmail" class="mb-1.5 block text-sm font-semibold text-[#26231f]">Email address</label><input id="attendeeEmail" name="email" type="email" autocomplete="email" required maxlength="254" class="focus-ring min-h-12 w-full rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-sm text-[#17110d] outline-none transition placeholder:text-black/35 focus:border-forest" placeholder="you@example.com"></div>
-                  <div><label for="attendeePhone" class="mb-1.5 block text-sm font-semibold text-[#26231f]">Phone number</label><input id="attendeePhone" name="phone" type="tel" autocomplete="tel" required maxlength="30" class="focus-ring min-h-12 w-full rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-sm text-[#17110d] outline-none transition placeholder:text-black/35 focus:border-forest" placeholder="+254 7XX XXX XXX"></div>
-                  <div><label for="attendeeOrganization" class="mb-1.5 block text-sm font-semibold text-[#26231f]">Company or organization</label><input id="attendeeOrganization" name="organization" autocomplete="organization" required maxlength="120" class="focus-ring min-h-12 w-full rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-sm text-[#17110d] outline-none transition placeholder:text-black/35 focus:border-forest" placeholder="Where you work"></div>
-                  <div><label for="attendeeGoal" class="mb-1.5 block text-sm font-semibold text-[#26231f]">What are your goals for the event?</label><select id="attendeeGoal" name="goal" required class="focus-ring min-h-12 w-full rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-sm text-[#17110d] outline-none transition focus:border-forest"><option value="" disabled selected>Select your primary goal</option><option value="Apply AI to business operations">Apply AI to business operations</option><option value="Automate workflows and scale">Automate workflows and scale</option><option value="Explore AI tools and infrastructure">Explore AI tools and infrastructure</option><option value="Meet founders, builders, and investors">Meet founders, builders, and investors</option></select></div>
+                  <div><label for="attendeeName" class="mb-1.5 block text-sm font-semibold text-[#26231f]">Full name</label><input id="attendeeName" name="name" autocomplete="name" required maxlength="100" class="focus-ring min-h-12 w-full min-w-0 rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-base text-[#17110d] outline-none transition placeholder:text-black/35 focus:border-forest" placeholder="Your full name"></div>
+                  <div><label for="attendeeEmail" class="mb-1.5 block text-sm font-semibold text-[#26231f]">Email address</label><input id="attendeeEmail" name="email" type="email" autocomplete="email" required maxlength="254" class="focus-ring min-h-12 w-full min-w-0 rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-base text-[#17110d] outline-none transition placeholder:text-black/35 focus:border-forest" placeholder="you@example.com"></div>
+                  <div><label for="attendeePhone" class="mb-1.5 block text-sm font-semibold text-[#26231f]">Phone number</label><input id="attendeePhone" name="phone" type="tel" autocomplete="tel" required maxlength="30" class="focus-ring min-h-12 w-full min-w-0 rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-base text-[#17110d] outline-none transition placeholder:text-black/35 focus:border-forest" placeholder="+254 7XX XXX XXX"></div>
+                  <div><label for="attendeeOrganization" class="mb-1.5 block text-sm font-semibold text-[#26231f]">Company or organization</label><input id="attendeeOrganization" name="organization" autocomplete="organization" required maxlength="120" class="focus-ring min-h-12 w-full min-w-0 rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-base text-[#17110d] outline-none transition placeholder:text-black/35 focus:border-forest" placeholder="Where you work"></div>
+                  <div><label for="attendeeGoal" class="mb-1.5 block text-sm font-semibold text-[#26231f]">What are your goals for the event?</label><select id="attendeeGoal" name="goal" required class="focus-ring min-h-12 w-full min-w-0 rounded-xl border border-black/10 bg-[#faf9f7] px-4 py-3 text-base text-[#17110d] outline-none transition focus:border-forest"><option value="" disabled selected>Select your primary goal</option><option value="Apply AI to business operations">Apply AI to business operations</option><option value="Automate workflows and scale">Automate workflows and scale</option><option value="Explore AI tools and infrastructure">Explore AI tools and infrastructure</option><option value="Meet founders, builders, and investors">Meet founders, builders, and investors</option></select></div>
                 </div>
                 <button type="submit" class="focus-ring mt-6 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-xl bg-forest px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#124233]">Continue to review <span aria-hidden="true">&rarr;</span></button>
                 <p class="mt-4 text-center text-xs leading-5 text-black/40">Your details are sent securely to start your payment and reserve your ticket.</p>
               </form>
 
               <div id="paymentStep" class="hidden" aria-labelledby="paymentHeading">
-                <button id="editDetails" type="button" class="focus-ring -ml-2 mb-5 inline-flex items-center gap-2 rounded-lg px-2 py-1 text-sm font-medium text-black/55 hover:text-forest"><span aria-hidden="true">&larr;</span> Edit details</button>
+                <button id="editDetails" type="button" class="focus-ring -ml-2 mb-5 inline-flex min-h-10 items-center gap-2 rounded-lg px-2 py-1 text-sm font-medium text-black/55 hover:text-forest"><span aria-hidden="true">&larr;</span> Edit details</button>
                 <p class="text-[10px] font-bold uppercase tracking-[.26em] text-forest">Final step</p>
                 <h2 id="paymentHeading" class="mt-3 font-display text-2xl text-[#17110d]">Review your order</h2>
                 <div class="mt-6 rounded-2xl bg-[#f6f5f2] p-4">
                   <div class="flex items-start justify-between gap-4"><div><p class="font-semibold text-[#17110d]">General admission</p><p class="mt-1 text-sm text-black/50">1 ticket &middot; Nairobi</p></div><p class="shrink-0 font-semibold text-[#17110d]">1,500 KES</p></div>
                   <div class="my-4 border-t border-black/10"></div>
-                  <p id="orderAttendee" class="text-sm font-semibold text-[#17110d]"></p>
+                  <p id="orderAttendee" class="break-words text-sm font-semibold text-[#17110d]"></p>
                   <p id="orderEmail" class="mt-1 break-all text-sm text-black/55"></p>
-                  <p id="orderPhone" class="mt-1 text-sm text-black/55"></p>
-                  <p id="orderOrganization" class="mt-1 text-sm text-black/55"></p>
+                  <p id="orderPhone" class="mt-1 break-words text-sm text-black/55"></p>
+                  <p id="orderOrganization" class="mt-1 break-words text-sm text-black/55"></p>
                 </div>
                 <button id="payButton" type="button" class="focus-ring mt-6 inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-forest px-6 py-4 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(11,43,32,.2)] transition hover:bg-[#124233]">Pay 1,500 KES</button>
                 <p id="paymentMessage" class="mt-4 hidden rounded-xl bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950" role="status" aria-live="polite"></p>
-                <button id="paymentRetry" type="button" class="focus-ring mt-3 hidden w-full rounded-xl border border-black/10 px-4 py-3 text-sm font-semibold text-forest hover:bg-[#f7f8f6]">Retry payment confirmation</button>
+                <button id="paymentRetry" type="button" class="focus-ring mt-3 hidden min-h-12 w-full rounded-xl border border-black/10 px-4 py-3 text-sm font-semibold text-forest hover:bg-[#f7f8f6]">Retry payment confirmation</button>
                 <p class="mt-4 text-center text-xs leading-5 text-black/40">Secure checkout by Paystack. Your card or M-Pesa details are handled by Paystack.</p>
               </div>
-            </section>
-            <p class="px-5 py-4 text-center text-xs leading-5 text-black/60">Questions? <a href="/crevia/contact.html" class="focus-ring rounded font-semibold text-black underline decoration-black/30 underline-offset-4 hover:text-forest">Contact the organisers</a></p>
-          </aside>
+            </div>
+          </dialog>
         </div>
       </section>
 
@@ -237,9 +253,9 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
 
-    const ticketDetails = document.getElementById('ticketDetails');
     const attendeeForm = document.getElementById('attendeeForm');
     const paymentStep = document.getElementById('paymentStep');
+    const checkoutDialog = document.getElementById('checkoutDialog');
     const paymentMessage = document.getElementById('paymentMessage');
     const paymentRetry = document.getElementById('paymentRetry');
     const payButton = document.getElementById('payButton');
@@ -254,8 +270,25 @@
       goal: document.getElementById('attendeeGoal')
     };
 
-    document.getElementById('ticketButton').addEventListener('click', () => { ticketDetails.classList.add('hidden'); attendeeForm.classList.remove('hidden'); attendeeFields.name.focus(); });
-    document.getElementById('backToDetails').addEventListener('click', () => { attendeeForm.classList.add('hidden'); ticketDetails.classList.remove('hidden'); document.getElementById('ticketButton').focus(); });
+    const ticketButton = document.getElementById('ticketButton');
+    function openCheckout(step = 'details') {
+      if (step === 'details') {
+        paymentStep.classList.add('hidden');
+        attendeeForm.classList.remove('hidden');
+      }
+      if (!checkoutDialog.open) checkoutDialog.showModal();
+      // Avoid opening the mobile keyboard just because someone opened checkout.
+      if (!window.matchMedia('(pointer: coarse)').matches && step === 'details') attendeeFields.name.focus({ preventScroll: true });
+    }
+    ticketButton.addEventListener('click', () => openCheckout());
+    document.getElementById('closeCheckout').addEventListener('click', () => checkoutDialog.close());
+    checkoutDialog.addEventListener('click', (event) => { if (event.target === checkoutDialog) checkoutDialog.close(); });
+    checkoutDialog.addEventListener('close', () => ticketButton.focus({ preventScroll: true }));
+    document.getElementById('backToDetails').addEventListener('click', () => {
+      attendeeForm.classList.add('hidden');
+      paymentStep.classList.add('hidden');
+      checkoutDialog.close();
+    });
     attendeeForm.addEventListener('submit', (event) => {
       event.preventDefault();
       if (!attendeeForm.reportValidity()) return;
@@ -270,7 +303,12 @@
       paymentStep.classList.remove('hidden');
       document.getElementById('payButton').focus();
     });
-    document.getElementById('editDetails').addEventListener('click', () => { paymentMessage.classList.add('hidden'); paymentStep.classList.add('hidden'); attendeeForm.classList.remove('hidden'); attendeeFields.name.focus(); });
+    document.getElementById('editDetails').addEventListener('click', () => {
+      paymentMessage.classList.add('hidden');
+      paymentStep.classList.add('hidden');
+      attendeeForm.classList.remove('hidden');
+      if (!window.matchMedia('(pointer: coarse)').matches) attendeeFields.name.focus({ preventScroll: true });
+    });
     function setPaymentMessage(message, kind = 'pending') {
       paymentMessage.textContent = message;
       paymentMessage.className = `mt-4 rounded-xl px-4 py-3 text-sm leading-6 ${kind === 'success' ? 'bg-emerald-50 text-emerald-950' : kind === 'error' ? 'bg-rose-50 text-rose-950' : 'bg-amber-50 text-amber-950'}`;
@@ -400,16 +438,16 @@
     if (callbackReference && /^aisummit_[a-f0-9]{32}$/.test(callbackReference)) {
       lastReference = callbackReference;
       sessionStorage.setItem('aisummit_checkout_reference', callbackReference);
-      ticketDetails.classList.add('hidden');
       attendeeForm.classList.add('hidden');
       paymentStep.classList.remove('hidden');
+      openCheckout('payment');
       setPayBusy(true, 'Verifying payment…');
       setPaymentMessage('Verifying your payment securely…');
       verifyPayment(callbackReference);
     } else if (lastReference) {
-      ticketDetails.classList.add('hidden');
       attendeeForm.classList.add('hidden');
       paymentStep.classList.remove('hidden');
+      openCheckout('payment');
       payButton.classList.add('hidden');
       const paymentConfirmed = sessionStorage.getItem('aisummit_payment_confirmed') === 'true';
       paymentMessage.textContent = paymentConfirmed

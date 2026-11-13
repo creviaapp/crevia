@@ -13,6 +13,6 @@
     { "source": "/crevia/dira", "destination": "/academy", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/academy", "destination": "/crevia/dira.html" }
+    { "source": "/academy", "destination": "/crevia/academy" }
   ]
 }
